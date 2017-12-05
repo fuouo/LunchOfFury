@@ -14,12 +14,14 @@ public class EventNames {
 	public const string ON_PICTURE_CLICKED = "ON_PICTURE_CLICKED";
 
 
-
+	//Controls
 	public const string ON_KEY_PRESSED_W = "ON_KEY_PRESSED_W";
 	public const string ON_KEY_PRESSED_S = "ON_KEY_PRESSED_S";
 	public const string ON_KEY_PRESSED_D = "ON_KEY_PRESSED_D";
 	public const string ON_KEY_PRESSED_A = "ON_KEY_PRESSED_A";
 
+	//Activate
+	public const string FRENZY_TRIGGERED = "FRENZY_TRIGGERED";
 
 	public const string ON_NEXT_FRAME = "ON_NEXT_FRAME";
 	public const string ON_SPAWN_REQUEST = "ON_SPAWN_REQUEST";	
