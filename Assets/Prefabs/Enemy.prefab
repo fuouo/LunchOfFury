@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 212941775428805978}
   - component: {fileID: 114602999615944664}
   - component: {fileID: 61888257200545892}
-  - component: {fileID: 50253975074905276}
+  - component: {fileID: 50109950851113092}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -43,7 +43,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &50253975074905276
+--- !u!50 &50109950851113092
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 1
@@ -56,13 +56,13 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 0
+  m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 7
+  m_Constraints: 0
 --- !u!61 &61888257200545892
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -72,7 +72,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bed1ef46838984b8c2be3b00dc4ca2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stepLength: 1.5
+  stepLength: 2
 --- !u!212 &212941775428805978
 SpriteRenderer:
   m_ObjectHideFlags: 1

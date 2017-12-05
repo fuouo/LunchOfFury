@@ -59,21 +59,21 @@ public class EnemySpawner : MonoBehaviour, IHitListener {
 	{
 		var enemy = (Enemy)poolableObject;
 
-		const float MIN = -3;
-		const float MAX = 3;
+		const float MIN = -5;
+		const float MAX = 5;
 
 		var endPosition = GameManager.Instance.GetSpawnPointPosition(enemy.GetDirection()) * 3;
 		endPosition.y += GetRandomNumber(MIN, MAX);
 		endPosition.x += GetRandomNumber(MIN, MAX);
 
 		// Change angle based on new position
-		enemy.transform.DORotate(new Vector3(0f, 0f, AngleBetweenVector2(enemy.transform.localPosition, endPosition)), 0.25f);
+		enemy.transform.DORotate(new Vector3(0f, 0f, AngleBetweenVector2(enemy.transform.localPosition, endPosition)), 1f);
 
 		// Change position on fly
-		enemy.transform.DOMove(endPosition, 1f)
+		enemy.transform.DOMove(endPosition, 1.5f)
 			.SetEase(Ease.OutExpo);
 
-		yield return new WaitForSeconds(1f);
+		yield return new WaitForSeconds(1.5f);
 
 		// Destroy object
 		this.objectPool.ReleasePoolable(poolableObject);

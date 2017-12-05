@@ -19,9 +19,9 @@ public class HitHandler : MonoBehaviour {
 		this.hitListener = hitListener;
 	}
 
-	void OnCollisionEnter2D(Collision2D collision)
+	void OnTriggerEnter2D(Collider2D collision)
 	{
-		Debug.Log("OnCollisionEnter2D");
+		Debug.Log("OnTriggerEnter");
 		var poolableObject = collision.gameObject.GetComponent<APoolable> ();
 
 		if (this.hitListener != null) {

@@ -11,7 +11,6 @@ public class GameManager : MonoBehaviour
 	public const string MAX_COMBO_KEY = "MAX_COMBO_KEY";
 	public const string CURRENT_COMBO_KEY = "CURRENT_COMBO_KEY";
 
-
 	[SerializeField] private int earnedGold; //this is the gold earned from previous games
 	[SerializeField] private int currentGold; //this is the gold earned from current game.
 	[SerializeField] private int bestGold; //this is the biggest gold earned from previous games
@@ -20,6 +19,7 @@ public class GameManager : MonoBehaviour
 	private bool isDead;
 
 	/* for enemy spawning */
+
 	[SerializeField]
 	private Transform spawnPointLeft;
 
@@ -35,8 +35,34 @@ public class GameManager : MonoBehaviour
 	[SerializeField]
 	private EnemyDatabase enemyDatabase;
 
+	// Spawn Rate properties
+
+	[SerializeField]
+	private float startSpawnRate = 25;
+
+	[SerializeField]
+	private float maxSpawnRate = 95;
+
+	[SerializeField]
+	private float spawnRate = 25;
+
+	[SerializeField]
+	private float spawnIncreaseRate = 1.1f;
+
+	// Speed properties
+
+	[SerializeField]
+	private float startSpeed = 1f;
+
+	[SerializeField]
+	private float minSpeedRate = 0.1f;
+
 	[SerializeField]
 	private float speed = 1f;
+
+	[SerializeField]
+	private float speedIncreaseRate = 1.005f;
+
 
 	[SerializeField]
 	private float nextTime;
@@ -88,15 +114,31 @@ public class GameManager : MonoBehaviour
 	 
 		Debug.Log (TAG + " Is Playing"); //TODO: Testing if isPlaying var works
 
-		if (Input.GetKeyDown("space"))
-			RequestSpawn();
-
-
 		if (!(Time.time >= nextTime)) return;
+
+		//		if (Input.GetKeyDown("space"))
+
+		// Spawn opponent based on spawn rate (75% default)
+		if (random.Next(100) <= this.spawnRate)
+			RequestSpawn();
 
 		// Go to next frame
 		NextFrame();
+
+		// Increase spawn rates and speed
+		IncreaseDifficulty();
+
 		nextTime += speed;
+	}
+
+	private void IncreaseDifficulty()
+	{
+		// Shorter == Faster
+		if (speed > minSpeedRate)
+			speed /= speedIncreaseRate;
+
+		if (spawnRate < maxSpawnRate)
+			spawnRate *= spawnIncreaseRate;
 	}
 
 	void DebugControls(){
@@ -171,6 +213,9 @@ public class GameManager : MonoBehaviour
 	public void OnPlay(){
 		ResetStats ();
 		StartCoroutine(DelayPlay(1.0f));
+
+		this.spawnRate = this.startSpawnRate;
+		this.speed = this.startSpeed;
 	}
 
 	IEnumerator DelayPlay(float seconds){

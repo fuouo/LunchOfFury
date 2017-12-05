@@ -200,7 +200,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 194577744}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 6, z: 0}
+  m_LocalPosition: {x: 0, y: 12, z: 0}
   m_LocalScale: {x: 1.0000058, y: 1.0000058, z: 1.0000058}
   m_Children: []
   m_Father: {fileID: 1578449553}
@@ -274,7 +274,14 @@ MonoBehaviour:
   spawnPointUp: {fileID: 194577745}
   spawnPointDown: {fileID: 1054412351}
   enemyDatabase: {fileID: 11400000, guid: fa1a7fda140d2204294cb1aa8f751333, type: 2}
+  startSpawnRate: 25
+  maxSpawnRate: 95
+  spawnRate: 75
+  spawnIncreaseRate: 1.05
+  startSpeed: 1
+  minSpeedRate: 0.25
   speed: 1
+  speedIncreaseRate: 1.05
   nextTime: 0
 --- !u!4 &357821109
 Transform:
@@ -314,7 +321,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 558583279}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6, y: 0, z: 0}
+  m_LocalPosition: {x: 12, y: 0, z: 0}
   m_LocalScale: {x: 1.0000058, y: 1.0000058, z: 1.0000058}
   m_Children: []
   m_Father: {fileID: 1578449553}
@@ -698,7 +705,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1054412350}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -6, z: 0}
+  m_LocalPosition: {x: 0, y: -12, z: 0}
   m_LocalScale: {x: 1.0000058, y: 1.0000058, z: 1.0000058}
   m_Children: []
   m_Father: {fileID: 1578449553}
@@ -771,7 +778,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1459434220}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6, y: 0, z: 0}
+  m_LocalPosition: {x: -12, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1578449553}
@@ -817,7 +824,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -857,7 +864,7 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 0
+  m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
@@ -1319,7 +1326,7 @@ MonoBehaviour:
   poolableObjectCopy: {fileID: 114602999615944664, guid: e69083902027f4640b9fc748e66824c9,
     type: 2}
   poolableParent: {fileID: 1798313940}
-  maxPoolSize: 20
+  maxPoolSize: 14
   fixedAllocation: 1
   availableObjects: []
   usedObjects: []
