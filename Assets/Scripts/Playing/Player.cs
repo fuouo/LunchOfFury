@@ -12,6 +12,9 @@ public class Player : MonoBehaviour {
 	private float comboPoints;
 	private bool alive;
 
+	[SerializeField] Animator animator;
+
+
 	// Use this for initialization
 	void Start () {
 		EventBroadcaster.Instance.AddObserver (EventNames.ENEMY_PUNCHED, this.enemyPunched);
