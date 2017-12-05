@@ -15,6 +15,10 @@ public class EventNames {
 
 
 
+	public const string ON_KEY_PRESSED_W = "ON_KEY_PRESSED_W";
+	public const string ON_KEY_PRESSED_S = "ON_KEY_PRESSED_S";
+	public const string ON_KEY_PRESSED_D = "ON_KEY_PRESSED_D";
+	public const string ON_KEY_PRESSED_A = "ON_KEY_PRESSED_A";
 
 
 	public const string ON_NEXT_FRAME = "ON_NEXT_FRAME";
