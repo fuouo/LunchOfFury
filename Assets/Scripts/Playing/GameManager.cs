@@ -112,10 +112,10 @@ public class GameManager : MonoBehaviour
 				position = this.spawnPointDown.localPosition;
 				break;
 			case Direction.LEFT:
-				position = this.spawnPointLeft.localPosition;
+				position = this.spawnPointRight.localPosition;
 				break;
 			case Direction.RIGHT:
-				position = this.spawnPointRight.localPosition;
+				position = this.spawnPointLeft.localPosition;
 				break;
 		}
 

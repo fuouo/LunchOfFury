@@ -77,6 +77,8 @@ public class Enemy : APoolable, IFaceDirection {
 			default:
 				throw new ArgumentOutOfRangeException("direction", direction, null);
 		}
+
+		ResetPosition();
 	}
 
 	private void ResetPosition()

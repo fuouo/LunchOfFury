@@ -259,6 +259,8 @@
     <Compile Include="Assets\Scripts\Playing\EnemySpawner.cs" />
     <Compile Include="Assets\Scripts\Playing\GameManager.cs" />
     <Compile Include="Assets\Scripts\Playing\IFaceDirection.cs" />
+    <Compile Include="Assets\Scripts\Playing\InputHandler.cs" />
+    <Compile Include="Assets\Scripts\Playing\Player.cs" />
     <Compile Include="Assets\Scripts\Playing\Utils\MakeScriptableObject.cs" />
     <Compile Include="Assets\Scripts\Pooling\APoolable.cs" />
     <Compile Include="Assets\Scripts\Pooling\GameObjectPool.cs" />
@@ -280,9 +282,12 @@
     <Compile Include="Assets\Scripts\ViewHandler\ViewNames.cs" />
     <Compile Include="Assets\Scripts\Views\BasicUIScreen.cs" />
     <Compile Include="Assets\Scripts\Views\BasicUIScreenModel.cs" />
+    <Compile Include="Assets\Scripts\Views\GameOverScreen.cs" />
     <Compile Include="Assets\Scripts\Views\InfoScreen.cs" />
+    <Compile Include="Assets\Scripts\Views\IntroScreen.cs" />
     <Compile Include="Assets\Scripts\Views\MainMenuScreen.cs" />
     <Compile Include="Assets\Scripts\Views\ObjectPoolUIScreen.cs" />
+    <Compile Include="Assets\Scripts\Views\PlayScreen.cs" />
     <Compile Include="Assets\Scripts\Views\SceneLightingHUD.cs" />
     <Compile Include="Assets\Scripts\Views\ScrollDemoScreen.cs" />
     <Compile Include="Assets\Scripts\Views\UIAnimScreen.cs" />

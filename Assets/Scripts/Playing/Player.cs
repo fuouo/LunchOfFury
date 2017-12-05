@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour {
 	[SerializeField] Text scoreText;
-	[SerializeField] float minimumComboForFrenzy = 40.0;
-	[SerializeField] float frenzyDecayRate = 0.05;
+	[SerializeField] float minimumComboForFrenzy = 40.0f;
+	[SerializeField] float frenzyDecayRate = 0.05f;
 	[SerializeField] private GameObject gameOverPanel;
 	private int currentScore;
 	private float comboPoints;
