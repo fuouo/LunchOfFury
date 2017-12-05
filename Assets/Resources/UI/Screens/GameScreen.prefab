@@ -284,8 +284,8 @@ MonoBehaviour:
   asRootScreen: 1
   entranceType: 0
   exitType: 0
-  CurrentGold: {fileID: 114832442255339728}
-  GoldEarned: {fileID: 114251905985650596}
+  CurrentGold: {fileID: 114251905985650596}
+  GoldEarned: {fileID: 114832442255339728}
   ComboGauge: {fileID: 114917941965857550}
 --- !u!114 &114173828545175778
 MonoBehaviour:
