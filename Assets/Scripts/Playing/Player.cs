@@ -18,7 +18,7 @@ public class Player : MonoBehaviour {
 		EventBroadcaster.Instance.AddObserver (EventNames.PLAYER_DEATH, this.gameOver);
 		currentScore = 0;
 		comboPoints = 0;
-		isAlive = true;
+		alive = true;
 	}
 	
 	// Update is called once per frame

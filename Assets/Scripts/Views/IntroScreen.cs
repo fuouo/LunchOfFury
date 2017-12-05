@@ -20,7 +20,10 @@ public class IntroScreen : View {
 	public void OnPlay() {
 
 		this.Hide ();
-		ViewHandler.Instance.Show (ViewNames.GAMEOVER_SCREEN);
+		ViewHandler.Instance.Show (ViewNames.PLAY_SCREEN);
+
 		//TODO: Notify GameManager that game starts
+		EventBroadcaster.Instance.PostEvent (EventNames.ON_PLAY);
+
 	}
 }
