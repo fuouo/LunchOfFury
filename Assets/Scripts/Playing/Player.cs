@@ -11,6 +11,7 @@ public class Player : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		EventBroadcaster.Instance.AddObserver (EventNames.ENEMY_HIT, this.enemyHit);
 		currentScore = 0;
 		comboPoints = 0;
 	}
@@ -35,7 +36,7 @@ public class Player : MonoBehaviour {
 	private void frenzy(){
 		
 		comboPoints = 0;
-
+		EventBroadcaster.Instance.PostEvent (EventNames.FRENZY_TRIGGERED);
 	}
 
 }

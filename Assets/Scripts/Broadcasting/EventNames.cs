@@ -20,7 +20,8 @@ public class EventNames {
 	public const string ON_KEY_PRESSED_D = "ON_KEY_PRESSED_D";
 	public const string ON_KEY_PRESSED_A = "ON_KEY_PRESSED_A";
 
-	//Activate
+	//Player Events
+	public const string ENEMY_HIT = "ENEMY_HIT";
 	public const string FRENZY_TRIGGERED = "FRENZY_TRIGGERED";
 
 	public const string ON_NEXT_FRAME = "ON_NEXT_FRAME";
