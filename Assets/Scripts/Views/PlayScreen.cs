@@ -6,11 +6,6 @@ using UnityEngine.UI;
 public class PlayScreen : View {
 	public const string TAG = "[PlayScreen] ";
 
-	public const string CURRENT_GOLD_KEY = "CURRENT_GOLD_KEY";
-	public const string MAX_COMBO_KEY = "MAX_COMBO_KEY";
-	public const string CURRENT_COMBO_KEY = "CURRENT_COMBO_KEY";
-
-
 	[SerializeField] Text CurrentGold;
 	[SerializeField] Text GoldEarned;
 	[SerializeField] Slider ComboGauge;
@@ -22,12 +17,18 @@ public class PlayScreen : View {
 		EventBroadcaster.Instance.AddObserver(EventNames.ON_GAME_OVER, this.OnGameOver); //this is for when player is hit
 
 		GoldEarned.text = GameManager.Instance.EarnedGold + "";
-
+		CurrentGold.text = GameManager.Instance.CurrentGold + "";
 	}
 
 	// Update is called once per frame
 	void Update () {
 
+	}
+
+	void OnDestroy() {
+		EventBroadcaster.Instance.RemoveObserver (EventNames.ON_UPDATE_COMBO);
+		EventBroadcaster.Instance.RemoveObserver(EventNames.ON_UPDATE_GOLD); //this is for updating current gold
+		EventBroadcaster.Instance.RemoveObserver(EventNames.ON_GAME_OVER); //this is for when player is hit
 	}
 
 	public void InitEarnedGold(){
@@ -40,14 +41,13 @@ public class PlayScreen : View {
 	}
 
 	public void UpdateCurrentGold(Parameters parameters){
-		CurrentGold.text = parameters.GetIntExtra (CURRENT_GOLD_KEY, int.Parse (CurrentGold.text)) + "";
+		Debug.Log (CurrentGold);
+		CurrentGold.text = parameters.GetIntExtra (GameManager.CURRENT_GOLD_KEY, int.Parse (CurrentGold.text)) + "";
 	}
 
 	public void UpdateCombo(Parameters parameters){
-		Debug.Log (TAG + "Updating Current Combo" +  ComboGauge.value + 1);
-
-		float currentCombo = parameters.GetFloatExtra (CURRENT_COMBO_KEY, ComboGauge.value + 1);
-		float maxCombo = parameters.GetFloatExtra (CURRENT_COMBO_KEY, 100);
+		float currentCombo = parameters.GetFloatExtra (GameManager.CURRENT_COMBO_KEY, ComboGauge.value + 1);
+		float maxCombo = parameters.GetFloatExtra (GameManager.CURRENT_COMBO_KEY, 100);
 
 		ComboGauge.value = currentCombo / maxCombo;
 	}
