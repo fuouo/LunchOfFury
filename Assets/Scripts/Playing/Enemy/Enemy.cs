@@ -6,6 +6,8 @@ using Random = UnityEngine.Random;
 
 public class Enemy : APoolable, IFaceDirection {
 
+	private IBoundaryListener boundaryListener;
+
 	[SerializeField]
 	private float stepLength = 50f;
 
@@ -84,6 +86,7 @@ public class Enemy : APoolable, IFaceDirection {
 	private void ResetPosition()
 	{
 		this.transform.localPosition = GameManager.Instance.GetSpawnPointPosition(direction);
+		this.transform.rotation = new Quaternion(0f, 0f, 0f, 0f);
 		Debug.Log(this.transform.localPosition);
 	}
 
@@ -100,5 +103,10 @@ public class Enemy : APoolable, IFaceDirection {
 	public override void OnActivate()
 	{
 		this.ResetPosition();
+	}
+
+	public Direction GetDirection()
+	{
+		return this.direction;
 	}
 }

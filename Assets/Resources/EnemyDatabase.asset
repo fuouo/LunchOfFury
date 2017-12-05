@@ -8,11 +8,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1516fe9a94bdccd4b963d743fd109b67, type: 3}
+  m_Script: {fileID: 11500000, guid: 91fc1661a4cc54d43b3474f28b1805b3, type: 3}
   m_Name: EnemyDatabase
   m_EditorClassIdentifier: 
   enemyClassList:
-  - FaceUpSprite: {fileID: 21300034, guid: 5c8bdf290bd4a5e45a394170821c93cd, type: 3}
+  - FaceUpSprite: {fileID: 21300042, guid: 5c8bdf290bd4a5e45a394170821c93cd, type: 3}
     FaceDownSprite: {fileID: 21300036, guid: 5c8bdf290bd4a5e45a394170821c93cd, type: 3}
     FaceLeftSprite: {fileID: 21300038, guid: 5c8bdf290bd4a5e45a394170821c93cd, type: 3}
     FaceRightSprite: {fileID: 21300040, guid: 5c8bdf290bd4a5e45a394170821c93cd, type: 3}

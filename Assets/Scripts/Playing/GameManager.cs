@@ -119,13 +119,6 @@ public class GameManager : MonoBehaviour
 				break;
 		}
 
-		Debug.Log("direction " + direction);
-		Debug.Log("spawnPointUp.localPosition " + spawnPointUp.localPosition);
-		Debug.Log("spawnPointDown.localPosition " + spawnPointDown.localPosition);
-		Debug.Log("spawnPointLeft.localPosition " + spawnPointLeft.localPosition);
-		Debug.Log("spawnPointRight.localPosition " + spawnPointRight.localPosition);
-		Debug.Log("position " + position);
-
 		return position;
 	}
 
