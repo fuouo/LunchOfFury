@@ -7,11 +7,15 @@ public class GameOverScreen : View {
 
 	[SerializeField] Text EarnedGold;
 	[SerializeField] Text CurrentGoldEarned;
-	[SerializeField] Button PlayButton;
 	[SerializeField] Text BestGold;
+	[SerializeField] Button PlayButton;
 
 	// Use this for initialization
 	void Start () {
+
+		EarnedGold.text = GameManager.Instance.EarnedGold + "";
+		CurrentGoldEarned.text = GameManager.Instance.CurrentGold + "";
+		BestGold.text = GameManager.Instance.BestGold + "";
 
 	}
 
@@ -22,11 +26,11 @@ public class GameOverScreen : View {
 
 
 	public void OnPlay() {
-
 		this.Hide ();
 		ViewHandler.Instance.Show (ViewNames.PLAY_SCREEN);
 
-		this.Hide ();
-		//TODO: Notify GameManager that game starts
+		//Notify GameManager that game starts
+		EventBroadcaster.Instance.PostEvent (EventNames.ON_PLAY);
+
 	}
 }

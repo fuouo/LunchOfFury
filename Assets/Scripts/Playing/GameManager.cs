@@ -6,6 +6,20 @@ using Random = System.Random;
 
 public class GameManager : MonoBehaviour
 {
+	public const string TAG = "[GameManager]";
+	public const string CURRENT_GOLD_KEY = "CURRENT_GOLD_KEY";
+	public const string MAX_COMBO_KEY = "MAX_COMBO_KEY";
+	public const string CURRENT_COMBO_KEY = "CURRENT_COMBO_KEY";
+
+
+	[SerializeField] private int earnedGold; //this is the gold earned from previous games
+	[SerializeField] private int currentGold; //this is the gold earned from current game.
+	[SerializeField] private int bestGold; //this is the biggest gold earned from previous games
+
+	private bool isPlaying;
+	private bool isDead;
+
+	/* for enemy spawning */
 	[SerializeField]
 	private Transform spawnPointLeft;
 
@@ -28,6 +42,7 @@ public class GameManager : MonoBehaviour
 	private float nextTime;
 
 	private static Random random;
+	/* end of enemy spawning */
 
 	private static GameManager sharedInstance = null;
 
@@ -53,7 +68,9 @@ public class GameManager : MonoBehaviour
 
 	private void Start()
 	{
-
+		EventBroadcaster.Instance.AddObserver (EventNames.ON_HIT_CUSTOMER, this.OnHitCustomer);
+		EventBroadcaster.Instance.AddObserver (EventNames.ON_DEAD, this.OnDead);
+		EventBroadcaster.Instance.AddObserver (EventNames.ON_PLAY, this.OnPlay);
 	}
 
 	private void OnDestroy()
@@ -64,6 +81,13 @@ public class GameManager : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
+		if (!isPlaying)
+			return;
+
+		DebugControls ();
+	 
+		Debug.Log (TAG + " Is Playing"); //TODO: Testing if isPlaying var works
+
 		if (Input.GetKeyDown("space"))
 			RequestSpawn();
 
@@ -73,6 +97,21 @@ public class GameManager : MonoBehaviour
 		// Go to next frame
 		NextFrame();
 		nextTime += speed;
+	}
+
+	void DebugControls(){
+		//TODO: This is for debugging and testing the functionality of the gamemanager
+
+		if (Input.GetKeyDown (KeyCode.Period)) {
+			//Testing: Player gets hit by customer
+			EventBroadcaster.Instance.PostEvent (EventNames.ON_DEAD);
+		}
+
+		if (Input.GetKeyDown (KeyCode.Comma)) {
+			//Testing: Player hits customer
+			EventBroadcaster.Instance.PostEvent (EventNames.ON_HIT_CUSTOMER);
+		}
+
 	}
 
 	private void RequestSpawn()
@@ -112,10 +151,10 @@ public class GameManager : MonoBehaviour
 				position = this.spawnPointDown.localPosition;
 				break;
 			case Direction.LEFT:
-				position = this.spawnPointRight.localPosition;
+				position = this.spawnPointLeft.localPosition;
 				break;
 			case Direction.RIGHT:
-				position = this.spawnPointLeft.localPosition;
+				position = this.spawnPointRight.localPosition;
 				break;
 		}
 
@@ -126,4 +165,72 @@ public class GameManager : MonoBehaviour
 	{
 		return this.enemyDatabase;
 	}
+
+
+	// This is for Playing. From Intro/GameOver state to Play state
+	public void OnPlay(){
+		ResetStats ();
+		StartCoroutine(DelayPlay(1.0f));
+	}
+
+	IEnumerator DelayPlay(float seconds){
+		yield return new WaitForSeconds (0.05f);
+		isPlaying = true;
+	}
+	//======================//
+
+	// This is for entering Intro/Gameover
+	//TODO: @Dyan. Please reprocess this method :) thanks
+	public void OnDead(){
+		isPlaying = false;
+		if (currentGold > bestGold) //updates best score
+			bestGold = currentGold;
+
+		EventBroadcaster.Instance.PostEvent (EventNames.ON_GAME_OVER);
+	}
+	//======================//
+
+
+	// This is for when player detects correct hit. 
+	public void OnHitCustomer(){
+		currentGold++;
+		Parameters param = new Parameters ();
+		//TODO: Integrate Player's combo stats here
+		//param.PutExtra(PlayScreen.MAX_COMBO_KEY, <max combo of player> );
+		//param.PutExtra(PlayScreen.CURRENT_COMBO_KEY, <current combo of player> );
+		param.PutExtra(CURRENT_GOLD_KEY, currentGold);
+
+		EventBroadcaster.Instance.PostEvent (EventNames.ON_UPDATE_COMBO, param); //TODO: Since combo is part of Player, pass the Player's Parameters next time
+		EventBroadcaster.Instance.PostEvent (EventNames.ON_UPDATE_GOLD, param);
+	}
+	//======================//
+
+	public void ResetStats(){
+		if (earnedGold > bestGold) //updates best score
+			bestGold = currentGold;
+		earnedGold = earnedGold + currentGold;
+		currentGold = 0;
+
+		//TODO: Reset Player stats here pls (Reset Combo pls)
+	}
+
+	public int EarnedGold{//this is the gold earned from previous games
+		get{
+			return earnedGold;
+		}
+	}
+
+	public int CurrentGold{//this is the gold earned from current games
+		get{
+			return currentGold;
+		}
+	}
+
+	public int BestGold{//this is the BEST gold earned from one run
+		get{
+			return bestGold;
+		}
+	}
+
+
 }

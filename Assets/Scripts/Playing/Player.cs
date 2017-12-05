@@ -10,6 +10,7 @@ public class Player : MonoBehaviour {
 	[SerializeField] private GameObject gameOverPanel;
 	private int currentScore;
 	private float comboPoints;
+	private bool alive;
 
 	// Use this for initialization
 	void Start () {
@@ -17,6 +18,7 @@ public class Player : MonoBehaviour {
 		EventBroadcaster.Instance.AddObserver (EventNames.PLAYER_DEATH, this.gameOver);
 		currentScore = 0;
 		comboPoints = 0;
+		alive = true;
 	}
 	
 	// Update is called once per frame
@@ -31,12 +33,17 @@ public class Player : MonoBehaviour {
 		}
 	}
 
+	public bool isAlive(){
+		return this.alive;
+	}
+
 	public void enemyPunched(){
 		currentScore++;
 		comboPoints++;
 	}
 
 	public void gameOver(){
+		alive = false;
 		gameOverPanel.SetActive (true);
 		gameOverPanel.transform.SetSiblingIndex (9999);
 

@@ -240,10 +240,10 @@ MonoBehaviour:
   asRootScreen: 0
   entranceType: 0
   exitType: 0
-  EarnedGold: {fileID: 0}
-  CurrentGoldEarned: {fileID: 0}
-  PlayButton: {fileID: 0}
-  BestGold: {fileID: 0}
+  EarnedGold: {fileID: 114725909955473958}
+  CurrentGoldEarned: {fileID: 114512080507374074}
+  PlayButton: {fileID: 114278828321586284}
+  BestGold: {fileID: 114546547344562650}
 --- !u!114 &114179433958427822
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -324,7 +324,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 114150627133327244}
         m_MethodName: OnPlay
         m_Mode: 1
         m_Arguments:
