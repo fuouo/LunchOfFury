@@ -23,7 +23,7 @@ public class EventNames {
 	//Player Events
 	public const string ENEMY_PUNCHED = "ENEMY_PUNCHED";
 	public const string FRENZY_TRIGGERED = "FRENZY_TRIGGERED";
-	public const string DEATH = "DEATH";
+	public const string PLAYER_DEATH = "PLAYER_DEATH";
 
 	public const string ON_NEXT_FRAME = "ON_NEXT_FRAME";
 	public const string ON_SPAWN_REQUEST = "ON_SPAWN_REQUEST";	
