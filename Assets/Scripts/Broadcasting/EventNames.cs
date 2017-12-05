@@ -17,10 +17,8 @@ public class EventNames {
 
 
 
-
-
 	public const string ON_NEXT_FRAME = "ON_NEXT_FRAME";
-	public const string ON_SPAWN_REQUEST = "ON_SPAWN_REQUEST";
+	public const string ON_SPAWN_REQUEST = "ON_SPAWN_REQUEST";	
 }
 
 

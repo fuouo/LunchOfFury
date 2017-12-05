@@ -12,4 +12,8 @@ public class SceneNames {
 	public const string BROADCASTING_SCENE = "EventBroadcasterDemo";
 	public const string SCENE_LIGHTING = "SceneLighting";
 	public const string ANIMATION_DEMO = "BasicAnimationDemo";
+
+	public const string INTRO_SCENE = "IntroScene";
+	public const string PLAY_SCENE = "PlayScene";
+	public const string GAMEOVER_SCENE = "GameoverScene";
 }

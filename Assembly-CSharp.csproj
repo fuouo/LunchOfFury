@@ -51,16 +51,52 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Ultimate GUI Kit\Script\ButtonRedirect.cs" />
-     <Compile Include="Assets\Ultimate GUI Kit\Script\GameStateManager.cs" />
-     <Compile Include="Assets\Ultimate GUI Kit\Script\Main.cs" />
-     <Compile Include="Assets\Ultimate GUI Kit\Script\MainMenu.cs" />
-     <Compile Include="Assets\Ultimate GUI Kit\Script\Player.cs" />
-     <Compile Include="Assets\Ultimate GUI Kit\Script\ReadSceneNames.cs" />
-     <Compile Include="Assets\Ultimate GUI Kit\Script\SelectLevel.cs" />
-     <Compile Include="Assets\Ultimate GUI Kit\Script\SplatchScreen.cs" />
-     <Compile Include="Assets\Ultimate GUI Kit\Script\Util.cs" />
-     <None Include="Assets\Ultimate GUI Kit\HOTweenMicro\HOTween_License.txt" />
+     <Compile Include="Assets\Scripts\BallLogic\BallObject.cs" />
+     <Compile Include="Assets\Scripts\BallLogic\BallSpawner.cs" />
+     <Compile Include="Assets\Scripts\BallLogic\BoundaryHandler.cs" />
+     <Compile Include="Assets\Scripts\BallLogic\IBoundaryListener.cs" />
+     <Compile Include="Assets\Scripts\BroadcasterDemo\BallObjectCreator.cs" />
+     <Compile Include="Assets\Scripts\BroadcasterDemo\BallSpawnControlUI.cs" />
+     <Compile Include="Assets\Scripts\BroadcasterDemo\BallSpawnEventNames.cs" />
+     <Compile Include="Assets\Scripts\Broadcasting\EventBroadcaster.cs" />
+     <Compile Include="Assets\Scripts\Broadcasting\EventNames.cs" />
+     <Compile Include="Assets\Scripts\Broadcasting\ObserverList.cs" />
+     <Compile Include="Assets\Scripts\Broadcasting\Parameters.cs" />
+     <Compile Include="Assets\Scripts\LoadManager\LoadManager.cs" />
+     <Compile Include="Assets\Scripts\LoadManager\SceneNames.cs" />
+     <Compile Include="Assets\Scripts\Pooling\APoolable.cs" />
+     <Compile Include="Assets\Scripts\Pooling\GameObjectPool.cs" />
+     <Compile Include="Assets\Scripts\UI Optimization\HidingScrollView.cs" />
+     <Compile Include="Assets\Scripts\UI Optimization\ScrollableBounds.cs" />
+     <Compile Include="Assets\Scripts\UI Optimization\ScrollableObject.cs" />
+     <Compile Include="Assets\Scripts\ViewHandler\BlackOverlay.cs" />
+     <Compile Include="Assets\Scripts\ViewHandler\NullScreen.cs" />
+     <Compile Include="Assets\Scripts\ViewHandler\Popups\DialogBuilder.cs" />
+     <Compile Include="Assets\Scripts\ViewHandler\Popups\DialogInterface.cs" />
+     <Compile Include="Assets\Scripts\ViewHandler\Popups\NotificationDialog.cs" />
+     <Compile Include="Assets\Scripts\ViewHandler\Popups\TimedDialog.cs" />
+     <Compile Include="Assets\Scripts\ViewHandler\Popups\TwoChoiceDialog.cs" />
+     <Compile Include="Assets\Scripts\ViewHandler\View.cs" />
+     <Compile Include="Assets\Scripts\ViewHandler\ViewAnimation.cs" />
+     <Compile Include="Assets\Scripts\ViewHandler\ViewAnimation\DOViewAnimation.cs" />
+     <Compile Include="Assets\Scripts\ViewHandler\ViewAnimation\IViewAnimation.cs" />
+     <Compile Include="Assets\Scripts\ViewHandler\ViewHandler.cs" />
+     <Compile Include="Assets\Scripts\ViewHandler\ViewNames.cs" />
+     <Compile Include="Assets\Scripts\Views\GameOverScreen.cs" />
+     <Compile Include="Assets\Scripts\Views\IntroScreen.cs" />
+     <Compile Include="Assets\Scripts\Views\PlayScreen.cs" />
+     <Compile Include="Assets\Scripts\Views\test\BasicUIScreen.cs" />
+     <Compile Include="Assets\Scripts\Views\test\BasicUIScreenModel.cs" />
+     <Compile Include="Assets\Scripts\Views\test\MainMenuScreen.cs" />
+     <Compile Include="Assets\Scripts\Views\test\ObjectPoolUIScreen.cs" />
+     <Compile Include="Assets\Scripts\Views\test\SceneLightingHUD.cs" />
+     <Compile Include="Assets\Scripts\Views\test\ScrollDemoScreen.cs" />
+     <Compile Include="Assets\Scripts\Views\test\UIAnimScreen.cs" />
+     <Compile Include="Assets\Scripts\Views\test\UIDemoScreen.cs" />
+     <None Include="Assets\DOTween\DOTween43.xml" />
+     <None Include="Assets\DOTween\DOTween46.xml" />
+     <None Include="Assets\DOTween\readme.txt" />
+     <None Include="Assets\DOTween\DOTween50.xml" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity 2017.1/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
@@ -82,8 +118,17 @@
  <Reference Include="UnityEngine.HoloLens">
  <HintPath>C:/Program Files/Unity 2017.1/Editor/Data/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll</HintPath>
  </Reference>
- <Reference Include="HOTween">
- <HintPath>C:/Users/Ronnie Nieva/Documents/Dydy/Unity Projects/LunchOfFury/Assets/Ultimate GUI Kit/HOTweenMicro/HOTween.dll</HintPath>
+ <Reference Include="DOTween50">
+ <HintPath>C:/Users/Ronnie Nieva/Documents/Dydy/Unity Projects/LunchOfFury/Assets/DOTween/DOTween50.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTween">
+ <HintPath>C:/Users/Ronnie Nieva/Documents/Dydy/Unity Projects/LunchOfFury/Assets/DOTween/DOTween.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTween46">
+ <HintPath>C:/Users/Ronnie Nieva/Documents/Dydy/Unity Projects/LunchOfFury/Assets/DOTween/DOTween46.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTween43">
+ <HintPath>C:/Users/Ronnie Nieva/Documents/Dydy/Unity Projects/LunchOfFury/Assets/DOTween/DOTween43.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
