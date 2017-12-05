@@ -1,8 +1,0 @@
-sceneSetups:
-<<<<<<< HEAD
-- path: Assets/Scenes/Playing.unity
-=======
-- path: Assets/Scenes/demo.unity
->>>>>>> UI
-  isLoaded: 1
-  isActive: 1
