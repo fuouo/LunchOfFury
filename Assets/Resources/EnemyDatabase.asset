@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: EnemyDatabase
   m_EditorClassIdentifier: 
   enemyClassList:
-  - FaceUpSprite: {fileID: 21300042, guid: 5c8bdf290bd4a5e45a394170821c93cd, type: 3}
+  - FaceUpSprite: {fileID: 21300034, guid: 5c8bdf290bd4a5e45a394170821c93cd, type: 3}
     FaceDownSprite: {fileID: 21300036, guid: 5c8bdf290bd4a5e45a394170821c93cd, type: 3}
     FaceLeftSprite: {fileID: 21300038, guid: 5c8bdf290bd4a5e45a394170821c93cd, type: 3}
     FaceRightSprite: {fileID: 21300040, guid: 5c8bdf290bd4a5e45a394170821c93cd, type: 3}
