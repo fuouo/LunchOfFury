@@ -71,6 +71,9 @@ public class GameManager : MonoBehaviour
 		EventBroadcaster.Instance.AddObserver (EventNames.ON_HIT_CUSTOMER, this.OnHitCustomer);
 		EventBroadcaster.Instance.AddObserver (EventNames.ON_DEAD, this.OnDead);
 		EventBroadcaster.Instance.AddObserver (EventNames.ON_PLAY, this.OnPlay);
+
+		// TODO: Remove later
+		isPlaying = true;
 	}
 
 	private void OnDestroy()
@@ -151,10 +154,10 @@ public class GameManager : MonoBehaviour
 				position = this.spawnPointDown.localPosition;
 				break;
 			case Direction.LEFT:
-				position = this.spawnPointLeft.localPosition;
+				position = this.spawnPointRight.localPosition;
 				break;
 			case Direction.RIGHT:
-				position = this.spawnPointRight.localPosition;
+				position = this.spawnPointLeft.localPosition;
 				break;
 		}
 
