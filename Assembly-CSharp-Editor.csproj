@@ -51,75 +51,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Ultimate GUI Kit\Facebook\Editor\android\FacebookAndroidUtil.cs" />
-     <Compile Include="Assets\Ultimate GUI Kit\Facebook\Editor\android\ManifestMod.cs" />
-     <Compile Include="Assets\Ultimate GUI Kit\Facebook\Editor\FacebookPostprocess.cs" />
-     <Compile Include="Assets\Ultimate GUI Kit\Facebook\Editor\FacebookSettingsEditor.cs" />
-     <Compile Include="Assets\Ultimate GUI Kit\Facebook\Editor\iOS\FBPListParser.cs" />
-     <Compile Include="Assets\Ultimate GUI Kit\Facebook\Editor\iOS\FixupFiles.cs" />
-     <Compile Include="Assets\Ultimate GUI Kit\Facebook\Editor\iOS\PListDict.cs" />
-     <Compile Include="Assets\Ultimate GUI Kit\Facebook\Editor\iOS\third_party\XCodeEditor-for-Unity\PBXBuildFile.cs" />
-     <Compile Include="Assets\Ultimate GUI Kit\Facebook\Editor\iOS\third_party\XCodeEditor-for-Unity\PBXBuildPhase.cs" />
-     <Compile Include="Assets\Ultimate GUI Kit\Facebook\Editor\iOS\third_party\XCodeEditor-for-Unity\PBXDictionary.cs" />
-     <Compile Include="Assets\Ultimate GUI Kit\Facebook\Editor\iOS\third_party\XCodeEditor-for-Unity\PBXFileReference.cs" />
-     <Compile Include="Assets\Ultimate GUI Kit\Facebook\Editor\iOS\third_party\XCodeEditor-for-Unity\PBXGroup.cs" />
-     <Compile Include="Assets\Ultimate GUI Kit\Facebook\Editor\iOS\third_party\XCodeEditor-for-Unity\PBXList.cs" />
-     <Compile Include="Assets\Ultimate GUI Kit\Facebook\Editor\iOS\third_party\XCodeEditor-for-Unity\PBXObject.cs" />
-     <Compile Include="Assets\Ultimate GUI Kit\Facebook\Editor\iOS\third_party\XCodeEditor-for-Unity\PBXParser.cs" />
-     <Compile Include="Assets\Ultimate GUI Kit\Facebook\Editor\iOS\third_party\XCodeEditor-for-Unity\PBXProject.cs" />
-     <Compile Include="Assets\Ultimate GUI Kit\Facebook\Editor\iOS\third_party\XCodeEditor-for-Unity\XCBuildConfiguration.cs" />
-     <Compile Include="Assets\Ultimate GUI Kit\Facebook\Editor\iOS\third_party\XCodeEditor-for-Unity\XCConfigurationList.cs" />
-     <Compile Include="Assets\Ultimate GUI Kit\Facebook\Editor\iOS\third_party\XCodeEditor-for-Unity\XCFileOperationQueue.cs" />
-     <Compile Include="Assets\Ultimate GUI Kit\Facebook\Editor\iOS\third_party\XCodeEditor-for-Unity\XCMod.cs" />
-     <Compile Include="Assets\Ultimate GUI Kit\Facebook\Editor\iOS\third_party\XCodeEditor-for-Unity\XCProject.cs" />
-     <Compile Include="Assets\Ultimate GUI Kit\Facebook\Editor\iOS\third_party\XCodeEditor-for-Unity\XCSourceFile.cs" />
-     <Compile Include="Assets\Ultimate GUI Kit\Facebook\Editor\iOS\third_party\XCodeEditor-for-Unity\XCTarget.cs" />
-     <None Include="Assets\Ultimate GUI Kit\Plugins\Android\facebook\proguard-project.txt" />
-     <None Include="Assets\Ultimate GUI Kit\Plugins\Android\facebook\bin\R.txt" />
-     <None Include="Assets\Ultimate GUI Kit\Plugins\Android\facebook\res\drawable\com_facebook_button_blue.xml" />
-     <None Include="Assets\Ultimate GUI Kit\Plugins\Android\facebook\res\layout\com_facebook_tooltip_bubble.xml" />
-     <None Include="Assets\Ultimate GUI Kit\Plugins\Android\facebook\res\values-xhdpi\dimens.xml" />
-     <None Include="Assets\Ultimate GUI Kit\Plugins\Android\facebook\res\layout\com_facebook_friendpickerfragment.xml" />
-     <None Include="Assets\Ultimate GUI Kit\Plugins\Android\facebook\res\values\attrs.xml" />
-     <None Include="Assets\Ultimate GUI Kit\Plugins\Android\facebook\res\values-he\strings.xml" />
-     <None Include="Assets\Ultimate GUI Kit\Plugins\Android\facebook\res\values-hdpi\dimens.xml" />
-     <None Include="Assets\Ultimate GUI Kit\Plugins\Android\facebook\res\values-mdpi\dimens.xml" />
-     <None Include="Assets\Ultimate GUI Kit\Plugins\Android\facebook\res\layout\com_facebook_placepickerfragment.xml" />
-     <None Include="Assets\Ultimate GUI Kit\Plugins\Android\facebook\res\drawable\com_facebook_button_like.xml" />
-     <None Include="Assets\Ultimate GUI Kit\Plugins\Android\facebook\bin\AndroidManifest.xml" />
-     <None Include="Assets\Ultimate GUI Kit\Plugins\Android\facebook\res\layout\com_facebook_search_bar_layout.xml" />
-     <None Include="Assets\Ultimate GUI Kit\Plugins\Android\facebook\bin\proguard.txt" />
-     <None Include="Assets\Ultimate GUI Kit\Plugins\Android\facebook\res\drawable\com_facebook_button_like_selected.xml" />
-     <None Include="Assets\Ultimate GUI Kit\Plugins\Android\facebook\res\drawable\com_facebook_top_background.xml" />
-     <None Include="Assets\Ultimate GUI Kit\HOTweenMicro\HOTween_License.txt" />
-     <None Include="Assets\Ultimate GUI Kit\Plugins\Android\facebook\res\layout\com_facebook_picker_checkbox.xml" />
-     <None Include="Assets\Ultimate GUI Kit\Plugins\Android\facebook\res\layout\com_facebook_picker_search_box.xml" />
-     <None Include="Assets\Ultimate GUI Kit\Plugins\Android\facebook\res\layout\com_facebook_picker_image.xml" />
-     <None Include="Assets\Ultimate GUI Kit\Plugins\Android\facebook\res\values\colors.xml" />
-     <None Include="Assets\Ultimate GUI Kit\Plugins\Android\facebook\res\layout\com_facebook_picker_activity_circle_row.xml" />
-     <None Include="Assets\Ultimate GUI Kit\Plugins\Android\facebook\build.xml" />
-     <None Include="Assets\Ultimate GUI Kit\Plugins\Android\facebook\res\values\strings.xml" />
-     <None Include="Assets\Ultimate GUI Kit\Plugins\Android\facebook\res\values\styles.xml" />
-     <None Include="Assets\Ultimate GUI Kit\Plugins\Android\facebook\res\values-iw\strings.xml" />
-     <None Include="Assets\Ultimate GUI Kit\Plugins\Android\facebook\res\drawable\com_facebook_usersettingsfragment_background_gradient.xml" />
-     <None Include="Assets\Ultimate GUI Kit\Plugins\Android\facebook\res\values-ldpi\dimens.xml" />
-     <None Include="Assets\Ultimate GUI Kit\Plugins\Android\facebook\res\layout\com_facebook_placepickerfragment_list_row.xml" />
-     <None Include="Assets\Ultimate GUI Kit\Plugins\Android\facebook\res\drawable\com_facebook_picker_top_button.xml" />
-     <None Include="Assets\Ultimate GUI Kit\Plugins\Android\facebook\res\layout\com_facebook_usersettingsfragment.xml" />
-     <None Include="Assets\Ultimate GUI Kit\Plugins\Android\facebook\res\layout\com_facebook_picker_list_section_header.xml" />
-     <None Include="Assets\Ultimate GUI Kit\Plugins\Android\facebook\res\drawable\com_facebook_picker_list_selector_background_transition.xml" />
-     <None Include="Assets\Ultimate GUI Kit\Plugins\Android\facebook\res\drawable\com_facebook_picker_item_background.xml" />
-     <None Include="Assets\Ultimate GUI Kit\Plugins\Android\facebook\res\values-es\strings.xml" />
-     <None Include="Assets\Ultimate GUI Kit\Plugins\Android\facebook\res\layout\com_facebook_picker_list_row.xml" />
-     <None Include="Assets\Ultimate GUI Kit\Plugins\Android\facebook\res\values\drawables.xml" />
-     <None Include="Assets\Ultimate GUI Kit\Plugins\Android\facebook\AndroidManifest.xml" />
-     <None Include="Assets\Ultimate GUI Kit\Plugins\Android\facebook\res\layout\com_facebook_picker_title_bar.xml" />
-     <None Include="Assets\Ultimate GUI Kit\Plugins\Android\facebook\res\drawable\com_facebook_top_button.xml" />
-     <None Include="Assets\Ultimate GUI Kit\Plugins\Android\facebook\res\drawable\com_facebook_button_check.xml" />
-     <None Include="Assets\Ultimate GUI Kit\Plugins\Android\facebook\res\layout\com_facebook_login_activity_layout.xml" />
-     <None Include="Assets\Ultimate GUI Kit\Plugins\Android\facebook\res\layout\com_facebook_picker_title_bar_stub.xml" />
-     <None Include="Assets\Ultimate GUI Kit\Plugins\Android\facebook\res\drawable\com_facebook_loginbutton_silver.xml" />
-     <None Include="Assets\Ultimate GUI Kit\Plugins\Android\facebook\res\drawable\com_facebook_picker_list_selector.xml" />
+     <Compile Include="Assets\PyroParticles\Prefab\Editor\PyroParticlesEditor.cs" />
+     <None Include="Assets\DOTween\DOTween43.xml" />
+     <None Include="Assets\DOTween\DOTween46.xml" />
+     <None Include="Assets\PyroParticles\Prefab\Materials\AdditiveTintable.shader" />
+     <None Include="Assets\DOTween\readme.txt" />
+     <None Include="Assets\PyroParticles\Readme.txt" />
+     <None Include="Assets\DOTween\DOTween50.xml" />
  <Reference Include="UnityEditor.Advertisements">
  <HintPath>C:/Program Files/Unity 2017.1/Editor/Data/UnityExtensions/Unity/Advertisements/Editor/UnityEditor.Advertisements.dll</HintPath>
  </Reference>
@@ -180,14 +118,20 @@
  <Reference Include="UnityEditor.WindowsStandalone.Extensions">
  <HintPath>C:/Program Files/Unity 2017.1/Editor/Data/PlaybackEngines/windowsstandalonesupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
  </Reference>
- <Reference Include="HOTween">
- <HintPath>C:/Users/Ronnie Nieva/Documents/Dydy/Unity Projects/LunchOfFury/Assets/Ultimate GUI Kit/HOTweenMicro/HOTween.dll</HintPath>
+ <Reference Include="DOTween">
+ <HintPath>C:/Users/Ronnie Nieva/Documents/Dydy/Unity Projects/LunchOfFury/Assets/DOTween/DOTween.dll</HintPath>
  </Reference>
- <Reference Include="IFacebook">
- <HintPath>C:/Users/Ronnie Nieva/Documents/Dydy/Unity Projects/LunchOfFury/Assets/Ultimate GUI Kit/Facebook/Scripts/IFacebook.dll</HintPath>
+ <Reference Include="DOTween43">
+ <HintPath>C:/Users/Ronnie Nieva/Documents/Dydy/Unity Projects/LunchOfFury/Assets/DOTween/DOTween43.dll</HintPath>
  </Reference>
- <Reference Include="HOTweenV1_Editor">
- <HintPath>C:/Users/Ronnie Nieva/Documents/Dydy/Unity Projects/LunchOfFury/Assets/Ultimate GUI Kit/HOTweenMicro/Editor/HOTweenV1_Editor.dll</HintPath>
+ <Reference Include="DOTween46">
+ <HintPath>C:/Users/Ronnie Nieva/Documents/Dydy/Unity Projects/LunchOfFury/Assets/DOTween/DOTween46.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTween50">
+ <HintPath>C:/Users/Ronnie Nieva/Documents/Dydy/Unity Projects/LunchOfFury/Assets/DOTween/DOTween50.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTweenEditor">
+ <HintPath>C:/Users/Ronnie Nieva/Documents/Dydy/Unity Projects/LunchOfFury/Assets/DOTween/Editor/DOTweenEditor.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>

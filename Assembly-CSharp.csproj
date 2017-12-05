@@ -51,6 +51,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\PyroParticles\Demo\DemoScript.cs" />
+     <Compile Include="Assets\PyroParticles\Demo\DemoScriptEditor.cs" />
+     <Compile Include="Assets\PyroParticles\Prefab\Script\FireBaseScript.cs" />
+     <Compile Include="Assets\PyroParticles\Prefab\Script\FireCollisionForwardScript.cs" />
+     <Compile Include="Assets\PyroParticles\Prefab\Script\FireConstantBaseScript.cs" />
+     <Compile Include="Assets\PyroParticles\Prefab\Script\FireLightScript.cs" />
+     <Compile Include="Assets\PyroParticles\Prefab\Script\FireProjectileScript.cs" />
+     <Compile Include="Assets\PyroParticles\Prefab\Script\MeteorSwarmScript.cs" />
+     <Compile Include="Assets\PyroParticles\Prefab\Script\SingleLineAttribute.cs" />
      <Compile Include="Assets\Scripts\BallLogic\BallObject.cs" />
      <Compile Include="Assets\Scripts\BallLogic\BallSpawner.cs" />
      <Compile Include="Assets\Scripts\BallLogic\BoundaryHandler.cs" />
@@ -64,6 +73,13 @@
      <Compile Include="Assets\Scripts\Broadcasting\Parameters.cs" />
      <Compile Include="Assets\Scripts\LoadManager\LoadManager.cs" />
      <Compile Include="Assets\Scripts\LoadManager\SceneNames.cs" />
+     <Compile Include="Assets\Scripts\Playing\Enemy.cs" />
+     <Compile Include="Assets\Scripts\Playing\EnemyClass.cs" />
+     <Compile Include="Assets\Scripts\Playing\EnemyDatabase.cs" />
+     <Compile Include="Assets\Scripts\Playing\EnemySpawner.cs" />
+     <Compile Include="Assets\Scripts\Playing\GameManager.cs" />
+     <Compile Include="Assets\Scripts\Playing\IFaceDirection.cs" />
+     <Compile Include="Assets\Scripts\Playing\Utils\MakeScriptableObject.cs" />
      <Compile Include="Assets\Scripts\Pooling\APoolable.cs" />
      <Compile Include="Assets\Scripts\Pooling\GameObjectPool.cs" />
      <Compile Include="Assets\Scripts\UI Optimization\HidingScrollView.cs" />
@@ -95,7 +111,9 @@
      <Compile Include="Assets\Scripts\Views\test\UIDemoScreen.cs" />
      <None Include="Assets\DOTween\DOTween43.xml" />
      <None Include="Assets\DOTween\DOTween46.xml" />
+     <None Include="Assets\PyroParticles\Prefab\Materials\AdditiveTintable.shader" />
      <None Include="Assets\DOTween\readme.txt" />
+     <None Include="Assets\PyroParticles\Readme.txt" />
      <None Include="Assets\DOTween\DOTween50.xml" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity 2017.1/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
@@ -118,17 +136,17 @@
  <Reference Include="UnityEngine.HoloLens">
  <HintPath>C:/Program Files/Unity 2017.1/Editor/Data/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll</HintPath>
  </Reference>
- <Reference Include="DOTween50">
- <HintPath>C:/Users/Ronnie Nieva/Documents/Dydy/Unity Projects/LunchOfFury/Assets/DOTween/DOTween50.dll</HintPath>
- </Reference>
  <Reference Include="DOTween">
  <HintPath>C:/Users/Ronnie Nieva/Documents/Dydy/Unity Projects/LunchOfFury/Assets/DOTween/DOTween.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTween43">
+ <HintPath>C:/Users/Ronnie Nieva/Documents/Dydy/Unity Projects/LunchOfFury/Assets/DOTween/DOTween43.dll</HintPath>
  </Reference>
  <Reference Include="DOTween46">
  <HintPath>C:/Users/Ronnie Nieva/Documents/Dydy/Unity Projects/LunchOfFury/Assets/DOTween/DOTween46.dll</HintPath>
  </Reference>
- <Reference Include="DOTween43">
- <HintPath>C:/Users/Ronnie Nieva/Documents/Dydy/Unity Projects/LunchOfFury/Assets/DOTween/DOTween43.dll</HintPath>
+ <Reference Include="DOTween50">
+ <HintPath>C:/Users/Ronnie Nieva/Documents/Dydy/Unity Projects/LunchOfFury/Assets/DOTween/DOTween50.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
