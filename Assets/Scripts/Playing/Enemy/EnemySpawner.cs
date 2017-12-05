@@ -59,8 +59,8 @@ public class EnemySpawner : MonoBehaviour, IHitListener {
 	{
 		var enemy = (Enemy)poolableObject;
 
-		const float MIN = -5;
-		const float MAX = 5;
+		const float MIN = -15;
+		const float MAX = 15;
 
 		var endPosition = GameManager.Instance.GetSpawnPointPosition(enemy.GetDirection()) * 3;
 		endPosition.y += GetRandomNumber(MIN, MAX);
@@ -70,10 +70,10 @@ public class EnemySpawner : MonoBehaviour, IHitListener {
 		enemy.transform.DORotate(new Vector3(0f, 0f, AngleBetweenVector2(enemy.transform.localPosition, endPosition)), 1f);
 
 		// Change position on fly
-		enemy.transform.DOMove(endPosition, 1.5f)
+		enemy.transform.DOMove(endPosition, 2f)
 			.SetEase(Ease.OutExpo);
 
-		yield return new WaitForSeconds(1.5f);
+		yield return new WaitForSeconds(2f);
 
 		// Destroy object
 		this.objectPool.ReleasePoolable(poolableObject);
