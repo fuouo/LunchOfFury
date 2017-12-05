@@ -7,12 +7,14 @@ public class Player : MonoBehaviour {
 	[SerializeField] Text scoreText;
 	[SerializeField] float minimumComboForFrenzy = 40.0;
 	[SerializeField] float frenzyDecayRate = 0.05;
+	[SerializeField] private GameObject gameOverPanel;
 	private int currentScore;
 	private float comboPoints;
 
 	// Use this for initialization
 	void Start () {
-		EventBroadcaster.Instance.AddObserver (EventNames.ENEMY_HIT, this.enemyHit);
+		EventBroadcaster.Instance.AddObserver (EventNames.ENEMY_PUNCHED, this.enemyPunched);
+		EventBroadcaster.Instance.AddObserver (EventNames.PLAYER_DEATH, this.gameOver);
 		currentScore = 0;
 		comboPoints = 0;
 	}
@@ -29,9 +31,19 @@ public class Player : MonoBehaviour {
 		}
 	}
 
-	public void enemyHit(){
+	public void enemyPunched(){
 		currentScore++;
 		comboPoints++;
+	}
+
+	public void gameOver(){
+		gameOverPanel.SetActive (true);
+		gameOverPanel.transform.SetSiblingIndex (9999);
+
+	}
+
+	public void onClickPlayAgain(){
+		//LoadManager.Instance.LoadScene (SceneNames.GAME_SCENE);	
 	}
 
 	private void frenzy(){
