@@ -14,6 +14,8 @@ public class Enemy : APoolable, IFaceDirection {
 	private Direction direction;
 	private EnemyClass enemyClass;
 
+	public bool IsHit { get; set; }
+
 	// Use this for initialization
 	private void Start()
 	{
@@ -87,6 +89,7 @@ public class Enemy : APoolable, IFaceDirection {
 	{
 		this.transform.localPosition = GameManager.Instance.GetSpawnPointPosition(direction);
 		this.transform.rotation = new Quaternion(0f, 0f, 0f, 0f);
+		IsHit = false;
 		Debug.Log(this.transform.localPosition);
 	}
 
