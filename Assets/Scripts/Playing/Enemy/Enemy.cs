@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -29,6 +30,9 @@ public class Enemy : APoolable, IFaceDirection {
 
 	private void Step()
 	{
+        if (IsHit)
+            return;
+
 		var newPosition = this.transform.localPosition;
 
 		switch (direction)
@@ -49,7 +53,8 @@ public class Enemy : APoolable, IFaceDirection {
 				throw new ArgumentOutOfRangeException();
 		}
 
-		this.transform.localPosition = newPosition;
+        this.transform.DOMove(newPosition, 0.5f * GameManager.Instance.GetCurrentSpeed()).SetEase(Ease.OutQuad);
+		//this.transform.localPosition = newPosition;
 	}
 
 	public void SetEnemyClass(EnemyClass enemyClass)
@@ -87,6 +92,7 @@ public class Enemy : APoolable, IFaceDirection {
 
 	private void ResetPosition()
 	{
+        this.transform.DOKill();
 		this.transform.localPosition = GameManager.Instance.GetSpawnPointPosition(direction);
 		this.transform.rotation = new Quaternion(0f, 0f, 0f, 0f);
 		IsHit = false;

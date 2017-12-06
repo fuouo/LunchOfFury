@@ -277,5 +277,10 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
+    public float GetCurrentSpeed()
+    {
+        return this.speed;
+    }
+
 
 }

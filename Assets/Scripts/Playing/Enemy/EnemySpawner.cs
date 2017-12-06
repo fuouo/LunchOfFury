@@ -75,7 +75,8 @@ public class EnemySpawner : MonoBehaviour, IHitListener {
 
 		yield return new WaitForSeconds(2f);
 
-		// Destroy object
+        // Destroy object
+        enemy.transform.DOKill();
 		this.objectPool.ReleasePoolable(poolableObject);
 	}
 
