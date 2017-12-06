@@ -226,18 +226,25 @@ public class GameManager : MonoBehaviour
 
 	// This is for entering Intro/Gameover
 	//TODO: @Dyan. Please reprocess this method :) thanks
-	public void OnDead(){
-		isPlaying = false;
-		if (currentGold > bestGold) //updates best score
-			bestGold = currentGold;
+	public void OnDead()
+    {
+        isPlaying = false;
+        if (currentGold > bestGold) //updates best score
+            bestGold = currentGold;
 
-		EventBroadcaster.Instance.PostEvent (EventNames.ON_GAME_OVER);
-	}
-	//======================//
+        StartCoroutine(OnDeadTransition());
+    }
+
+    private IEnumerator OnDeadTransition()
+    {
+        yield return new WaitForSeconds(1f);
+        EventBroadcaster.Instance.PostEvent(EventNames.ON_GAME_OVER);
+    }
+    //======================//
 
 
-	// This is for when player detects correct hit. 
-	public void OnHitCustomer(){
+    // This is for when player detects correct hit. 
+    public void OnHitCustomer(){
 		currentGold++;
 		Parameters param = new Parameters ();
 		//TODO: Integrate Player's combo stats here

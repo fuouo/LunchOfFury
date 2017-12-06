@@ -4,11 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Player : MonoBehaviour {
-	[SerializeField] Text scoreText;
 	[SerializeField] float minimumComboForFrenzy = 40.0f;
 	[SerializeField] float frenzyDecayRate = 0.05f;
 	[SerializeField] private GameObject gameOverPanel;
-	private int currentScore;
 	private float comboPoints;
 	private bool alive;
 
@@ -19,14 +17,12 @@ public class Player : MonoBehaviour {
 	void Start () {
 		EventBroadcaster.Instance.AddObserver (EventNames.ENEMY_PUNCHED, this.enemyPunched);
 		EventBroadcaster.Instance.AddObserver (EventNames.PLAYER_DEATH, this.gameOver);
-		currentScore = 0;
 		comboPoints = 0;
 		alive = true;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		scoreText.text = currentScore.ToString ();
 		if (comboPoints > 0) {
 			comboPoints -= frenzyDecayRate;
 		}
@@ -41,7 +37,6 @@ public class Player : MonoBehaviour {
 	}
 
 	public void enemyPunched(){
-		currentScore++;
 		comboPoints++;
 	}
 
@@ -61,5 +56,15 @@ public class Player : MonoBehaviour {
 		comboPoints = 0;
 		EventBroadcaster.Instance.PostEvent (EventNames.FRENZY_TRIGGERED);
 	}
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        var poolableObject = collision.gameObject.GetComponent<APoolable>();
+
+        if (poolableObject == null)
+            return;
+
+        EventBroadcaster.Instance.PostEvent(EventNames.ON_DEAD);
+    }
 
 }
