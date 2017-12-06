@@ -19,6 +19,11 @@ public class EventNames {
 	public const string ON_GAME_OVER = "ON_GAME_OVER"; //this is when intro screen enters game screen. or gameover screen enters game screen
 	public const string ON_UPDATE_GOLD = "ON_UPDATE_GOLD"; //this is to tell UI to update the displayed gold
 	public const string ON_UPDATE_COMBO = "ON_UPDATE_COMBO"; //this is to tell UI to update combo gauge
+	public const string ON_UPDATE_MAX_COMBO = "ON_UPDATE_MAX_COMBO"; //this is to tell UI to update max combo gauge
+
+	//Call
+	public const string START_GAME = "START_GAME"; //this is to tell UI to update max combo gauge
+
 
 	//Controls
 	public const string ON_KEY_PRESSED_W = "ON_KEY_PRESSED_W";

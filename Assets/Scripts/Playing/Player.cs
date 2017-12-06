@@ -16,20 +16,41 @@ public class Player : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		EventBroadcaster.Instance.AddObserver (EventNames.ENEMY_PUNCHED, this.enemyPunched);
+		EventBroadcaster.Instance.AddObserver (EventNames.ON_KEY_PRESSED_W, this.punch_W);
 		EventBroadcaster.Instance.AddObserver (EventNames.PLAYER_DEATH, this.gameOver);
 		comboPoints = 0;
 		alive = true;
 	}
+
+	void updateCombo(){
+
+		Debug.Log ("WENT IN START");
+
+		Parameters parameters = new Parameters();
+		parameters.PutExtra(GameManager.MAX_COMBO_KEY, minimumComboForFrenzy);
+		parameters.PutExtra (GameManager.CURRENT_COMBO_KEY, comboPoints);
+		EventBroadcaster.Instance.PostEvent (EventNames.ON_UPDATE_COMBO,parameters);
+	}
 	
 	// Update is called once per frame
 	void Update () {
+//		scoreText.text = currentScore.ToString ();
 		if (comboPoints > 0) {
 			comboPoints -= frenzyDecayRate;
+//			comboGauge.value = comboPoints;
+			updateCombo();
 		}
 
 		if (comboPoints >= minimumComboForFrenzy) {
 			this.frenzy ();
 		}
+	}
+
+	void punch_W(){
+		currentScore++;
+		comboPoints++;
+//		comboGauge.value = comboPoints;
+		updateCombo();
 	}
 
 	public bool isAlive(){
@@ -38,6 +59,7 @@ public class Player : MonoBehaviour {
 
 	public void enemyPunched(){
 		comboPoints++;
+//		comboGauge.value = comboPoints;
 	}
 
 	public void gameOver(){
