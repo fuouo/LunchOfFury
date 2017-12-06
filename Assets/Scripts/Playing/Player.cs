@@ -47,7 +47,7 @@ public class Player : MonoBehaviour {
 	}
 
 	void punch_W(){
-		currentScore++;
+//		currentScore++;
 		comboPoints++;
 //		comboGauge.value = comboPoints;
 		updateCombo();
