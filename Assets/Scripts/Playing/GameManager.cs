@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
 	public const string MAX_COMBO_KEY = "MAX_COMBO_KEY";
 	public const string CURRENT_COMBO_KEY = "CURRENT_COMBO_KEY";
 
+	[SerializeField] private float startPlayDelay;
 	[SerializeField] private int earnedGold; //this is the gold earned from previous games
 	[SerializeField] private int currentGold; //this is the gold earned from current game.
 	[SerializeField] private int bestGold; //this is the biggest gold earned from previous games
@@ -111,8 +112,6 @@ public class GameManager : MonoBehaviour
 			return;
 
 		DebugControls ();
-	 
-		Debug.Log (TAG + " Is Playing"); //TODO: Testing if isPlaying var works
 
 		if (!(Time.time >= nextTime)) return;
 
@@ -212,15 +211,14 @@ public class GameManager : MonoBehaviour
 	// This is for Playing. From Intro/GameOver state to Play state
 	public void OnPlay(){
 		ResetStats ();
-		StartCoroutine(DelayPlay(1.0f));
-
-		this.spawnRate = this.startSpawnRate;
-		this.speed = this.startSpeed;
+		StartCoroutine(DelayPlay(startPlayDelay));
 	}
 
 	IEnumerator DelayPlay(float seconds){
-		yield return new WaitForSeconds (0.05f);
+		yield return new WaitForSeconds (seconds);
 		isPlaying = true;
+		this.spawnRate = this.startSpawnRate;
+		this.speed = this.startSpeed;
 	}
 	//======================//
 

@@ -13,10 +13,10 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
+  - Bottom
+  - Player
+  - Customer
+  - Effects
   - 
   - 
   - 
@@ -38,6 +38,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Tile
+    uniqueID: 3768014641
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
