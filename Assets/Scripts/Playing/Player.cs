@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Player : MonoBehaviour {
 	[SerializeField] float minimumComboForFrenzy = 40.0f;
 	[SerializeField] float frenzyDecayRate = 0.05f;
+	[SerializeField] float comboIncrementRate =1;
 	[SerializeField] private GameObject gameOverPanel;
 	private float comboPoints;
 	private bool alive;
@@ -50,7 +51,7 @@ public class Player : MonoBehaviour {
 		//		currentScore++;
 
 		SwipeDirection direction = (SwipeDirection) parameters.GetObjectExtra (GameManager.PUNCH_DIRECTION);
-		comboPoints++;
+
 		//		comboGauge.value = comboPoints;
 		updateCombo();
 
@@ -64,7 +65,7 @@ public class Player : MonoBehaviour {
 	}
 
 	public void enemyPunched(){
-		comboPoints++;
+		comboPoints=comboPoints+comboIncrementRate;
 //		comboGauge.value = comboPoints;
 	}
 
