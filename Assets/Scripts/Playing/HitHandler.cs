@@ -29,6 +29,10 @@ public class HitHandler : MonoBehaviour {
 	void OnTriggerStay2D(Collider2D collision)
 	{
 		var poolableObject = collision.gameObject.GetComponent<APoolable>();
+
+		if (poolableObject == null)
+			return;
+
 		var enemy = (Enemy) poolableObject;
 
 		// TODO: Remove later; for testing of scoring lang
@@ -58,6 +62,7 @@ public class HitHandler : MonoBehaviour {
 
 		enemy.IsHit = true;
 
+		EventBroadcaster.Instance.PostEvent (EventNames.ENEMY_PUNCHED);
 		if (this.hitListener != null) {
 			this.hitListener.OnHit(poolableObject);
 		}

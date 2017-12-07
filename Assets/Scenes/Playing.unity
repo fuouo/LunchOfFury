@@ -894,6 +894,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3decbc391d428d94b8711174cf4d5edd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  theme: {fileID: 11400000, guid: b3ff760a52db39544b7361a6316dcceb, type: 2}
   frontCounter: {fileID: 1586867417}
   backCounter: {fileID: 2054265027}
   leftCounter: {fileID: 1650063064}
@@ -3281,6 +3282,8 @@ GameObject:
   - component: {fileID: 2046838628}
   - component: {fileID: 2046838627}
   - component: {fileID: 2046838626}
+  - component: {fileID: 2046838630}
+  - component: {fileID: 2046838629}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -3333,7 +3336,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: {fileID: 11400000, guid: 9d9f5a280ed64e9499f74428eaf8b569, type: 2}
   minimumComboForFrenzy: 40
-  frenzyDecayRate: 0.05
+  frenzyDecayRate: 0.02
+  comboIncrementRate: 20
   gameOverPanel: {fileID: 0}
 --- !u!212 &2046838628
 SpriteRenderer:
@@ -3377,6 +3381,51 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
+--- !u!61 &2046838629
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2046838624}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.97, y: 2.01}
+    newSize: {x: 1.97, y: 2.01}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.5, y: 0.5}
+  m_EdgeRadius: 0
+--- !u!50 &2046838630
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2046838624}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &2052018275
 GameObject:
   m_ObjectHideFlags: 0

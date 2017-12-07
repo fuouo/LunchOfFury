@@ -217,6 +217,11 @@ public class GameManager : MonoBehaviour
 
 	IEnumerator DelayPlay(float seconds){
 		yield return new WaitForSeconds (seconds);
+
+		// Reset the enemy state
+
+
+		// Start the game
 		isPlaying = true;
 		this.spawnRate = this.startSpawnRate;
 		this.speed = this.startSpeed;
