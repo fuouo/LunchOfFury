@@ -17,6 +17,9 @@ public class Player : MonoBehaviour {
 	void Start () {
 		EventBroadcaster.Instance.AddObserver (EventNames.ENEMY_PUNCHED, this.enemyPunched);
 		EventBroadcaster.Instance.AddObserver (EventNames.ON_KEY_PRESSED_W, this.punch_W);
+		EventBroadcaster.Instance.AddObserver (EventNames.ON_KEY_PRESSED_D, this.punch_D);
+		EventBroadcaster.Instance.AddObserver (EventNames.ON_KEY_PRESSED_S, this.punch_S);
+		EventBroadcaster.Instance.AddObserver (EventNames.ON_KEY_PRESSED_A, this.punch_A);
 		EventBroadcaster.Instance.AddObserver (EventNames.PLAYER_DEATH, this.gameOver);
 		comboPoints = 0;
 		alive = true;
@@ -47,11 +50,35 @@ public class Player : MonoBehaviour {
 	}
 
 	void punch_W(){
-//		currentScore++;
+		//		currentScore++;
 		comboPoints++;
-//		comboGauge.value = comboPoints;
+		//		comboGauge.value = comboPoints;
+		updateCombo();
+	}	
+
+	void punch_A(){
+		//		currentScore++;
+		comboPoints++;
+		//		comboGauge.value = comboPoints;
+		updateCombo();
+
+	
+	}
+
+	void punch_S(){
+		//		currentScore++;
+		comboPoints++;
+		//		comboGauge.value = comboPoints;
 		updateCombo();
 	}
+
+	void punch_D(){
+		//		currentScore++;
+		comboPoints++;
+		//		comboGauge.value = comboPoints;
+		updateCombo();
+	}
+
 
 	public bool isAlive(){
 		return this.alive;

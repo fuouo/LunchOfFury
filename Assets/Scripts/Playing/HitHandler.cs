@@ -25,6 +25,7 @@ public class HitHandler : MonoBehaviour {
 		OnTriggerStay2D(collision);
 	}
 
+
 	void OnTriggerStay2D(Collider2D collision)
 	{
 		var poolableObject = collision.gameObject.GetComponent<APoolable>();
