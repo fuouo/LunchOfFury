@@ -11,6 +11,7 @@ public class Player : MonoBehaviour {
 	[Header("COMBO")]
 	[SerializeField] float minimumComboForFrenzy = 40.0f;
 	[SerializeField] float frenzyDecayRate = 0.05f;
+	[SerializeField] float comboIncrementRate =1;
 	private float comboPoints;
 
 	[Header("STATES")]
