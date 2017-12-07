@@ -4,13 +4,18 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Player : MonoBehaviour {
+	[Header("Player Type")]
+	[SerializeField] PlayerType type;
+
+
+	[Header("COMBO")]
 	[SerializeField] float minimumComboForFrenzy = 40.0f;
 	[SerializeField] float frenzyDecayRate = 0.05f;
-	[SerializeField] private GameObject gameOverPanel;
 	private float comboPoints;
-	private bool alive;
 
-	[SerializeField] Animator animator;
+	[Header("STATES")]
+	[SerializeField] private GameObject gameOverPanel;
+	private bool alive;
 
 
 	// Use this for initialization
@@ -20,6 +25,10 @@ public class Player : MonoBehaviour {
 		EventBroadcaster.Instance.AddObserver (EventNames.PLAYER_DEATH, this.gameOver);
 		comboPoints = 0;
 		alive = true;
+
+		GetComponent<SpriteRenderer> ().sprite = type.defaultSprite;
+		GetComponent<Animator> ().runtimeAnimatorController = type.animator;
+
 	}
 
 	void updateCombo(){
