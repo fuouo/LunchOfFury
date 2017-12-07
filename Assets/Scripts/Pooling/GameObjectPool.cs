@@ -64,6 +64,10 @@ public class GameObjectPool : MonoBehaviour {
 		}
 	}
 
+	public List<APoolable> GetUsedObjects(){
+		return this.usedObjects;
+	}
+
 	public void ReleasePoolable(APoolable poolableObject) {
 		this.usedObjects.Remove (poolableObject);
 

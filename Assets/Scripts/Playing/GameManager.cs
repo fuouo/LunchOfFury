@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
 	public const string CURRENT_GOLD_KEY = "CURRENT_GOLD_KEY";
 	public const string MAX_COMBO_KEY = "MAX_COMBO_KEY";
 	public const string CURRENT_COMBO_KEY = "CURRENT_COMBO_KEY";
+	public const string PUNCH_DIRECTION = "PUNCH_DIRECTION";
 
 	[SerializeField] private float startPlayDelay;
 	[SerializeField] private int earnedGold; //this is the gold earned from previous games

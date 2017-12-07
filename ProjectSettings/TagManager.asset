@@ -13,10 +13,10 @@ TagManager:
   - UI
   - 
   - 
-  - Bottom
-  - Player
-  - Customer
-  - Effects
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 
@@ -43,4 +43,13 @@ TagManager:
     locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Player
+    uniqueID: 3642126637
+    locked: 0
+  - name: Customer
+    uniqueID: 431593173
+    locked: 0
+  - name: Smoke
+    uniqueID: 4137637275
     locked: 0

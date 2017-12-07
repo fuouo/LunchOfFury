@@ -23,9 +23,21 @@ public class EnemySpawner : MonoBehaviour, IHitListener {
 	{
 		random = new System.Random();
 
+		EventBroadcaster.Instance.AddObserver (EventNames.FRENZY_TRIGGERED, this.Frenzy);
 		EventBroadcaster.Instance.AddObserver(EventNames.ON_SPAWN_REQUEST, Spawn);
 		this.objectPool.Initialize();
 		this.hitHandler.SetListener(this);
+
+	}
+
+	private void Frenzy(){
+		List <APoolable> objects =  objectPool.GetUsedObjects();
+
+		objects.ForEach (delegate(APoolable poolableObject) {
+			this.objectPool.ReleasePoolable(poolableObject);
+
+			EventBroadcaster.Instance.PostEvent(EventNames.ON_HIT_CUSTOMER);
+		});
 
 	}
 

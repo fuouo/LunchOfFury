@@ -16,7 +16,7 @@ public class Player : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		EventBroadcaster.Instance.AddObserver (EventNames.ENEMY_PUNCHED, this.enemyPunched);
-		EventBroadcaster.Instance.AddObserver (EventNames.ON_KEY_PRESSED_W, this.punch_W);
+		EventBroadcaster.Instance.AddObserver (EventNames.ON_KEY_PRESSED, this.punch);
 		EventBroadcaster.Instance.AddObserver (EventNames.PLAYER_DEATH, this.gameOver);
 		comboPoints = 0;
 		alive = true;
@@ -46,12 +46,18 @@ public class Player : MonoBehaviour {
 		}
 	}
 
-	void punch_W(){
-//		currentScore++;
+	void punch(Parameters parameters){
+		//		currentScore++;
+
+		SwipeDirection direction = (SwipeDirection) parameters.GetObjectExtra (GameManager.PUNCH_DIRECTION);
 		comboPoints++;
-//		comboGauge.value = comboPoints;
+		//		comboGauge.value = comboPoints;
 		updateCombo();
-	}
+
+		Debug.Log (direction);
+	}	
+
+
 
 	public bool isAlive(){
 		return this.alive;

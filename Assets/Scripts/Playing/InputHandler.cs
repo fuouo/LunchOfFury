@@ -54,16 +54,24 @@ public class InputHandler : MonoBehaviour {
 
 
 		if (Input.GetKeyDown(KeyCode.W)||this.isSwiping(SwipeDirection.Up)) {
-			EventBroadcaster.Instance.PostEvent (EventNames.ON_KEY_PRESSED_W);
+			Parameters parameters = new Parameters();
+			parameters.PutObjectExtra(GameManager.PUNCH_DIRECTION, SwipeDirection.Up);
+			EventBroadcaster.Instance.PostEvent (EventNames.ON_KEY_PRESSED, parameters);
 		}
 		else if (Input.GetKeyDown(KeyCode.A)||this.isSwiping(SwipeDirection.Left)) {
-			EventBroadcaster.Instance.PostEvent (EventNames.ON_KEY_PRESSED_A);
+			Parameters parameters = new Parameters();
+			parameters.PutObjectExtra(GameManager.PUNCH_DIRECTION, SwipeDirection.Left);
+			EventBroadcaster.Instance.PostEvent (EventNames.ON_KEY_PRESSED, parameters);
 		}
 		else if (Input.GetKeyDown(KeyCode.D)||this.isSwiping(SwipeDirection.Right)) {
-			EventBroadcaster.Instance.PostEvent (EventNames.ON_KEY_PRESSED_D);
+			Parameters parameters = new Parameters();
+			parameters.PutObjectExtra(GameManager.PUNCH_DIRECTION, SwipeDirection.Right);
+			EventBroadcaster.Instance.PostEvent (EventNames.ON_KEY_PRESSED, parameters);
 		}
 		else if (Input.GetKeyDown(KeyCode.S)||this.isSwiping(SwipeDirection.Down)) {
-			EventBroadcaster.Instance.PostEvent (EventNames.ON_KEY_PRESSED_S);
+			Parameters parameters = new Parameters();
+			parameters.PutObjectExtra(GameManager.PUNCH_DIRECTION, SwipeDirection.Down);
+			EventBroadcaster.Instance.PostEvent (EventNames.ON_KEY_PRESSED, parameters);
 		}
 	}
 }
