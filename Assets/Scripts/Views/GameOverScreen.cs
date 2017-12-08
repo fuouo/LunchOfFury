@@ -27,6 +27,7 @@ public class GameOverScreen : View {
 
 
 	public void OnPlay() {
+		EventBroadcaster.Instance.PostEvent (EventNames.BUTTON_CLICK);
 		this.Hide ();
 		ViewHandler.Instance.Show (ViewNames.PLAY_SCREEN);
 

@@ -10,7 +10,7 @@ public class FrenzyHandler : MonoBehaviour
 	private float frenzyDecayRate = 0.05f;
 
 	[SerializeField]
-	private float comboIncrementRate = 1;
+	private float comboIncrementRate = 5f;
 
 	private float comboPoints;
 
