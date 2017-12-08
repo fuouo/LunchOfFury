@@ -60,7 +60,7 @@ public class HitHandler : MonoBehaviour {
 		var enemy = (Enemy)poolableObject;
 
 		// Remove enemy instance in the direction
-		if (!isExit)
+		if (!isExit && !enemy.IsHit)
 			enemyInDirection[enemy.GetDirection()] = enemy;
 		else
 			enemyInDirection[enemy.GetDirection()] = null;
