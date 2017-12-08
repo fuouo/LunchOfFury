@@ -55,6 +55,9 @@ public class EnemyMechanicHandler : MonoBehaviour
 		EventBroadcaster.Instance.PostEvent(EventNames.ON_HIT_CUSTOMER, p);
 		EventBroadcaster.Instance.PostEvent(EventNames.ON_UPDATE_SCORE);
 
+		// Shake camera
+		CameraShake.Shake(0.15f, 0.25f);
+
 		if (!willIncreaseCombo)
 			return;
 

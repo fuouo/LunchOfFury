@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class IntroScreen : View {
 
 	[SerializeField] Button PlayButton;
+	[SerializeField] Text price;
 
 
 	[SerializeField] Image SelectedSprite;
@@ -17,6 +18,7 @@ public class IntroScreen : View {
 
 	// Use this for initialization
 	void Start () {
+		
 		playerTypes = PlayerType.LoadAll ();
 		EventBroadcaster.Instance.PostEvent (EventNames.INTRO_SOUND);
 	}
@@ -24,6 +26,19 @@ public class IntroScreen : View {
 	// Update is called once per frame
 	void Update () {
 		
+	}
+	public void OnBuy(){
+		if (playerTypes [currentCounter].locked == false) {
+			this.OnPlay ();
+		}else{
+			if (playerTypes [currentCounter].price < GameManager.Instance.getEarnedGold()) {
+				GameManager.Instance.setEarnedGold (GameManager.Instance.getEarnedGold() - playerTypes [currentCounter].price);
+				//Switch Player
+
+
+
+			}
+		}
 	}
 
 	public void OnPlay() {
@@ -44,8 +59,17 @@ public class IntroScreen : View {
 			currentCounter = 0;
 		else
 			currentCounter++;
-
+		
 		SelectedSprite.sprite = playerTypes [currentCounter].defaultSprite;
+		if (playerTypes [currentCounter].locked == false) {
+			price.text = "";
+			//SWITCH PLAYER
+
+
+
+		} else {
+			price.text = playerTypes [currentCounter].price + " Coins";
+		}
 
 	}
 	public void OnClickPlayerSkinLeft(){
@@ -55,7 +79,17 @@ public class IntroScreen : View {
 		else
 			currentCounter--;
 
-
 		SelectedSprite.sprite = playerTypes [currentCounter].defaultSprite;
+
+		if (playerTypes [currentCounter].locked == false) {
+			price.text = "";
+			//SWITCH PLAYER
+
+
+
+		} else {
+			price.text = playerTypes [currentCounter].price + " Coins";
+
+		}
 	}
 }
