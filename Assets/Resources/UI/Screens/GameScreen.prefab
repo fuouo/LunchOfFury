@@ -52,7 +52,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224193698861293566}
   - component: {fileID: 222173196107883486}
-  - component: {fileID: 114139220744830220}
+  - component: {fileID: 114714485713033168}
   m_Layer: 5
   m_Name: GameScreen
   m_TagString: Untagged
@@ -270,23 +270,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114139220744830220
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1291140392308704}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 763f0d4abc9a40a4988f75fb1e95a8ad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  asRootScreen: 1
-  entranceType: 0
-  exitType: 0
-  CurrentGold: {fileID: 114251905985650596}
-  GoldEarned: {fileID: 114832442255339728}
-  FrenzyGauge: {fileID: 114917941965857550}
 --- !u!114 &114173828545175778
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -407,6 +390,23 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114714485713033168
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1291140392308704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 763f0d4abc9a40a4988f75fb1e95a8ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  asRootScreen: 0
+  entranceType: 0
+  exitType: 0
+  CurrentGold: {fileID: 114251905985650596}
+  GoldEarned: {fileID: 114832442255339728}
+  FrenzyGauge: {fileID: 114917941965857550}
 --- !u!114 &114740809793747068
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -679,8 +679,8 @@ RectTransform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1291140392308704}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7756.8, y: 8160.7993, z: 0}
-  m_LocalScale: {x: 19.391998, y: 19.391998, z: 19.391998}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 224573714849074680}
   m_Father: {fileID: 0}
@@ -688,7 +688,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 7756.8, y: 8160.7993}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 32, y: 33.666626}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224207525384495154

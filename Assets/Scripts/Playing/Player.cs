@@ -71,9 +71,14 @@ public class Player : MonoBehaviour {
 	}
 
 	public void playDead(){
+		if(!alive)
+			return;
+		alive = false;
 		GetComponent<SpriteRenderer>().sortingLayerName = "Food";
 		GetComponent<SpriteRenderer> ().sortingOrder = 999;
-		GetComponent<Animator> ().SetBool (IS_HIT_ANIM, true);
+		GetComponent<Animator> ().ResetTrigger (IS_HIT_ANIM);
+		GetComponent<Animator> ().SetTrigger (IS_HIT_ANIM);
+
 	}
 
 
