@@ -5,7 +5,7 @@ using DG.Tweening;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class EnemySpawner : MonoBehaviour, IHitListener
+public class EnemySpawner : MonoBehaviour
 {
 
 	private int spawnedCount;
@@ -18,6 +18,7 @@ public class EnemySpawner : MonoBehaviour, IHitListener
 
 	public const string PARAM_DIRECTION = "PARAM_DIRECTION";
 	public const string PARAM_ENEMYCLASS = "PARAM_ENEMYCLASS";
+	public const string PARAM_ENEMY_TO_HIT = "PARAM_ENEMY_TO_HIT";
 
 	private System.Random random;
 
@@ -27,10 +28,10 @@ public class EnemySpawner : MonoBehaviour, IHitListener
 		random = new System.Random();
 
 		EventBroadcaster.Instance.AddObserver (EventNames.FRENZY_TRIGGERED, this.Frenzy);
-		EventBroadcaster.Instance.AddObserver(EventNames.ON_SPAWN_REQUEST, Spawn);
 		EventBroadcaster.Instance.AddObserver(EventNames.ON_GAME_RESET, ResetEnemy);
+		EventBroadcaster.Instance.AddObserver(EventNames.ON_SPAWN_REQUEST, Spawn);
+		EventBroadcaster.Instance.AddObserver(EventNames.ON_HIT_CUSTOMER, OnHit);
 		this.objectPool.Initialize();
-		this.hitHandler.SetListener(this);
 
 	}
 
@@ -38,6 +39,7 @@ public class EnemySpawner : MonoBehaviour, IHitListener
 	{
 		EventBroadcaster.Instance.RemoveActionAtObserver(EventNames.ON_SPAWN_REQUEST, Spawn);
 		EventBroadcaster.Instance.RemoveActionAtObserver(EventNames.ON_GAME_RESET, ResetEnemy);
+		EventBroadcaster.Instance.RemoveActionAtObserver(EventNames.ON_HIT_CUSTOMER, OnHit);
 	}
 
 	private void Frenzy(){
@@ -103,25 +105,20 @@ public class EnemySpawner : MonoBehaviour, IHitListener
 
 	}
 
-	public void OnHit(APoolable poolableObject)
+	public void OnHit(Parameters parameters)
 	{
+		var poolableObject = (APoolable) parameters.GetObjectExtra(PARAM_ENEMY_TO_HIT);
 		StartCoroutine(FlyAnimation(poolableObject));
-	}
+	}	
 
 	private IEnumerator FlyAnimation(APoolable poolableObject)
 	{
 		var enemy = (Enemy)poolableObject;
-		enemy.PlayFlyAnimation(2f);
 
-		yield return new WaitForSeconds(2f);
+		yield return new WaitForSeconds(enemy.GetFlyAnimationSpeed());
 
         // Destroy object
         enemy.transform.DOKill();
 		this.objectPool.ReleasePoolable(poolableObject);
-	}
-
-	private float GetRandomNumber(float min, float max)
-	{
-		return (float) random.NextDouble() * (max - min) + min;
 	}
 }

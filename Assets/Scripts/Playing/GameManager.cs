@@ -80,12 +80,6 @@ public class GameManager : MonoBehaviour
 	{
 		get
 		{
-			if (sharedInstance == null)
-			{
-				sharedInstance = new GameManager();
-				random = new Random();
-			}
-
 			return sharedInstance;
 		}
 	}
@@ -98,14 +92,16 @@ public class GameManager : MonoBehaviour
 
 	private void Start()
 	{
-		EventBroadcaster.Instance.AddObserver (EventNames.ON_HIT_CUSTOMER, this.OnHitCustomer);
 		EventBroadcaster.Instance.AddObserver (EventNames.ON_DEAD, this.OnDead);
 		EventBroadcaster.Instance.AddObserver (EventNames.ON_PLAY, this.OnPlay);
+		EventBroadcaster.Instance.AddObserver(EventNames.ON_HIT_CUSTOMER, OnHitCustomer);
 	}
 
 	private void OnDestroy()
 	{
-		
+		EventBroadcaster.Instance.RemoveActionAtObserver(EventNames.ON_DEAD, this.OnDead);
+		EventBroadcaster.Instance.RemoveActionAtObserver(EventNames.ON_PLAY, this.OnPlay);
+		EventBroadcaster.Instance.RemoveActionAtObserver(EventNames.ON_HIT_CUSTOMER, OnHitCustomer);
 	}
 
 	// Update is called once per frame
@@ -198,10 +194,10 @@ public class GameManager : MonoBehaviour
 				position = this.spawnPointDown.localPosition;
 				break;
 			case Direction.LEFT:
-				position = this.spawnPointRight.localPosition;
+				position = this.spawnPointLeft.localPosition;
 				break;
 			case Direction.RIGHT:
-				position = this.spawnPointLeft.localPosition;
+				position = this.spawnPointRight.localPosition;
 				break;
 		}
 
@@ -304,6 +300,11 @@ public class GameManager : MonoBehaviour
     {
         return this.speed;
     }
+
+	public bool IsPlaying()
+	{
+		return this.isPlaying;
+	}
 
 
 }

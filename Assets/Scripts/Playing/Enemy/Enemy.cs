@@ -6,13 +6,16 @@ using UnityEngine;
 using Random = System.Random;
 
 public class Enemy : APoolable, IFaceDirection {
-
-	private IBoundaryListener boundaryListener;
-
-	private Random random;
-
+	
 	[SerializeField]
 	private float stepLength = 50f;
+
+	// Fly speed in seconds
+	[SerializeField]
+	private float flyAnimationSpeed = 2f;
+
+	private IBoundaryListener boundaryListener;
+	private Random random;
 
 	private Direction direction;
 	private EnemyClass enemyClass;
@@ -47,10 +50,10 @@ public class Enemy : APoolable, IFaceDirection {
 				newPosition.y = newPosition.y + stepLength;
 				break;
 			case Direction.LEFT:
-				newPosition.x = newPosition.x - stepLength;
+				newPosition.x = newPosition.x + stepLength;
 				break;
 			case Direction.RIGHT:
-				newPosition.x = newPosition.x + stepLength;
+				newPosition.x = newPosition.x - stepLength;
 				break;
 			default:
 				throw new ArgumentOutOfRangeException();
@@ -122,7 +125,7 @@ public class Enemy : APoolable, IFaceDirection {
 		return this.direction;
 	}
 
-	public void PlayFlyAnimation(float second)
+	public void PlayFlyAnimation()
 	{
 		const float MIN = -15;
 		const float MAX = 15;
@@ -132,15 +135,20 @@ public class Enemy : APoolable, IFaceDirection {
 		endPosition.x += GetRandomNumber(MIN, MAX);
 
 		// Change angle based on new position
-		this.transform.DORotate(new Vector3(0f, 0f, this.transform.localPosition.AngleBetweenVector(endPosition)), second / 2);
+		this.transform.DORotate(new Vector3(0f, 0f, this.transform.localPosition.AngleBetweenVector(endPosition)), this.flyAnimationSpeed / 2);
 
 		// Change position on fly
-		this.transform.DOMove(endPosition, second)
+		this.transform.DOMove(endPosition, this.flyAnimationSpeed)
 			.SetEase(Ease.OutExpo);
 	}
 
 	private float GetRandomNumber(float min, float max)
 	{
 		return (float)random.NextDouble() * (max - min) + min;
+	}
+
+	public float GetFlyAnimationSpeed()
+	{
+		return this.flyAnimationSpeed;
 	}
 }

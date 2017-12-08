@@ -27,12 +27,7 @@ public class EventNames {
 
 
 	//Controls
-
-	public const string ON_KEY_PRESSED_W = "ON_KEY_PRESSED_W";
-	public const string ON_KEY_PRESSED_S = "ON_KEY_PRESSED_S";
-	public const string ON_KEY_PRESSED_D = "ON_KEY_PRESSED_D";
-	public const string ON_KEY_PRESSED_A = "ON_KEY_PRESSED_A";
-	public const string ON_KEY_PRESSED = "ON_KEY_PRESSED";
+	public const string ON_SWIPE = "ON_SWIPE";
 
 	//Player Events
 	public const string ENEMY_PUNCHED = "ENEMY_PUNCHED";
