@@ -15,7 +15,4 @@ MonoBehaviour:
   typeName: Default
   price: 0
   locked: 0
-  background: {fileID: 21300000, guid: 6a78386a86d163e458ad29b58c64af91, type: 3}
-  tile: {fileID: 21300012, guid: 4d1311b5bfed6ba41ac46e24ec2fd8a5, type: 3}
-  sideCounter: {fileID: 21300010, guid: 4d1311b5bfed6ba41ac46e24ec2fd8a5, type: 3}
-  frontCounter: {fileID: 21300008, guid: 4d1311b5bfed6ba41ac46e24ec2fd8a5, type: 3}
+  background: {fileID: 21300000, guid: 4a8483135aa7cb841aede72c4d262af9, type: 3}

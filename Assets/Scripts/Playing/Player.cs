@@ -14,6 +14,13 @@ public class Player : MonoBehaviour {
 	[Header("Frenzy")]
 	[SerializeField]  GameObject FrenzyEffect;
 
+	[Header("Smoke Particles")]
+	[SerializeField]  ParticleSystem SmokeN;
+	[SerializeField]  ParticleSystem SmokeW;
+	[SerializeField]  ParticleSystem SmokeE;
+	[SerializeField]  ParticleSystem SmokeS;
+
+
 	//STATES
 	private bool isAlive;
 
@@ -26,6 +33,8 @@ public class Player : MonoBehaviour {
 
 	//KEYS
 	public const string PLAYER_TYPE_KEY = "PLAYER_TYPE";
+	public const string SERVED_CUSTOMER_KEY = "SERVED_CUSTOMER_KEY";
+	public const string SERVED_DIR_CUSTOMER_KEY = "SERVED_CUSTOMER_DIRECTION_KEY";
 
 	// Use this for initialization
 	void Start () {
@@ -34,6 +43,7 @@ public class Player : MonoBehaviour {
 		EventBroadcaster.Instance.AddObserver (EventNames.ON_PLAYER_DEATH, this.playDead);
 		EventBroadcaster.Instance.AddObserver (EventNames.ON_GAME_RESET, this.ResetStats);
 		EventBroadcaster.Instance.AddObserver (EventNames.ON_SET_PLAYERTYPE, this.SetPlayerType);
+		EventBroadcaster.Instance.AddObserver (EventNames.ON_HIT_CUSTOMER, this.OnHitCustomer);
 	
 		GetComponent<SpriteRenderer> ().sprite = type.defaultSprite;
 		GetComponent<Animator> ().runtimeAnimatorController = type.animator;
@@ -46,6 +56,26 @@ public class Player : MonoBehaviour {
 	void Update () {
 	}
 
+	void OnHitCustomer(Parameters p){
+		var enemy = (Enemy)p.GetObjectExtra (SERVED_CUSTOMER_KEY);
+		var direction = (Direction)p.GetObjectExtra(SERVED_DIR_CUSTOMER_KEY);
+		enemy.SetFood (currentFood.GetComponent<SpriteRenderer>().sprite);
+
+		if (direction == Direction.UP) {
+			SmokeN.Play ();
+		}
+		if (direction == Direction.LEFT) {
+			SmokeW.Play ();
+		}
+		if (direction == Direction.RIGHT) {
+			SmokeE.Play ();
+		}
+		if (direction == Direction.DOWN) {
+			SmokeS.Play ();
+		}
+
+	}
+
 	void SetPlayerType(Parameters param){
 		type  = (PlayerType) param.GetObjectExtra(PLAYER_TYPE_KEY);
 
@@ -53,7 +83,11 @@ public class Player : MonoBehaviour {
 		GetComponent<Animator> ().runtimeAnimatorController = type.animator;
 	}
 	void ResetStats(){
-		Debug.Log ("hi there");
+		FrenzyEffect.GetComponent<ParticleSystem> ().Pause();
+		SmokeN.Pause (); 
+		SmokeW.Pause ();
+		SmokeE.Pause ();
+		SmokeS.Pause ();
 		GetComponent<SpriteRenderer>().sortingLayerName = "Player";
 		GetComponent<SpriteRenderer> ().sortingOrder = 1;
 		GetComponent<Animator> ().SetInteger (PUNCH_TRIGGER_PARAM, (int)Direction.NONE);
@@ -74,7 +108,6 @@ public class Player : MonoBehaviour {
 
 		StartCoroutine (playPunchAnimation (direction));
 	}	
-
 
 	IEnumerator playPunchAnimation(Direction direction){
 		GetComponent<Animator> ().SetInteger (PUNCH_TRIGGER_PARAM, (int)direction);
@@ -107,11 +140,8 @@ public class Player : MonoBehaviour {
 		StartCoroutine (animFrenzy ());
 	}
 	IEnumerator animFrenzy(){
-		FrenzyEffect.SetActive (true);
 		FrenzyEffect.GetComponent<ParticleSystem> ().Play ();
-		yield return new WaitForSeconds (FRENZY_DELAY);
-		FrenzyEffect.SetActive (false);
-		FrenzyEffect.GetComponent<ParticleSystem> ().Pause ();
+		yield return null;
 	}
 
 

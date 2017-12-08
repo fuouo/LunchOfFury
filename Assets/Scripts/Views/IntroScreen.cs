@@ -40,8 +40,7 @@ public class IntroScreen : View {
 		}else{
 			if (playerTypes [currentCounter].price <= GameManager.Instance.getEarnedGold()) {
 				GameManager.Instance.setEarnedGold (GameManager.Instance.getEarnedGold() - playerTypes [currentCounter].price);
-				//For Demo purposes, this is commented out
-				//playerTypes [currentCounter].locked=false;
+				playerTypes [currentCounter].locked=false;
 
 				Parameters param = new Parameters ();
 				param.PutObjectExtra (Player.PLAYER_TYPE_KEY, playerTypes [currentCounter]);

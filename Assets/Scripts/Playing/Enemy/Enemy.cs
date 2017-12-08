@@ -6,13 +6,16 @@ using UnityEngine;
 using Random = System.Random;
 
 public class Enemy : APoolable, IFaceDirection {
-	
+
 	[SerializeField]
 	private float stepLength = 50f;
 
 	// Fly speed in seconds
 	[SerializeField]
 	private float flyAnimationSpeed = 2f;
+
+	[SerializeField] 
+	GameObject food;
 
 	private IBoundaryListener boundaryListener;
 	private Random random;
@@ -101,6 +104,7 @@ public class Enemy : APoolable, IFaceDirection {
 		this.transform.rotation = new Quaternion(0f, 0f, 0f, 0f);
 		this.transform.localScale = Vector3.one;
 		IsHit = false;
+		food.GetComponent<SpriteRenderer> ().sprite = null;
 	}
 
 	public override void Initialize()
@@ -129,6 +133,12 @@ public class Enemy : APoolable, IFaceDirection {
 		const float MIN = -10;
 		const float MAX = 10;
 
+		Parameters p = new Parameters ();
+		p.PutObjectExtra (Player.SERVED_CUSTOMER_KEY, this);
+		p.PutObjectExtra (Player.SERVED_DIR_CUSTOMER_KEY, this.GetDirection());
+		EventBroadcaster.Instance.PostEvent (EventNames.ON_HIT_CUSTOMER, p);
+
+
 		// Update sprite
 		this.GetComponent<SpriteRenderer>().sprite = enemyClass.HitSprite;
 
@@ -156,5 +166,9 @@ public class Enemy : APoolable, IFaceDirection {
 	public float GetFlyAnimationSpeed()
 	{
 		return this.flyAnimationSpeed;
+	}
+
+	public void SetFood(Sprite food){
+		this.food.GetComponent<SpriteRenderer> ().sprite = food;
 	}
 }

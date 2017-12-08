@@ -91,6 +91,13 @@ public class GameManager : MonoBehaviour
 		random = new Random();
 	}
 
+	void OnApplicationQuit(){
+		foreach (PlayerType type in PlayerType.LoadAll()) {
+			if(type.typeName != "Default")
+				type.locked = true;
+		}
+	}
+		
 	public  int getEarnedGold(){
 		return this.earnedGold;
 	}

@@ -7,19 +7,11 @@ public class ThemeHandler : MonoBehaviour {
 	[SerializeField] Themes theme;
 
 	[Header("Elements")]
-	[SerializeField] GameObject frontCounter;
-	[SerializeField] GameObject backCounter;
-	[SerializeField] GameObject leftCounter;
-	[SerializeField] GameObject rightCounter;
 	[SerializeField] GameObject background;
 
 	// Use this for initialization
 	void Start () {
 
-		frontCounter.GetComponent<SpriteRenderer> ().sprite = theme.frontCounter;
-		backCounter.GetComponent<SpriteRenderer> ().sprite = theme.frontCounter;
-		leftCounter.GetComponent<SpriteRenderer> ().sprite = theme.sideCounter;
-		rightCounter.GetComponent<SpriteRenderer> ().sprite = theme.sideCounter;
 		background.GetComponent<SpriteRenderer> ().sprite = theme.background;
 
 	}

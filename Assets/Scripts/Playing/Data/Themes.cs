@@ -16,10 +16,6 @@ public class Themes : ScriptableObject {
 	//background
 	public Sprite background;
 
-	//tiles
-	public Sprite tile;
-	public Sprite sideCounter;
-	public Sprite frontCounter;
 
 	public static Themes[] LoadAll() {
 		return Resources.LoadAll<Themes>("Themes");
