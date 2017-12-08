@@ -696,6 +696,49 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!1 &231861387
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 231861388}
+  - component: {fileID: 231861389}
+  m_Layer: 0
+  m_Name: FrenzyHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &231861388
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 231861387}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 357821109}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &231861389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 231861387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e103c81c06836034b8aa65b5ce34c3d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minimumComboForFrenzy: 40
+  frenzyDecayRate: 0.05
+  comboIncrementRate: 1
 --- !u!1 &321187584
 GameObject:
   m_ObjectHideFlags: 0
@@ -821,6 +864,7 @@ Transform:
   - {fileID: 1894406794}
   - {fileID: 1300459244}
   - {fileID: 1000465430}
+  - {fileID: 231861388}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3456,10 +3500,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: {fileID: 11400000, guid: bafb6463bb6b0d6438e25cc1c02a4e72, type: 2}
-  minimumComboForFrenzy: 40
-  frenzyDecayRate: 0.02
-  comboIncrementRate: 1
-  gameOverPanel: {fileID: 0}
 --- !u!212 &2046838628
 SpriteRenderer:
   m_ObjectHideFlags: 0
