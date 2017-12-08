@@ -263,9 +263,9 @@ public class GameManager : MonoBehaviour
 	//======================//
 
 	public void ResetState(){
-		if (earnedGold > bestGold) //updates best score
+		if (currentGold > bestGold) //updates best score
 			bestGold = currentGold;
-		earnedGold = earnedGold + currentGold;
+		earnedGold += currentGold;
 		currentGold = 0;
 
 		// Reset rate
