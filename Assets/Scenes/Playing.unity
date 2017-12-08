@@ -2662,6 +2662,7 @@ MonoBehaviour:
   ButtonClickClip: {fileID: 8300000, guid: 47f1689a5683e8d478774e9b7413a879, type: 3}
   DeathClip: {fileID: 8300000, guid: 39d854b2a35761d4da6073bc9e1cb617, type: 3}
   HaClip: {fileID: 8300000, guid: 9cbcb219783666240b7c00460b06367b, type: 3}
+  FrenzyClip: {fileID: 8300000, guid: c113f8f27a5c035479c678085ec9bd12, type: 3}
   AudioSource: {fileID: 1531843762}
 --- !u!1 &1538814212
 GameObject:

@@ -10,6 +10,7 @@ public class SFXScript : MonoBehaviour {
 	[SerializeField] AudioClip ButtonClickClip;
 	[SerializeField] AudioClip DeathClip;
 	[SerializeField] AudioClip HaClip;
+	[SerializeField] AudioClip FrenzyClip;
 
 	[SerializeField] AudioSource AudioSource;
 	// Use this for initialization
@@ -18,6 +19,7 @@ public class SFXScript : MonoBehaviour {
 		EventBroadcaster.Instance.AddObserver (EventNames.DEATH, this.Death);
 		EventBroadcaster.Instance.AddObserver (EventNames.SERVED, this.Served);
 		EventBroadcaster.Instance.AddObserver (EventNames.HA, this.CustomerServed);
+		EventBroadcaster.Instance.AddObserver (EventNames.FRENZY, this.frenzy);
 
 	}
 	
@@ -28,6 +30,12 @@ public class SFXScript : MonoBehaviour {
 
 	void Served(){
 		AudioSource.clip = ServedClip;
+		AudioSource.Play ();
+
+	}
+
+	void frenzy(){
+		AudioSource.clip = FrenzyClip;
 		AudioSource.Play ();
 
 	}
