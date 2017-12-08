@@ -86,6 +86,13 @@ public class GameManager : MonoBehaviour
 		random = new Random();
 	}
 
+	public  int getEarnedGold(){
+		return this.earnedGold;
+	}
+
+	public void setEarnedGold(int EarnedGold){
+		this.earnedGold = EarnedGold;
+	}
 	private void Start()
 	{
 		EventBroadcaster.Instance.AddObserver (EventNames.ON_DEAD, this.OnDead);
