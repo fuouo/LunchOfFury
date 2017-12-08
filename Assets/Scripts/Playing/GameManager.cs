@@ -122,12 +122,12 @@ public class GameManager : MonoBehaviour
 
 		//		if (Input.GetKeyDown("space"))
 
+		// Go to next frame
+		NextFrame();
+
 		// Spawn opponent based on spawn rate (75% default)
 		if (random.Next(100) <= this.spawnRate)
 			RequestSpawn();
-
-		// Go to next frame
-		NextFrame();
 
 		// Increase spawn rates and speed
 		IncreaseDifficulty();
