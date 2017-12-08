@@ -87,7 +87,6 @@ public class Enemy : APoolable, IFaceDirection {
 				spriteRenderer.sprite = enemyClass.FaceLeftSprite;
 				break;
 			case Direction.RIGHT:
-			default:
 				spriteRenderer.sprite = enemyClass.FaceRightSprite;
 				break;
 		}

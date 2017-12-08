@@ -43,16 +43,18 @@ public class EnemyMechanicHandler : MonoBehaviour
 		if (enemy.IsHit)
 			return;
 
+		if (!EnemySpawner.Instance.IsEnemyClosest(enemy) && willIncreaseCombo)
+		{
+			Debug.Log("Attack rejected");
+			return;
+		}
+
 		enemy.IsHit = true;
+		EnemySpawner.Instance.RemoveEnemy(enemy);
 
 		// Play fly animation
 		enemy.PlayFlyAnimation();
-
-
-		// Request release from EnemySpawner
-		var p = new Parameters();
-		p.PutObjectExtra(EnemySpawner.PARAM_ENEMY_TO_HIT, enemy);
-		EventBroadcaster.Instance.PostEvent(EventNames.ON_HIT_CUSTOMER, p);
+		
 		EventBroadcaster.Instance.PostEvent(EventNames.ON_UPDATE_SCORE);
 
 		// Shake camera
