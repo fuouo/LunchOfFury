@@ -665,7 +665,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   requiredFrenzyCombo: 40
   frenzyDecayRate: 0.02
-  comboIncrementRate: 10
+  comboIncrementRate: 4
 --- !u!1 &321187584
 GameObject:
   m_ObjectHideFlags: 0
@@ -769,9 +769,9 @@ MonoBehaviour:
   spawnPointUp: {fileID: 194577745}
   spawnPointDown: {fileID: 1054412351}
   enemyDatabase: {fileID: 11400000, guid: fa1a7fda140d2204294cb1aa8f751333, type: 2}
-  startSpawnRate: 25
-  maxSpawnRate: 95
-  spawnRate: 75
+  startSpawnRate: 15
+  maxSpawnRate: 50
+  spawnRate: 15
   spawnIncreaseRate: 1.02
   startSpeed: 1
   minSpeedRate: 0.25
@@ -1103,7 +1103,7 @@ RectTransform:
   m_GameObject: {fileID: 1736373254}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.014625297, y: 0.014625297, z: 0.014625297}
+  m_LocalScale: {x: 0.0146484375, y: 0.0146484375, z: 0.0146484375}
   m_Children:
   - {fileID: 893323164}
   - {fileID: 1798594462}
@@ -3682,7 +3682,7 @@ BoxCollider2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2046838624}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
