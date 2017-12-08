@@ -36,6 +36,7 @@ public class EventNames {
 	//Player Events
 	public const string ON_FRENZY_ACTIVATED = "ON_FRENZY_ACTIVATED";
 	public const string ON_PLAYER_DEATH = "ON_PLAYER_DEATH";
+	public const string ON_SET_PLAYERTYPE = "ON_SET_PLAYERTYPE";
 
 	//BGM
 	public const string INTRO_SOUND = "INTRO_SOUND";

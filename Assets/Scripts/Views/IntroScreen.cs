@@ -11,7 +11,7 @@ public class IntroScreen : View {
 
 	[SerializeField] Image SelectedSprite;
 
-	[SerializeField] Player CurrentlyBeingUsed;
+	[SerializeField] PlayerType CurrentlyBeingUsed;
 
 	PlayerType[] playerTypes;
 	int currentCounter =0;
@@ -29,15 +29,23 @@ public class IntroScreen : View {
 		
 	}
 	public void OnBuy(){
+
+		CurrentlyBeingUsed = playerTypes [currentCounter];
+
 		if (playerTypes [currentCounter].locked == false) {
 			this.OnPlay ();
+			Parameters param = new Parameters ();
+			param.PutObjectExtra (Player.PLAYER_TYPE_KEY, playerTypes [currentCounter]);
+			EventBroadcaster.Instance.PostEvent (EventNames.ON_SET_PLAYERTYPE, param);
 		}else{
-			if (playerTypes [currentCounter].price < GameManager.Instance.getEarnedGold()) {
+			if (playerTypes [currentCounter].price <= GameManager.Instance.getEarnedGold()) {
 				GameManager.Instance.setEarnedGold (GameManager.Instance.getEarnedGold() - playerTypes [currentCounter].price);
-				playerTypes [currentCounter].locked=false;
-				//Switch Player
+				//For Demo purposes, this is commented out
+				//playerTypes [currentCounter].locked=false;
 
-
+				Parameters param = new Parameters ();
+				param.PutObjectExtra (Player.PLAYER_TYPE_KEY, playerTypes [currentCounter]);
+				EventBroadcaster.Instance.PostEvent (EventNames.ON_SET_PLAYERTYPE, param);
 
 				this.OnPlay ();
 			}

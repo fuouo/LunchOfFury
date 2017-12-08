@@ -43,11 +43,13 @@ public class EnemyMechanicHandler : MonoBehaviour
 		if (enemy.IsHit)
 			return;
 
+		/*
 		if (!EnemySpawner.Instance.IsEnemyClosest(enemy) && willIncreaseCombo)
 		{
 			Debug.Log("Attack rejected");
 			return;
-		}
+		}*/
+
 
 		enemy.IsHit = true;
 		EnemySpawner.Instance.RemoveEnemy(enemy);

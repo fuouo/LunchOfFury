@@ -54,7 +54,6 @@ public class PlayScreen : View {
 	}
 
 	public void UpdateCurrentGold(Parameters parameters){
-		Debug.Log (CurrentGold);
 		CurrentGold.text = parameters.GetIntExtra (PARAM_CURRENT_SCORE, Int32.Parse (CurrentGold.text)) + "";
 	}
 	/*

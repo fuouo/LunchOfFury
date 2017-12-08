@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
 	private EnemyDatabase enemyDatabase;
 
 	// Spawn Rate properties
-
+	[Header("Spawn Rate Properties")]
 	[SerializeField]
 	private float startSpawnRate = 25;
 
@@ -42,13 +42,15 @@ public class GameManager : MonoBehaviour
 	private float maxSpawnRate = 95;
 
 	[SerializeField]
-	private float spawnRate = 25;
-
-	[SerializeField]
 	private float spawnIncreaseRate = 1.02f;
 
-	// Speed properties
+	//[SerializeField]
+	private float spawnRate = 25;
 
+
+
+	// Speed properties
+	[Header("Speed Properties")]
 	[SerializeField]
 	private float startSpeed = 1f;
 
@@ -56,10 +58,10 @@ public class GameManager : MonoBehaviour
 	private float minSpeedRate = 0.25f;
 
 	[SerializeField]
-	private float speed = 1f;
-
-	[SerializeField]
 	private float speedIncreaseRate = 1.05f;
+
+	//[SerializeField]
+	private float speed = 1f;
 
 
 	[SerializeField]
@@ -120,14 +122,7 @@ public class GameManager : MonoBehaviour
 		if (!isPlaying)
 			return;
 
-		if (!isInitialized) {
-			RequestSpawn ();
-			isInitialized = true;
-		}
-			
-		
 		time = Time.timeSinceLevelLoad;
-
 
 		if (!(time >= nextTime)) return;
 
@@ -140,20 +135,22 @@ public class GameManager : MonoBehaviour
 		if (random.Next(100) <= this.spawnRate)
 			RequestSpawn();
 
-		// Increase spawn rates and speed
-		IncreaseDifficulty();
-
 		nextTime += speed;
 	}
 
 	private void IncreaseDifficulty()
 	{
+		Debug.Log ("Increasing Difficulty");
 		// Shorter == Faster
 		if (speed > minSpeedRate)
 			speed /= speedIncreaseRate;
+		else
+			speed = minSpeedRate;
 
 		if (spawnRate < maxSpawnRate)
-			spawnRate *= spawnIncreaseRate;
+			spawnRate += spawnRate * spawnIncreaseRate;
+		if (spawnRate > maxSpawnRate)
+			spawnRate = maxSpawnRate;
 	}
 
 	void DebugControls(){
@@ -273,7 +270,7 @@ public class GameManager : MonoBehaviour
     private IEnumerator OnDeadTransition()
     {
 		EventBroadcaster.Instance.PostEvent (EventNames.ON_PLAYER_DEATH);
-		yield return null;
+		yield return new WaitForSeconds(0.5f);
 		EventBroadcaster.Instance.PostEvent(EventNames.ON_GAME_OVER);
     }
     //======================//
@@ -283,6 +280,9 @@ public class GameManager : MonoBehaviour
     public void OnUpdateScore(){
 			
 		currentGold++;
+
+		// Increase spawn rates and speed
+		IncreaseDifficulty();
 
 		// Update current score
 		var param = new Parameters();

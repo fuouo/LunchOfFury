@@ -24,12 +24,16 @@ public class Player : MonoBehaviour {
 	//IMPORTANT DELAYS
 	public const float FRENZY_DELAY = 1.5f;
 
+	//KEYS
+	public const string PLAYER_TYPE_KEY = "PLAYER_TYPE";
+
 	// Use this for initialization
 	void Start () {
 		EventBroadcaster.Instance.AddObserver (EventNames.ON_SWIPE, this.punch);
 		EventBroadcaster.Instance.AddObserver (EventNames.ON_FRENZY_ACTIVATED, this.playFrenzy);
 		EventBroadcaster.Instance.AddObserver (EventNames.ON_PLAYER_DEATH, this.playDead);
 		EventBroadcaster.Instance.AddObserver (EventNames.ON_GAME_RESET, this.ResetStats);
+		EventBroadcaster.Instance.AddObserver (EventNames.ON_SET_PLAYERTYPE, this.SetPlayerType);
 	
 		GetComponent<SpriteRenderer> ().sprite = type.defaultSprite;
 		GetComponent<Animator> ().runtimeAnimatorController = type.animator;
@@ -42,7 +46,14 @@ public class Player : MonoBehaviour {
 	void Update () {
 	}
 
+	void SetPlayerType(Parameters param){
+		type  = (PlayerType) param.GetObjectExtra(PLAYER_TYPE_KEY);
+
+		GetComponent<SpriteRenderer> ().sprite = type.defaultSprite;
+		GetComponent<Animator> ().runtimeAnimatorController = type.animator;
+	}
 	void ResetStats(){
+		Debug.Log ("hi there");
 		GetComponent<SpriteRenderer>().sortingLayerName = "Player";
 		GetComponent<SpriteRenderer> ().sortingOrder = 1;
 		GetComponent<Animator> ().SetInteger (PUNCH_TRIGGER_PARAM, (int)Direction.NONE);
@@ -81,8 +92,14 @@ public class Player : MonoBehaviour {
 			return;
 		GetComponent<SpriteRenderer>().sortingLayerName = "Food";
 		GetComponent<SpriteRenderer> ().sortingOrder = 999;
+		StartCoroutine (animDead());
+
+	}
+
+	IEnumerator animDead(){
 		GetComponent<Animator> ().ResetTrigger (IS_HIT_ANIM);
 		GetComponent<Animator> ().SetTrigger (IS_HIT_ANIM);
+		yield return new WaitForSeconds (0.5f);
 		GetComponent<Animator> ().ResetTrigger (IS_HIT_ANIM);
 	}
 

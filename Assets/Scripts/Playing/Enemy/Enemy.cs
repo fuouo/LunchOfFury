@@ -96,7 +96,6 @@ public class Enemy : APoolable, IFaceDirection {
 
 	private void ResetPosition()
 	{
-		Debug.Log("ResetPosition Enemy");
 		this.transform.DOKill();
 		this.transform.localPosition = GameManager.Instance.GetSpawnPointPosition(direction);
 		this.transform.rotation = new Quaternion(0f, 0f, 0f, 0f);
@@ -126,8 +125,6 @@ public class Enemy : APoolable, IFaceDirection {
 
 	public void PlayFlyAnimation()
 	{
-
-		Debug.Log("HA");
 		EventBroadcaster.Instance.PostEvent (EventNames.HA);
 		const float MIN = -10;
 		const float MAX = 10;

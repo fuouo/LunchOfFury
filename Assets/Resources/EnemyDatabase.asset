@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Name: EnemyDatabase
   m_EditorClassIdentifier: 
   enemyClassList:
-  - FaceUpSprite: {fileID: 21300040, guid: 4d1311b5bfed6ba41ac46e24ec2fd8a5, type: 3}
-    FaceDownSprite: {fileID: 21300042, guid: 4d1311b5bfed6ba41ac46e24ec2fd8a5, type: 3}
-    FaceLeftSprite: {fileID: 21300046, guid: 4d1311b5bfed6ba41ac46e24ec2fd8a5, type: 3}
-    FaceRightSprite: {fileID: 21300044, guid: 4d1311b5bfed6ba41ac46e24ec2fd8a5, type: 3}
-    HitSprite: {fileID: 21300048, guid: 4d1311b5bfed6ba41ac46e24ec2fd8a5, type: 3}
+  - FaceUpSprite: {fileID: 21300022, guid: f1cbe77d112081849b217c83e37bf6f3, type: 3}
+    FaceDownSprite: {fileID: 21300024, guid: f1cbe77d112081849b217c83e37bf6f3, type: 3}
+    FaceLeftSprite: {fileID: 21300028, guid: f1cbe77d112081849b217c83e37bf6f3, type: 3}
+    FaceRightSprite: {fileID: 21300026, guid: f1cbe77d112081849b217c83e37bf6f3, type: 3}
+    HitSprite: {fileID: 21300030, guid: f1cbe77d112081849b217c83e37bf6f3, type: 3}
