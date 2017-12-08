@@ -52,6 +52,7 @@ public class Player : MonoBehaviour {
 		}
 
 		if (comboPoints >= minimumComboForFrenzy) {
+			EventBroadcaster.Instance.PostEvent (EventNames.FRENZY);
 			this.frenzy ();
 		}
 	}

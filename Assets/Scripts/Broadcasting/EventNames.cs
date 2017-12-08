@@ -45,6 +45,7 @@ public class EventNames {
 	public const string DEATH = "DEATH";
 	public const string SERVED = "SERVED";
 	public const string HA = "HA";
+	public const string FRENZY = "FRENZY";
 
 }
 
