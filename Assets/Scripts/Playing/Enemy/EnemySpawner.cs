@@ -38,13 +38,13 @@ public class EnemySpawner : MonoBehaviour, IHitListener {
 	}
 
 	private void Frenzy(){
-		List <APoolable> objects =  objectPool.GetUsedObjects();
+		var usedObjects =  objectPool.GetUsedObjects().ToArray();
 
-		objects.ForEach (delegate(APoolable poolableObject) {
-			Debug.Log("FRENZY"+objectPool.ToString());
-			StartCoroutine(FlyAnimation(poolableObject));
+		for (var i = 0; i < usedObjects.Length; i++)
+		{
+			StartCoroutine(FlyAnimation(usedObjects[i]));
 			EventBroadcaster.Instance.PostEvent(EventNames.ON_HIT_CUSTOMER);
-		});
+		}
 
 	}
 	
@@ -55,17 +55,11 @@ public class EnemySpawner : MonoBehaviour, IHitListener {
 
 	private void ResetEnemy()
 	{
-		Debug.Log("ResetEnemy");
-
 		var usedObjects = objectPool.GetUsedObjects().ToArray();
 
 		// Reset all objects
 		for (var i = 0; i < usedObjects.Length; i++)
-		{
 			objectPool.ReleasePoolable(usedObjects[i]);
-			Debug.Log("Released Enemey " + (i + 1) + "/" + usedObjects.Length);
-		}
-		Debug.Log("Done ResetEnemy");
 	}
 
 	private void Spawn(Parameters parameters)
