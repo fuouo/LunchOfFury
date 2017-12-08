@@ -20,6 +20,7 @@ public class PlayScreen : View {
 		GoldEarned.text = GameManager.Instance.EarnedGold + "";
 		CurrentGold.text = GameManager.Instance.CurrentGold + "";
 		EventBroadcaster.Instance.PostEvent (EventNames.START_GAME);
+		EventBroadcaster.Instance.PostEvent (EventNames.IN_GAME_SOUND);
 	}
 
 	// Update is called once per frame
