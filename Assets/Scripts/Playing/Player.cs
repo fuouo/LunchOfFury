@@ -76,7 +76,7 @@ public class Player : MonoBehaviour {
 		StartCoroutine (playPunchAnimation (direction));
 	}	
 
-	IEnumerator playPunchAnimation(Direction	 direction){
+	IEnumerator playPunchAnimation(Direction direction){
 		GetComponent<Animator> ().SetInteger (PUNCH_TRIGGER_PARAM, (int)direction);
 		Debug.Log (direction + " = " + (int)direction);
 		yield return null;
@@ -95,9 +95,15 @@ public class Player : MonoBehaviour {
 	}
 
 	public void gameOver(){
-		alive = false;
-		gameOverPanel.SetActive (true);
-		gameOverPanel.transform.SetSiblingIndex (9999);
+		GetComponent<SpriteRenderer>().sortingLayerName = "Food";
+		GetComponent<SpriteRenderer> ().sortingOrder = 999;
+		GetComponent<Animator> ().SetInteger (IS_HIT_ANIM, 1); 
+
+		//StartCoroutine(playDead ());
+	}
+
+	IEnumerator playDead(){
+		yield return null;
 
 	}
 

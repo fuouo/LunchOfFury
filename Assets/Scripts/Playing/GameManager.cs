@@ -107,12 +107,13 @@ public class GameManager : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
+		DebugControls ();
+
 		if (!isPlaying)
 			return;
 		
 		time = Time.timeSinceLevelLoad;
 
-		DebugControls ();
 
 		if (!(time >= nextTime)) return;
 
@@ -233,10 +234,9 @@ public class GameManager : MonoBehaviour
 	//======================//
 
 	// This is for entering Intro/Gameover
-	//TODO: @Dyan. Please reprocess this method :) thanks
 	public void OnDead()
     {
-        isPlaying = false;
+        //isPlaying = false;
 		UpdateBestScore();
 
 		StartCoroutine(OnDeadTransition());
@@ -244,8 +244,9 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator OnDeadTransition()
     {
-        yield return new WaitForSeconds(1f);
-        EventBroadcaster.Instance.PostEvent(EventNames.ON_GAME_OVER);
+		EventBroadcaster.Instance.PostEvent (EventNames.PLAYER_DEATH);
+		yield return null;
+		EventBroadcaster.Instance.PostEvent(EventNames.ON_GAME_OVER);
     }
     //======================//
 
