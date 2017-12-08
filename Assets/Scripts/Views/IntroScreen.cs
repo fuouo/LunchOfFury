@@ -18,6 +18,7 @@ public class IntroScreen : View {
 	// Use this for initialization
 	void Start () {
 		playerTypes = PlayerType.LoadAll ();
+		EventBroadcaster.Instance.PostEvent (EventNames.INTRO_SOUND);
 	}
 	
 	// Update is called once per frame

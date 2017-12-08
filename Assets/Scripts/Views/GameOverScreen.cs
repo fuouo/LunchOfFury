@@ -16,6 +16,7 @@ public class GameOverScreen : View {
 		EarnedGold.text = GameManager.Instance.EarnedGold + "";
 		CurrentGoldEarned.text = GameManager.Instance.CurrentGold + "";
 		BestGold.text = GameManager.Instance.BestGold + "";
+		EventBroadcaster.Instance.PostEvent (EventNames.GAME_OVER_SOUND);
 
 	}
 
