@@ -100,6 +100,7 @@ public class Enemy : APoolable, IFaceDirection {
 		this.transform.DOKill();
 		this.transform.localPosition = GameManager.Instance.GetSpawnPointPosition(direction);
 		this.transform.rotation = new Quaternion(0f, 0f, 0f, 0f);
+		this.transform.localScale = Vector3.one;
 		IsHit = false;
 	}
 
@@ -142,6 +143,8 @@ public class Enemy : APoolable, IFaceDirection {
 
 		// Change angle based on new position
 		this.transform.DORotate(new Vector3(0f, 0f, this.transform.localPosition.AngleBetweenVector(endPosition)), this.flyAnimationSpeed / 2);
+
+		this.transform.localScale = new Vector3 (1.5f, 1.5f, 1.5f);
 
 		// Change position on fly
 		this.transform.DOMove(endPosition, this.flyAnimationSpeed)

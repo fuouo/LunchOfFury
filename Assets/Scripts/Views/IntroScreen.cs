@@ -33,10 +33,12 @@ public class IntroScreen : View {
 		}else{
 			if (playerTypes [currentCounter].price < GameManager.Instance.getEarnedGold()) {
 				GameManager.Instance.setEarnedGold (GameManager.Instance.getEarnedGold() - playerTypes [currentCounter].price);
+				playerTypes [currentCounter].locked=false;
 				//Switch Player
 
 
 
+				this.OnPlay ();
 			}
 		}
 	}
