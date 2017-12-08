@@ -3,11 +3,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Random = UnityEngine.Random;
+using Random = System.Random;
 
 public class Enemy : APoolable, IFaceDirection {
 
 	private IBoundaryListener boundaryListener;
+
+	private Random random;
 
 	[SerializeField]
 	private float stepLength = 50f;
@@ -20,6 +22,7 @@ public class Enemy : APoolable, IFaceDirection {
 	// Use this for initialization
 	private void Start()
 	{
+		random = new Random();
 		EventBroadcaster.Instance.AddObserver(EventNames.ON_NEXT_FRAME, Step);
 	}
 
@@ -117,5 +120,27 @@ public class Enemy : APoolable, IFaceDirection {
 	public Direction GetDirection()
 	{
 		return this.direction;
+	}
+
+	public void PlayFlyAnimation(float second)
+	{
+		const float MIN = -15;
+		const float MAX = 15;
+
+		var endPosition = GameManager.Instance.GetSpawnPointPosition(this.GetDirection()) * 3;
+		endPosition.y += GetRandomNumber(MIN, MAX);
+		endPosition.x += GetRandomNumber(MIN, MAX);
+
+		// Change angle based on new position
+		this.transform.DORotate(new Vector3(0f, 0f, this.transform.localPosition.AngleBetweenVector(endPosition)), second / 2);
+
+		// Change position on fly
+		this.transform.DOMove(endPosition, second)
+			.SetEase(Ease.OutExpo);
+	}
+
+	private float GetRandomNumber(float min, float max)
+	{
+		return (float)random.NextDouble() * (max - min) + min;
 	}
 }

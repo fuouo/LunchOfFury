@@ -111,20 +111,7 @@ public class EnemySpawner : MonoBehaviour, IHitListener
 	private IEnumerator FlyAnimation(APoolable poolableObject)
 	{
 		var enemy = (Enemy)poolableObject;
-
-		const float MIN = -15;
-		const float MAX = 15;
-
-		var endPosition = GameManager.Instance.GetSpawnPointPosition(enemy.GetDirection()) * 3;
-		endPosition.y += GetRandomNumber(MIN, MAX);
-		endPosition.x += GetRandomNumber(MIN, MAX);
-
-		// Change angle based on new position
-		enemy.transform.DORotate(new Vector3(0f, 0f, AngleBetweenVector2(enemy.transform.localPosition, endPosition)), 1f);
-
-		// Change position on fly
-		enemy.transform.DOMove(endPosition, 2f)
-			.SetEase(Ease.OutExpo);
+		enemy.PlayFlyAnimation(2f);
 
 		yield return new WaitForSeconds(2f);
 
@@ -136,12 +123,5 @@ public class EnemySpawner : MonoBehaviour, IHitListener
 	private float GetRandomNumber(float min, float max)
 	{
 		return (float) random.NextDouble() * (max - min) + min;
-	}
-
-	private static float AngleBetweenVector2(Vector2 vec1, Vector2 vec2)
-	{
-		var diference = vec2 - vec1;
-		var sign = (vec2.y < vec1.y) ? -1.0f : 1.0f;
-		return Vector2.Angle(Vector2.right, diference) * sign;
 	}
 }
