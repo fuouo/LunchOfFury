@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: PlayerType
   m_EditorClassIdentifier: Assembly-CSharp::PlayerType
   id: 2
-  typeName: Type2
+  typeName: 34
   price: 5
   locked: 1
   animator: {fileID: 9100000, guid: af6674081ee09a246a913c76db6b7a9f, type: 2}
