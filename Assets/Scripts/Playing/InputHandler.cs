@@ -34,6 +34,7 @@ public class InputHandler : MonoBehaviour {
 	void Update ()
 	{
 
+
 		if (!GameManager.Instance.IsPlaying())
 			return;
 
@@ -55,23 +56,22 @@ public class InputHandler : MonoBehaviour {
 		}
 		
 		var parameters = new Parameters();
+		
+		if (Input.GetKeyDown(KeyCode.W) || this.isSwiping(SwipeDirection.UP))
+			parameters.PutObjectExtra(EnemyMechanicHandler.PARAM_DIRECTION, Direction.UP);
+		else if (Input.GetKeyDown(KeyCode.A) || this.isSwiping(SwipeDirection.LEFT))
+			parameters.PutObjectExtra(EnemyMechanicHandler.PARAM_DIRECTION, Direction.LEFT);
+		else if (Input.GetKeyDown(KeyCode.D) || this.isSwiping(SwipeDirection.RIGHT))
+			parameters.PutObjectExtra(EnemyMechanicHandler.PARAM_DIRECTION, Direction.RIGHT);
+		else if (Input.GetKeyDown(KeyCode.S) || this.isSwiping(SwipeDirection.DOWN))
+			parameters.PutObjectExtra(EnemyMechanicHandler.PARAM_DIRECTION, Direction.DOWN);
+		else
+		{
+			return;
+		}
 
-		try
-		{
-			if (Input.GetKeyDown(KeyCode.W) || this.isSwiping(SwipeDirection.UP))
-				parameters.PutObjectExtra(EnemyMechanicHandler.PARAM_DIRECTION, Direction.UP);
-			else if (Input.GetKeyDown(KeyCode.A) || this.isSwiping(SwipeDirection.LEFT))
-				parameters.PutObjectExtra(EnemyMechanicHandler.PARAM_DIRECTION, Direction.LEFT);
-			else if (Input.GetKeyDown(KeyCode.D) || this.isSwiping(SwipeDirection.RIGHT))
-				parameters.PutObjectExtra(EnemyMechanicHandler.PARAM_DIRECTION, Direction.RIGHT);
-			else if (Input.GetKeyDown(KeyCode.S) || this.isSwiping(SwipeDirection.DOWN))
-				parameters.PutObjectExtra(EnemyMechanicHandler.PARAM_DIRECTION, Direction.DOWN);
-		}
-		finally
-		{
-			// Notify on swipe
-			EventBroadcaster.Instance.PostEvent(EventNames.ON_SWIPE, parameters);
-		}
+		// Notify on swipe
+		EventBroadcaster.Instance.PostEvent(EventNames.ON_SWIPE, parameters);
 
 	}
 }

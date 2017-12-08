@@ -39,7 +39,7 @@ public class Player : MonoBehaviour {
 		Parameters parameters = new Parameters();
 		parameters.PutExtra(GameManager.MAX_COMBO_KEY, minimumComboForFrenzy);
 		parameters.PutExtra (GameManager.CURRENT_COMBO_KEY, comboPoints);
-		EventBroadcaster.Instance.PostEvent (EventNames.ON_UPDATE_COMBO,parameters);
+		EventBroadcaster.Instance.PostEvent (EventNames.ON_UPDATE_COMBO_UI,parameters);
 	}
 
 	// Update is called once per frame

@@ -26,12 +26,12 @@ public class EnemySpawner : MonoBehaviour
 	void Start()
 	{
 		random = new System.Random();
+		this.objectPool.Initialize();
 
 		EventBroadcaster.Instance.AddObserver (EventNames.FRENZY_TRIGGERED, this.Frenzy);
 		EventBroadcaster.Instance.AddObserver(EventNames.ON_GAME_RESET, ResetEnemy);
 		EventBroadcaster.Instance.AddObserver(EventNames.ON_SPAWN_REQUEST, Spawn);
 		EventBroadcaster.Instance.AddObserver(EventNames.ON_HIT_CUSTOMER, OnHit);
-		this.objectPool.Initialize();
 
 	}
 

@@ -36,16 +36,15 @@ public class EnemyMechanicHandler : MonoBehaviour
 
 		enemy.IsHit = true;
 
-		// Request release from EnemySpawner
-		var p = new Parameters();
-		p.PutObjectExtra(EnemySpawner.PARAM_ENEMY_TO_HIT, enemy);
-		EventBroadcaster.Instance.PostEvent(EnemySpawner.PARAM_ENEMY_TO_HIT, p);
-
 		// Play fly animation
 		enemy.PlayFlyAnimation();
 
-		// Update score
-		EventBroadcaster.Instance.PostEvent(EventNames.ON_HIT_CUSTOMER);
+
+		// Request release from EnemySpawner
+		var p = new Parameters();
+		p.PutObjectExtra(EnemySpawner.PARAM_ENEMY_TO_HIT, enemy);
+		EventBroadcaster.Instance.PostEvent(EventNames.ON_HIT_CUSTOMER, p);
+		EventBroadcaster.Instance.PostEvent(EventNames.ON_UPDATE_SCORE);
 
 	}
 }
