@@ -35,11 +35,16 @@ public class EventNames {
 	public const string FRENZY_TRIGGERED = "FRENZY_TRIGGERED";
 	public const string PLAYER_DEATH = "PLAYER_DEATH";
 
-	//Sounds
+	//BGM
 	public const string INTRO_SOUND = "INTRO_SOUND";
 	public const string IN_GAME_SOUND = "IN_GAME_SOUND";
 	public const string GAME_OVER_SOUND = "GAME_OVER_SOUND";
 
+	//SFX
+	public const string BUTTON_CLICK = "BUTTON_CLICK";
+	public const string DEATH = "DEATH";
+	public const string SERVED = "SERVED";
+	public const string HA = "HA";
 
 }
 

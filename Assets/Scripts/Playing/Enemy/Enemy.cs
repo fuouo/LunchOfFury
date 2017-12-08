@@ -127,6 +127,9 @@ public class Enemy : APoolable, IFaceDirection {
 
 	public void PlayFlyAnimation()
 	{
+
+		Debug.Log("HA");
+		EventBroadcaster.Instance.PostEvent (EventNames.HA);
 		const float MIN = -15;
 		const float MAX = 15;
 

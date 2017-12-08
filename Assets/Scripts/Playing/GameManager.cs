@@ -229,7 +229,8 @@ public class GameManager : MonoBehaviour
 	// This is for entering Intro/Gameover
 	//TODO: @Dyan. Please reprocess this method :) thanks
 	public void OnDead()
-    {
+	{
+		EventBroadcaster.Instance.PostEvent (EventNames.DEATH);
         isPlaying = false;
 		UpdateBestScore();
 

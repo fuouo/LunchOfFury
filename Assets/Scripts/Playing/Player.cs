@@ -58,7 +58,7 @@ public class Player : MonoBehaviour {
 
 	void punch(Parameters parameters){
 		//		currentScore++;
-
+		//EventBroadcaster.Instance.PostEvent (EventNames.SERVED);
 //		SwipeDirection direction = (SwipeDirection) parameters.GetObjectExtra (GameManager.PUNCH_DIRECTION);
 //
 //		//		comboGauge.value = comboPoints;

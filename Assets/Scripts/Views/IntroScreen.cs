@@ -28,6 +28,7 @@ public class IntroScreen : View {
 
 	public void OnPlay() {
 
+		EventBroadcaster.Instance.PostEvent (EventNames.BUTTON_CLICK);
 		this.Hide ();
 		ViewHandler.Instance.Show (ViewNames.PLAY_SCREEN);
 
@@ -38,6 +39,7 @@ public class IntroScreen : View {
 
 	public void OnClickPlayerSkinRight(){
 		//		SelectedSprite.sprite;
+		EventBroadcaster.Instance.PostEvent (EventNames.BUTTON_CLICK);
 		if (currentCounter + 1 == playerTypes.Length)
 			currentCounter = 0;
 		else
@@ -47,6 +49,7 @@ public class IntroScreen : View {
 
 	}
 	public void OnClickPlayerSkinLeft(){
+		EventBroadcaster.Instance.PostEvent (EventNames.BUTTON_CLICK);
 		if (currentCounter - 1 == -1)
 			currentCounter = playerTypes.Length - 1;
 		else
