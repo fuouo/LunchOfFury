@@ -1,73 +1,75 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using Random = System.Random;
 
 public class HitHandler : MonoBehaviour {
+	
+	private static HitHandler sharedInstance = null;
 
-	private IHitListener hitListener;
+	private Dictionary<Direction, Enemy> enemyInDirection;
+
+	public static HitHandler Instance
+	{
+		get
+		{
+			return sharedInstance;
+		}
+	}
+
+	void Awake()
+	{
+		sharedInstance = this;
+		enemyInDirection = new Dictionary<Direction, Enemy>
+		{
+			{Direction.UP, null},
+			{Direction.DOWN, null},
+			{Direction.LEFT, null},
+			{Direction.RIGHT, null},
+		};
+	}
 
 	// Use this for initialization
 	void Start () {
-		
-	}
-
-	void OnDestroy() {
-		this.hitListener = null;
-	}
-
-	public void SetListener(IHitListener hitListener) {
-		this.hitListener = hitListener;
 	}
 
 	void OnTriggerEnter2D(Collider2D collision)
 	{
 		OnTriggerStay2D(collision);
 	}
-
-
-	void OnTriggerStay2D(Collider2D collision)
+	
+	void OnTriggerStay2D(Collider2D collider)
 	{
-		var poolableObject = collision.gameObject.GetComponent<APoolable>();
+		UpdateEnemyInDirection(collider, false);
+	}
+
+	void OnTriggerExit2D(Collider2D collider)
+	{
+		UpdateEnemyInDirection(collider, true);
+	}
+
+	private void UpdateEnemyInDirection(Collider2D collider, bool isExit)
+	{
+		var poolableObject = collider.gameObject.GetComponent<APoolable>();
 
 		if (poolableObject == null)
 			return;
 
-		var enemy = (Enemy) poolableObject;
+		var enemy = (Enemy)poolableObject;
 
-		// TODO: Remove later; for testing of scoring lang
-		switch (enemy.GetDirection())
-		{
-			case Direction.UP:
-				if (!Input.GetKey(KeyCode.W))
-					return;
-				break;
-			case Direction.DOWN:
-				if (!Input.GetKey(KeyCode.S))
-					return;
-				break;
-			case Direction.LEFT:
-				if (!Input.GetKey(KeyCode.D))
-					return;
-				break;
-			case Direction.RIGHT:
-				if (!Input.GetKey(KeyCode.A))
-					return;
-				break;
-		}
-
-		// Check first if already hit to avoid double points
-		if (enemy.IsHit)
-			return;
-
-		enemy.IsHit = true;
-
-		EventBroadcaster.Instance.PostEvent (EventNames.ENEMY_PUNCHED);
-		if (this.hitListener != null) {
-			this.hitListener.OnHit(poolableObject);
-		}
-
-		// Update score
-		EventBroadcaster.Instance.PostEvent(EventNames.ON_HIT_CUSTOMER);
+		// Remove enemy instance in the direction
+		if (!isExit && !enemy.IsHit)
+			enemyInDirection[enemy.GetDirection()] = enemy;
+		else
+			enemyInDirection[enemy.GetDirection()] = null;
 	}
+
+	public Enemy GetEnemyInDirection(Direction direction)
+	{
+		return enemyInDirection[direction];
+	}
+
+	
 }

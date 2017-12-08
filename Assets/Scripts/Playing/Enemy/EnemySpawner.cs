@@ -5,7 +5,7 @@ using DG.Tweening;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class EnemySpawner : MonoBehaviour, IHitListener
+public class EnemySpawner : MonoBehaviour
 {
 
 	private int spawnedCount;
@@ -18,6 +18,7 @@ public class EnemySpawner : MonoBehaviour, IHitListener
 
 	public const string PARAM_DIRECTION = "PARAM_DIRECTION";
 	public const string PARAM_ENEMYCLASS = "PARAM_ENEMYCLASS";
+	public const string PARAM_ENEMY_TO_HIT = "PARAM_ENEMY_TO_HIT";
 
 	private System.Random random;
 
@@ -25,12 +26,12 @@ public class EnemySpawner : MonoBehaviour, IHitListener
 	void Start()
 	{
 		random = new System.Random();
+		this.objectPool.Initialize();
 
 		EventBroadcaster.Instance.AddObserver (EventNames.FRENZY_TRIGGERED, this.Frenzy);
-		EventBroadcaster.Instance.AddObserver(EventNames.ON_SPAWN_REQUEST, Spawn);
 		EventBroadcaster.Instance.AddObserver(EventNames.ON_GAME_RESET, ResetEnemy);
-		this.objectPool.Initialize();
-		this.hitHandler.SetListener(this);
+		EventBroadcaster.Instance.AddObserver(EventNames.ON_SPAWN_REQUEST, Spawn);
+		EventBroadcaster.Instance.AddObserver(EventNames.ON_HIT_CUSTOMER, OnHit);
 
 	}
 
@@ -38,6 +39,7 @@ public class EnemySpawner : MonoBehaviour, IHitListener
 	{
 		EventBroadcaster.Instance.RemoveActionAtObserver(EventNames.ON_SPAWN_REQUEST, Spawn);
 		EventBroadcaster.Instance.RemoveActionAtObserver(EventNames.ON_GAME_RESET, ResetEnemy);
+		EventBroadcaster.Instance.RemoveActionAtObserver(EventNames.ON_HIT_CUSTOMER, OnHit);
 	}
 
 	private void Frenzy(){
@@ -103,45 +105,21 @@ public class EnemySpawner : MonoBehaviour, IHitListener
 
 	}
 
-	public void OnHit(APoolable poolableObject)
+	public void OnHit(Parameters parameters)
 	{
+		// The enemy that has been hit
+		var poolableObject = (APoolable) parameters.GetObjectExtra(PARAM_ENEMY_TO_HIT);
 		StartCoroutine(FlyAnimation(poolableObject));
-	}
+	}	
 
 	private IEnumerator FlyAnimation(APoolable poolableObject)
 	{
 		var enemy = (Enemy)poolableObject;
 
-		const float MIN = -15;
-		const float MAX = 15;
-
-		var endPosition = GameManager.Instance.GetSpawnPointPosition(enemy.GetDirection()) * 3;
-		endPosition.y += GetRandomNumber(MIN, MAX);
-		endPosition.x += GetRandomNumber(MIN, MAX);
-
-		// Change angle based on new position
-		enemy.transform.DORotate(new Vector3(0f, 0f, AngleBetweenVector2(enemy.transform.localPosition, endPosition)), 1f);
-
-		// Change position on fly
-		enemy.transform.DOMove(endPosition, 2f)
-			.SetEase(Ease.OutExpo);
-
-		yield return new WaitForSeconds(2f);
+		yield return new WaitForSeconds(enemy.GetFlyAnimationSpeed());
 
         // Destroy object
         enemy.transform.DOKill();
 		this.objectPool.ReleasePoolable(poolableObject);
-	}
-
-	private float GetRandomNumber(float min, float max)
-	{
-		return (float) random.NextDouble() * (max - min) + min;
-	}
-
-	private static float AngleBetweenVector2(Vector2 vec1, Vector2 vec2)
-	{
-		var diference = vec2 - vec1;
-		var sign = (vec2.y < vec1.y) ? -1.0f : 1.0f;
-		return Vector2.Angle(Vector2.right, diference) * sign;
 	}
 }

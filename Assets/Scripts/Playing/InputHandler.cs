@@ -2,76 +2,52 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum SwipeDirection{
-	None=0,
-	Left=1,
-	Right=2,
-	Up=4,
-	Down=8
-}
-
 public class InputHandler : MonoBehaviour {
-	// Use this for initialization
-
-
-
-	public SwipeDirection Direction{ set; get; }
-
-	private Vector3 touchPosition;
-	private float swipeResistance = 50.0f;
-
-
-	void Start () {
+	
+	void Start ()
+	{
+		// Support for gestures
+		SimpleGesture.On4AxisFlickSwipeUp(() => SwipeCallback(Direction.UP));
+		SimpleGesture.On4AxisFlickSwipeDown(() => SwipeCallback(Direction.DOWN));
+		SimpleGesture.On4AxisFlickSwipeLeft(() => SwipeCallback(Direction.LEFT));
+		SimpleGesture.On4AxisFlickSwipeRight(() => SwipeCallback(Direction.RIGHT));
 	}
 
-	public bool isSwiping(SwipeDirection direction){
-		if (this.Direction == direction)
-			return true;
-		else
-			return false;
-	}
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+	{
+		if (!GameManager.Instance.IsPlaying())
+			return;
+		
+		Direction direction;
 
-
-		Direction = SwipeDirection.None;
-
-		if (Input.GetMouseButtonDown (0)) {
-			touchPosition = Input.mousePosition;
+		if (Input.GetKeyDown(KeyCode.W))
+			direction = Direction.UP;
+		else if (Input.GetKeyDown(KeyCode.A))
+			direction = Direction.LEFT;
+		else if (Input.GetKeyDown(KeyCode.D))
+			direction = Direction.RIGHT;
+		else if (Input.GetKeyDown(KeyCode.S))
+			direction = Direction.DOWN;
+		else
+		{
+			return;
 		}
-		if (Input.GetMouseButtonUp (0)) {
-			Vector2 deltaSwipe = touchPosition - Input.mousePosition;
 
-			if (Mathf.Abs (deltaSwipe.x) > swipeResistance) {
-				Direction |=(deltaSwipe.x<0) ? SwipeDirection.Right:SwipeDirection.Left;
-			}
-			if (Mathf.Abs (deltaSwipe.y) > swipeResistance) {
-				Direction |=(deltaSwipe.y<0) ? SwipeDirection.Up:SwipeDirection.Down;
+		// Notify on swipe
+		var parameters = new Parameters();
+		parameters.PutObjectExtra(EnemyMechanicHandler.PARAM_DIRECTION, direction);
+		EventBroadcaster.Instance.PostEvent(EventNames.ON_SWIPE, parameters);
+	}
 
-			}
-		}
-
-
-
-		if (Input.GetKeyDown(KeyCode.W)||this.isSwiping(SwipeDirection.Up)) {
-			Parameters parameters = new Parameters();
-			parameters.PutObjectExtra(GameManager.PUNCH_DIRECTION, SwipeDirection.Up);
-			EventBroadcaster.Instance.PostEvent (EventNames.ON_KEY_PRESSED, parameters);
-		}
-		else if (Input.GetKeyDown(KeyCode.A)||this.isSwiping(SwipeDirection.Left)) {
-			Parameters parameters = new Parameters();
-			parameters.PutObjectExtra(GameManager.PUNCH_DIRECTION, SwipeDirection.Left);
-			EventBroadcaster.Instance.PostEvent (EventNames.ON_KEY_PRESSED, parameters);
-		}
-		else if (Input.GetKeyDown(KeyCode.D)||this.isSwiping(SwipeDirection.Right)) {
-			Parameters parameters = new Parameters();
-			parameters.PutObjectExtra(GameManager.PUNCH_DIRECTION, SwipeDirection.Right);
-			EventBroadcaster.Instance.PostEvent (EventNames.ON_KEY_PRESSED, parameters);
-		}
-		else if (Input.GetKeyDown(KeyCode.S)||this.isSwiping(SwipeDirection.Down)) {
-			Parameters parameters = new Parameters();
-			parameters.PutObjectExtra(GameManager.PUNCH_DIRECTION, SwipeDirection.Down);
-			EventBroadcaster.Instance.PostEvent (EventNames.ON_KEY_PRESSED, parameters);
-		}
+	private static void SwipeCallback(Direction direction)
+	{
+		if (!GameManager.Instance.IsPlaying())
+			return;
+		
+		// Notify on swipe
+		var parameters = new Parameters();
+		parameters.PutObjectExtra(EnemyMechanicHandler.PARAM_DIRECTION, direction);
+		EventBroadcaster.Instance.PostEvent(EventNames.ON_SWIPE, parameters);
 	}
 }

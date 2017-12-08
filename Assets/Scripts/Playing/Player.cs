@@ -29,7 +29,7 @@ public class Player : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		EventBroadcaster.Instance.AddObserver (EventNames.ENEMY_PUNCHED, this.enemyPunched);
-		EventBroadcaster.Instance.AddObserver (EventNames.ON_KEY_PRESSED, this.punch);
+		EventBroadcaster.Instance.AddObserver (EventNames.ON_SWIPE, this.punch);
 		EventBroadcaster.Instance.AddObserver (EventNames.PLAYER_DEATH, this.gameOver);
 		comboPoints = 0;
 		alive = true;
@@ -46,7 +46,7 @@ public class Player : MonoBehaviour {
 		Parameters parameters = new Parameters();
 		parameters.PutExtra(GameManager.MAX_COMBO_KEY, minimumComboForFrenzy);
 		parameters.PutExtra (GameManager.CURRENT_COMBO_KEY, comboPoints);
-		EventBroadcaster.Instance.PostEvent (EventNames.ON_UPDATE_COMBO,parameters);
+		EventBroadcaster.Instance.PostEvent (EventNames.ON_UPDATE_COMBO_UI,parameters);
 	}
 
 	// Update is called once per frame
@@ -64,7 +64,7 @@ public class Player : MonoBehaviour {
 	}
 
 	void punch(Parameters parameters){
-		SwipeDirection direction = (SwipeDirection) parameters.GetObjectExtra (GameManager.PUNCH_DIRECTION);
+		Direction direction = (Direction) parameters.GetObjectExtra (EnemyMechanicHandler.PARAM_DIRECTION);
 		updateCombo();
 
 		int randomFoodIndex = (int) Random.Range (0, foods.Length);
@@ -74,14 +74,13 @@ public class Player : MonoBehaviour {
 		currentFood.SetActive (true);
 
 		StartCoroutine (playPunchAnimation (direction));
-
 	}	
 
-	IEnumerator playPunchAnimation(SwipeDirection direction){
+	IEnumerator playPunchAnimation(Direction	 direction){
 		GetComponent<Animator> ().SetInteger (PUNCH_TRIGGER_PARAM, (int)direction);
 		Debug.Log (direction + " = " + (int)direction);
 		yield return null;
-		GetComponent<Animator> ().SetInteger (PUNCH_TRIGGER_PARAM, (int)SwipeDirection.None);
+		GetComponent<Animator> ().SetInteger (PUNCH_TRIGGER_PARAM, (int)Direction.NONE);
 
 
 	}

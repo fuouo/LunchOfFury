@@ -3,14 +3,19 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Random = UnityEngine.Random;
+using Random = System.Random;
 
 public class Enemy : APoolable, IFaceDirection {
-
-	private IBoundaryListener boundaryListener;
-
+	
 	[SerializeField]
 	private float stepLength = 50f;
+
+	// Fly speed in seconds
+	[SerializeField]
+	private float flyAnimationSpeed = 30f;
+
+	private IBoundaryListener boundaryListener;
+	private Random random;
 
 	private Direction direction;
 	private EnemyClass enemyClass;
@@ -20,6 +25,7 @@ public class Enemy : APoolable, IFaceDirection {
 	// Use this for initialization
 	private void Start()
 	{
+		random = new Random();
 		EventBroadcaster.Instance.AddObserver(EventNames.ON_NEXT_FRAME, Step);
 	}
 
@@ -44,16 +50,16 @@ public class Enemy : APoolable, IFaceDirection {
 				newPosition.y = newPosition.y + stepLength;
 				break;
 			case Direction.LEFT:
-				newPosition.x = newPosition.x - stepLength;
+				newPosition.x = newPosition.x + stepLength;
 				break;
 			case Direction.RIGHT:
-				newPosition.x = newPosition.x + stepLength;
+				newPosition.x = newPosition.x - stepLength;
 				break;
 			default:
 				throw new ArgumentOutOfRangeException();
 		}
 
-        this.transform.DOMove(newPosition, 0.5f * GameManager.Instance.GetCurrentSpeed()).SetEase(Ease.OutQuad);
+        this.transform.DOMove(newPosition, 0.5f * GameManager.Instance.GetCurrentSpeed()).SetEase(Ease.OutExpo);
 		//this.transform.localPosition = newPosition;
 	}
 
@@ -81,10 +87,9 @@ public class Enemy : APoolable, IFaceDirection {
 				spriteRenderer.sprite = enemyClass.FaceLeftSprite;
 				break;
 			case Direction.RIGHT:
+			default:
 				spriteRenderer.sprite = enemyClass.FaceRightSprite;
 				break;
-			default:
-				throw new ArgumentOutOfRangeException("direction", direction, null);
 		}
 
 		ResetPosition();
@@ -117,5 +122,37 @@ public class Enemy : APoolable, IFaceDirection {
 	public Direction GetDirection()
 	{
 		return this.direction;
+	}
+
+	public void PlayFlyAnimation()
+	{
+		const float MIN = -10;
+		const float MAX = 10;
+
+		// Update sprite
+		this.GetComponent<SpriteRenderer>().sprite = enemyClass.HitSprite;
+
+		var endPosition = GameManager.Instance.GetSpawnPointPosition(this.GetDirection());
+		endPosition.x *= 1.5f;
+		endPosition.y *= 1.5f;
+		endPosition.y += GetRandomNumber(MIN, MAX);
+		endPosition.x += GetRandomNumber(MIN, MAX);
+
+		// Change angle based on new position
+		this.transform.DORotate(new Vector3(0f, 0f, this.transform.localPosition.AngleBetweenVector(endPosition)), this.flyAnimationSpeed / 2);
+
+		// Change position on fly
+		this.transform.DOMove(endPosition, this.flyAnimationSpeed)
+			.SetEase(Ease.OutExpo);
+	}
+
+	private float GetRandomNumber(float min, float max)
+	{
+		return (float)random.NextDouble() * (max - min) + min;
+	}
+
+	public float GetFlyAnimationSpeed()
+	{
+		return this.flyAnimationSpeed;
 	}
 }

@@ -80,12 +80,6 @@ public class GameManager : MonoBehaviour
 	{
 		get
 		{
-			if (sharedInstance == null)
-			{
-				sharedInstance = new GameManager();
-				random = new Random();
-			}
-
 			return sharedInstance;
 		}
 	}
@@ -98,14 +92,16 @@ public class GameManager : MonoBehaviour
 
 	private void Start()
 	{
-		EventBroadcaster.Instance.AddObserver (EventNames.ON_HIT_CUSTOMER, this.OnHitCustomer);
 		EventBroadcaster.Instance.AddObserver (EventNames.ON_DEAD, this.OnDead);
 		EventBroadcaster.Instance.AddObserver (EventNames.ON_PLAY, this.OnPlay);
+		EventBroadcaster.Instance.AddObserver(EventNames.ON_UPDATE_SCORE, OnUpdateScore);
 	}
 
 	private void OnDestroy()
 	{
-		
+		EventBroadcaster.Instance.RemoveActionAtObserver(EventNames.ON_DEAD, this.OnDead);
+		EventBroadcaster.Instance.RemoveActionAtObserver(EventNames.ON_PLAY, this.OnPlay);
+		EventBroadcaster.Instance.RemoveActionAtObserver(EventNames.ON_UPDATE_SCORE, OnUpdateScore);
 	}
 
 	// Update is called once per frame
@@ -179,7 +175,13 @@ public class GameManager : MonoBehaviour
 	private static Direction GetRandomDirection()
 	{
 		var values = Enum.GetValues(typeof(Direction));
-		return (Direction) values.GetValue(random.Next(values.Length));
+		Direction dir;
+
+		do {
+			dir = (Direction) values.GetValue (random.Next (values.Length));
+		} while(dir == Direction.NONE);
+			
+		return (Direction)dir;
 	}
 
 	private void NextFrame()
@@ -198,10 +200,10 @@ public class GameManager : MonoBehaviour
 				position = this.spawnPointDown.localPosition;
 				break;
 			case Direction.LEFT:
-				position = this.spawnPointRight.localPosition;
+				position = this.spawnPointLeft.localPosition;
 				break;
 			case Direction.RIGHT:
-				position = this.spawnPointLeft.localPosition;
+				position = this.spawnPointRight.localPosition;
 				break;
 		}
 
@@ -235,10 +237,9 @@ public class GameManager : MonoBehaviour
 	public void OnDead()
     {
         isPlaying = false;
-        if (currentGold > bestGold) //updates best score
-            bestGold = currentGold;
+		UpdateBestScore();
 
-        StartCoroutine(OnDeadTransition());
+		StartCoroutine(OnDeadTransition());
     }
 
     private IEnumerator OnDeadTransition()
@@ -250,23 +251,24 @@ public class GameManager : MonoBehaviour
 
 
     // This is for when player detects correct hit. 
-    public void OnHitCustomer(){
+    public void OnUpdateScore(){
+
+		Debug.Log("OnUpdateScore");
+
 		currentGold++;
-		Parameters param = new Parameters ();
+		var param = new Parameters ();
 		//TODO: Integrate Player's combo stats here
 		//param.PutExtra(PlayScreen.MAX_COMBO_KEY, <max combo of player> );
 		//param.PutExtra(PlayScreen.CURRENT_COMBO_KEY, <current combo of player> );
 		param.PutExtra(CURRENT_GOLD_KEY, currentGold);
 
-		EventBroadcaster.Instance.PostEvent (EventNames.ON_UPDATE_COMBO, param); //TODO: Since combo is part of Player, pass the Player's Parameters next time
-		EventBroadcaster.Instance.PostEvent (EventNames.ON_UPDATE_GOLD, param);
+		EventBroadcaster.Instance.PostEvent (EventNames.ON_UPDATE_COMBO_UI, param); //TODO: Since combo is part of Player, pass the Player's Parameters next time
+		EventBroadcaster.Instance.PostEvent (EventNames.ON_UPDATE_GOLD_UI, param);
 	}
 	//======================//
 
-	public void ResetState(){
-		if (earnedGold > bestGold) //updates best score
-			bestGold = currentGold;
-		earnedGold = earnedGold + currentGold;
+	public void ResetState()
+	{
 		currentGold = 0;
 
 		// Reset rate
@@ -280,6 +282,13 @@ public class GameManager : MonoBehaviour
 		EventBroadcaster.Instance.PostEvent(EventNames.ON_GAME_RESET);
 
 		//TODO: Reset Player stats here pls (Reset Combo pls)
+	}
+
+	private void UpdateBestScore()
+	{
+		if (currentGold > bestGold) //updates best score
+			bestGold = currentGold;
+		earnedGold += currentGold;
 	}
 
 	public int EarnedGold{//this is the gold earned from previous games
@@ -304,6 +313,11 @@ public class GameManager : MonoBehaviour
     {
         return this.speed;
     }
+
+	public bool IsPlaying()
+	{
+		return this.isPlaying;
+	}
 
 
 }

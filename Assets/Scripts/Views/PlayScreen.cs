@@ -12,14 +12,15 @@ public class PlayScreen : View {
 
 	// Use this for initialization
 	void Start () {
-		EventBroadcaster.Instance.AddObserver(EventNames.ON_UPDATE_COMBO, this.UpdateCombo);
-//		EventBroadcaster.Instance.AddObserver(EventNames.ON_UPDATE_MAX_COMBO, this.UpdateMaxCombo);
-		EventBroadcaster.Instance.AddObserver(EventNames.ON_UPDATE_GOLD, this.UpdateCurrentGold); //this is for updating current gold
+		EventBroadcaster.Instance.AddObserver(EventNames.ON_UPDATE_COMBO_UI, this.UpdateCombo);
+//		EventBroadcaster.Instance.AddObserver(EventNames.ON_UPDATE_MAX_COMBO_UI, this.UpdateMaxCombo);
+		EventBroadcaster.Instance.AddObserver(EventNames.ON_UPDATE_GOLD_UI, this.UpdateCurrentGold); //this is for updating current gold
 		EventBroadcaster.Instance.AddObserver(EventNames.ON_GAME_OVER, this.OnGameOver); //this is for when player is hit
 
 		GoldEarned.text = GameManager.Instance.EarnedGold + "";
 		CurrentGold.text = GameManager.Instance.CurrentGold + "";
 		EventBroadcaster.Instance.PostEvent (EventNames.START_GAME);
+		EventBroadcaster.Instance.PostEvent (EventNames.IN_GAME_SOUND);
 	}
 
 	// Update is called once per frame
@@ -28,8 +29,8 @@ public class PlayScreen : View {
 	}
 
 	void OnDestroy() {
-		EventBroadcaster.Instance.RemoveObserver (EventNames.ON_UPDATE_COMBO);
-		EventBroadcaster.Instance.RemoveObserver(EventNames.ON_UPDATE_GOLD); //this is for updating current gold
+		EventBroadcaster.Instance.RemoveObserver (EventNames.ON_UPDATE_COMBO_UI);
+		EventBroadcaster.Instance.RemoveObserver(EventNames.ON_UPDATE_GOLD_UI); //this is for updating current gold
 		EventBroadcaster.Instance.RemoveObserver(EventNames.ON_GAME_OVER); //this is for when player is hit
 	}
 
