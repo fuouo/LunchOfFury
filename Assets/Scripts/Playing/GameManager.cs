@@ -231,10 +231,9 @@ public class GameManager : MonoBehaviour
 	public void OnDead()
     {
         isPlaying = false;
-        if (currentGold > bestGold) //updates best score
-            bestGold = currentGold;
+		UpdateBestScore();
 
-        StartCoroutine(OnDeadTransition());
+		StartCoroutine(OnDeadTransition());
     }
 
     private IEnumerator OnDeadTransition()
@@ -262,10 +261,8 @@ public class GameManager : MonoBehaviour
 	}
 	//======================//
 
-	public void ResetState(){
-		if (currentGold > bestGold) //updates best score
-			bestGold = currentGold;
-		earnedGold += currentGold;
+	public void ResetState()
+	{
 		currentGold = 0;
 
 		// Reset rate
@@ -279,6 +276,13 @@ public class GameManager : MonoBehaviour
 		EventBroadcaster.Instance.PostEvent(EventNames.ON_GAME_RESET);
 
 		//TODO: Reset Player stats here pls (Reset Combo pls)
+	}
+
+	private void UpdateBestScore()
+	{
+		if (currentGold > bestGold) //updates best score
+			bestGold = currentGold;
+		earnedGold += currentGold;
 	}
 
 	public int EarnedGold{//this is the gold earned from previous games
