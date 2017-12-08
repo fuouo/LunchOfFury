@@ -88,7 +88,17 @@ public class EnemySpawner : MonoBehaviour, IHitListener
 			newEnemy.ChangeDirection(direction);
 
 			// Update layer
-			newEnemy.GetComponent<Renderer>().sortingOrder = this.spawnedCount--;
+			if (direction == Direction.UP)
+			{
+				newEnemy.GetComponent<Renderer>().sortingLayerName = SortingLayerNames.CUSTOMER_TOP;
+				newEnemy.GetComponent<Renderer>().sortingOrder = Math.Abs(this.spawnedCount--);
+
+			}
+			else
+			{
+				newEnemy.GetComponent<Renderer>().sortingLayerName = SortingLayerNames.CUSTOMER;
+				newEnemy.GetComponent<Renderer>().sortingOrder = this.spawnedCount--;
+			}
 		}
 
 	}
