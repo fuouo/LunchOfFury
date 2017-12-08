@@ -98,9 +98,7 @@ public class Player : MonoBehaviour {
 	public void gameOver(){
 		GetComponent<SpriteRenderer>().sortingLayerName = "Food";
 		GetComponent<SpriteRenderer> ().sortingOrder = 999;
-		GetComponent<Animator> ().SetInteger (IS_HIT_ANIM, 1); 
-
-		//StartCoroutine(playDead ());
+		GetComponent<Animator> ().SetBool (IS_HIT_ANIM, true);
 	}
 
 	IEnumerator playDead(){
