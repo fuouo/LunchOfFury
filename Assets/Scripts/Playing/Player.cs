@@ -14,10 +14,17 @@ public class Player : MonoBehaviour {
 	[SerializeField] float comboIncrementRate =1;
 	private float comboPoints;
 
+	[Header("FOODS SERVED")]
+	[SerializeField] GameObject currentFood;
+	[SerializeField] GameObject[] foods;
+
 	[Header("STATES")]
 	[SerializeField] private GameObject gameOverPanel;
 	private bool alive;
 
+	//Animation Parameters
+	private const string PUNCH_TRIGGER_PARAM = "punch";
+	private const string IS_HIT_ANIM = "isHit";
 
 	// Use this for initialization
 	void Start () {
@@ -57,17 +64,27 @@ public class Player : MonoBehaviour {
 	}
 
 	void punch(Parameters parameters){
-		//		currentScore++;
-
 		SwipeDirection direction = (SwipeDirection) parameters.GetObjectExtra (GameManager.PUNCH_DIRECTION);
-
-		//		comboGauge.value = comboPoints;
 		updateCombo();
 
-		Debug.Log (direction);
+		int randomFoodIndex = (int) Random.Range (0, foods.Length);
+
+		currentFood.SetActive (false);
+		currentFood = foods [randomFoodIndex];
+		currentFood.SetActive (true);
+
+		StartCoroutine (playPunchAnimation (direction));
+
 	}	
 
+	IEnumerator playPunchAnimation(SwipeDirection direction){
+		GetComponent<Animator> ().SetInteger (PUNCH_TRIGGER_PARAM, (int)direction);
+		Debug.Log (direction + " = " + (int)direction);
+		yield return null;
+		GetComponent<Animator> ().SetInteger (PUNCH_TRIGGER_PARAM, (int)SwipeDirection.None);
 
+
+	}
 
 	public bool isAlive(){
 		return this.alive;

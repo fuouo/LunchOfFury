@@ -275,7 +275,7 @@ Transform:
   m_GameObject: {fileID: 93740220}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 1985634084}
   m_RootOrder: 1
@@ -311,8 +311,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -756083749
+  m_SortingLayer: 5
   m_SortingOrder: 998
   m_Sprite: {fileID: 21300016, guid: 4d1311b5bfed6ba41ac46e24ec2fd8a5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -348,7 +348,7 @@ Transform:
   m_GameObject: {fileID: 98224165}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 1985634084}
   m_RootOrder: 0
@@ -384,8 +384,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -756083749
+  m_SortingLayer: 5
   m_SortingOrder: 998
   m_Sprite: {fileID: 21300014, guid: 4d1311b5bfed6ba41ac46e24ec2fd8a5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1039,7 +1039,7 @@ Transform:
   m_GameObject: {fileID: 685015112}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 1985634084}
   m_RootOrder: 2
@@ -1075,8 +1075,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -756083749
+  m_SortingLayer: 5
   m_SortingOrder: 998
   m_Sprite: {fileID: 21300018, guid: 4d1311b5bfed6ba41ac46e24ec2fd8a5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1678,28 +1678,9 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 198488889879867778, guid: 6da9928a81022584ead30716bcbf6e09,
-        type: 2}
-      propertyPath: randomSeed
-      value: -658582642
-      objectReference: {fileID: 0}
     - target: {fileID: 1601793191668696, guid: 6da9928a81022584ead30716bcbf6e09, type: 2}
       propertyPath: m_IsActive
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1601793191668696, guid: 6da9928a81022584ead30716bcbf6e09, type: 2}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 199550331311384264, guid: 6da9928a81022584ead30716bcbf6e09,
-        type: 2}
-      propertyPath: m_SortingLayerID
-      value: -157330021
-      objectReference: {fileID: 0}
-    - target: {fileID: 199550331311384264, guid: 6da9928a81022584ead30716bcbf6e09,
-        type: 2}
-      propertyPath: m_SortingLayer
-      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6da9928a81022584ead30716bcbf6e09, type: 2}
@@ -3359,7 +3340,7 @@ Animator:
   m_GameObject: {fileID: 2046838624}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: af6674081ee09a246a913c76db6b7a9f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -3382,6 +3363,11 @@ MonoBehaviour:
   minimumComboForFrenzy: 40
   frenzyDecayRate: 0.02
   comboIncrementRate: 1
+  currentFood: {fileID: 98224165}
+  foods:
+  - {fileID: 98224165}
+  - {fileID: 93740220}
+  - {fileID: 685015112}
   gameOverPanel: {fileID: 0}
 --- !u!212 &2046838628
 SpriteRenderer:
