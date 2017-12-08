@@ -16,3 +16,4 @@ MonoBehaviour:
     FaceDownSprite: {fileID: 21300042, guid: 4d1311b5bfed6ba41ac46e24ec2fd8a5, type: 3}
     FaceLeftSprite: {fileID: 21300046, guid: 4d1311b5bfed6ba41ac46e24ec2fd8a5, type: 3}
     FaceRightSprite: {fileID: 21300044, guid: 4d1311b5bfed6ba41ac46e24ec2fd8a5, type: 3}
+    HitSprite: {fileID: 21300048, guid: 4d1311b5bfed6ba41ac46e24ec2fd8a5, type: 3}

@@ -107,6 +107,7 @@ public class EnemySpawner : MonoBehaviour
 
 	public void OnHit(Parameters parameters)
 	{
+		// The enemy that has been hit
 		var poolableObject = (APoolable) parameters.GetObjectExtra(PARAM_ENEMY_TO_HIT);
 		StartCoroutine(FlyAnimation(poolableObject));
 	}	

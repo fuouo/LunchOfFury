@@ -12,7 +12,7 @@ public class Enemy : APoolable, IFaceDirection {
 
 	// Fly speed in seconds
 	[SerializeField]
-	private float flyAnimationSpeed = 2f;
+	private float flyAnimationSpeed = 30f;
 
 	private IBoundaryListener boundaryListener;
 	private Random random;
@@ -59,7 +59,7 @@ public class Enemy : APoolable, IFaceDirection {
 				throw new ArgumentOutOfRangeException();
 		}
 
-        this.transform.DOMove(newPosition, 0.5f * GameManager.Instance.GetCurrentSpeed()).SetEase(Ease.OutQuad);
+        this.transform.DOMove(newPosition, 0.5f * GameManager.Instance.GetCurrentSpeed()).SetEase(Ease.OutExpo);
 		//this.transform.localPosition = newPosition;
 	}
 
@@ -133,7 +133,12 @@ public class Enemy : APoolable, IFaceDirection {
 		const float MIN = -15;
 		const float MAX = 15;
 
-		var endPosition = GameManager.Instance.GetSpawnPointPosition(this.GetDirection()) * 3;
+		// Update sprite
+		this.GetComponent<SpriteRenderer>().sprite = enemyClass.HitSprite;
+
+		var endPosition = GameManager.Instance.GetSpawnPointPosition(this.GetDirection());
+		endPosition.x *= 1.5f;
+		endPosition.y *= 1.5f;
 		endPosition.y += GetRandomNumber(MIN, MAX);
 		endPosition.x += GetRandomNumber(MIN, MAX);
 
