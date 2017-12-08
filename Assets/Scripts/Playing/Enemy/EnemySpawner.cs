@@ -5,8 +5,11 @@ using DG.Tweening;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class EnemySpawner : MonoBehaviour, IHitListener {
-	
+public class EnemySpawner : MonoBehaviour, IHitListener
+{
+
+	private int spawnedCount;
+
 	[SerializeField]
 	private GameObjectPool objectPool;
 
@@ -55,6 +58,7 @@ public class EnemySpawner : MonoBehaviour, IHitListener {
 
 	private void ResetEnemy()
 	{
+		this.spawnedCount = 0;
 		var usedObjects = objectPool.GetUsedObjects().ToArray();
 
 		// Reset all objects
@@ -67,14 +71,26 @@ public class EnemySpawner : MonoBehaviour, IHitListener {
 		const int SPAWN_COUNT = 1;
 
 		if (!this.objectPool.HasObjectAvailable(SPAWN_COUNT)) return;
-		var newEnemy = (Enemy) this.objectPool.RequestPoolableBatch(SPAWN_COUNT)[0];
+		var newEnemyList = this.objectPool.RequestPoolableBatch(SPAWN_COUNT);
 
-		var direction = (Direction) parameters.GetObjectExtra(PARAM_DIRECTION);
-		var enemyClass = (EnemyClass) parameters.GetObjectExtra(PARAM_ENEMYCLASS);
+		if (newEnemyList == null)
+			return;
 
-		// Update enemy direction
-		newEnemy.SetEnemyClass(enemyClass);
-		newEnemy.ChangeDirection(direction);
+		for (var i = 0; i < newEnemyList.Length; i++)
+		{
+			var newEnemy = (Enemy) newEnemyList[i];
+
+			var direction = (Direction)parameters.GetObjectExtra(PARAM_DIRECTION);
+			var enemyClass = (EnemyClass)parameters.GetObjectExtra(PARAM_ENEMYCLASS);
+
+			// Update enemy direction
+			newEnemy.SetEnemyClass(enemyClass);
+			newEnemy.ChangeDirection(direction);
+
+			// Update layer
+			newEnemy.GetComponent<Renderer>().sortingOrder = this.spawnedCount--;
+		}
+
 	}
 
 	public void OnHit(APoolable poolableObject)
