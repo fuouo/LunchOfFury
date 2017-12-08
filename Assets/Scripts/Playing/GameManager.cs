@@ -241,7 +241,7 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator OnDeadTransition()
     {
-		EventBroadcaster.Instance.PostEvent (EventNames.PLAYER_DEATH);
+		EventBroadcaster.Instance.PostEvent (EventNames.ON_PLAYER_DEATH);
 		yield return null;
 		EventBroadcaster.Instance.PostEvent(EventNames.ON_GAME_OVER);
     }

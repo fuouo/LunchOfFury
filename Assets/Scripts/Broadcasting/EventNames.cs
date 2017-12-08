@@ -30,12 +30,12 @@ public class EventNames {
 	//Call
 	public const string START_GAME = "START_GAME"; //this is to tell UI to update max combo gauge
 
-
 	//Controls
 	public const string ON_SWIPE = "ON_SWIPE";
 
 	//Player Events
 	public const string ON_FRENZY_ACTIVATED = "ON_FRENZY_ACTIVATED";
+	public const string ON_PLAYER_DEATH = "ON_PLAYER_DEATH";
 
 	//BGM
 	public const string INTRO_SOUND = "INTRO_SOUND";

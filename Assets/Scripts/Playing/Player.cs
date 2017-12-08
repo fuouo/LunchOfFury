@@ -28,6 +28,7 @@ public class Player : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		EventBroadcaster.Instance.AddObserver (EventNames.ON_SWIPE, this.punch);
+		EventBroadcaster.Instance.AddObserver (EventNames.ON_PLAYER_DEATH, this.playDead);
 
 		GetComponent<SpriteRenderer> ().sprite = type.defaultSprite;
 		GetComponent<Animator> ().runtimeAnimatorController = type.animator;
@@ -69,25 +70,15 @@ public class Player : MonoBehaviour {
 		//		comboGauge.value = comboPoints;
 	}
 
-	public void gameOver(){
+	public void playDead(){
 		GetComponent<SpriteRenderer>().sortingLayerName = "Food";
 		GetComponent<SpriteRenderer> ().sortingOrder = 999;
 		GetComponent<Animator> ().SetBool (IS_HIT_ANIM, true);
 	}
 
-	IEnumerator playDead(){
-		yield return null;
-
-	}
 
 	public void onClickPlayAgain(){
 		//LoadManager.Instance.LoadScene (SceneNames.GAME_SCENE);	
-	}
-
-	private void frenzy(){
-
-		comboPoints = 0;
-		EventBroadcaster.Instance.PostEvent (EventNames.FRENZY_TRIGGERED);
 	}
 
 	private void OnTriggerEnter2D(Collider2D collision)
