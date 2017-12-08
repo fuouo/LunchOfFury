@@ -9,4 +9,5 @@ public class EnemyClass
 	public Sprite FaceDownSprite;
 	public Sprite FaceLeftSprite;
 	public Sprite FaceRightSprite;
+	public Sprite HitSprite;
 }
