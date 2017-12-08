@@ -62,6 +62,7 @@ public class HitHandler : MonoBehaviour {
 
 		enemy.IsHit = true;
 
+		EventBroadcaster.Instance.PostEvent (EventNames.ENEMY_PUNCHED);
 		if (this.hitListener != null) {
 			this.hitListener.OnHit(poolableObject);
 		}

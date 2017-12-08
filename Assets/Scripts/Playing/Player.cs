@@ -4,13 +4,19 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Player : MonoBehaviour {
+	[Header("Player Type")]
+	[SerializeField] PlayerType type;
+
+
+	[Header("COMBO")]
 	[SerializeField] float minimumComboForFrenzy = 40.0f;
 	[SerializeField] float frenzyDecayRate = 0.05f;
-	[SerializeField] private GameObject gameOverPanel;
+	[SerializeField] float comboIncrementRate =1;
 	private float comboPoints;
-	private bool alive;
 
-	[SerializeField] Animator animator;
+	[Header("STATES")]
+	[SerializeField] private GameObject gameOverPanel;
+	private bool alive;
 
 
 	// Use this for initialization
@@ -20,6 +26,10 @@ public class Player : MonoBehaviour {
 		EventBroadcaster.Instance.AddObserver (EventNames.PLAYER_DEATH, this.gameOver);
 		comboPoints = 0;
 		alive = true;
+
+		GetComponent<SpriteRenderer> ().sprite = type.defaultSprite;
+		GetComponent<Animator> ().runtimeAnimatorController = type.animator;
+
 	}
 
 	void updateCombo(){
@@ -31,13 +41,13 @@ public class Player : MonoBehaviour {
 		parameters.PutExtra (GameManager.CURRENT_COMBO_KEY, comboPoints);
 		EventBroadcaster.Instance.PostEvent (EventNames.ON_UPDATE_COMBO,parameters);
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
-//		scoreText.text = currentScore.ToString ();
+		//		scoreText.text = currentScore.ToString ();
 		if (comboPoints > 0) {
 			comboPoints -= frenzyDecayRate;
-//			comboGauge.value = comboPoints;
+			//			comboGauge.value = comboPoints;
 			updateCombo();
 		}
 
@@ -50,7 +60,7 @@ public class Player : MonoBehaviour {
 		//		currentScore++;
 
 		SwipeDirection direction = (SwipeDirection) parameters.GetObjectExtra (GameManager.PUNCH_DIRECTION);
-		comboPoints++;
+
 		//		comboGauge.value = comboPoints;
 		updateCombo();
 
@@ -64,8 +74,8 @@ public class Player : MonoBehaviour {
 	}
 
 	public void enemyPunched(){
-		comboPoints++;
-//		comboGauge.value = comboPoints;
+		comboPoints=comboPoints+comboIncrementRate;
+		//		comboGauge.value = comboPoints;
 	}
 
 	public void gameOver(){
@@ -80,19 +90,19 @@ public class Player : MonoBehaviour {
 	}
 
 	private void frenzy(){
-		
+
 		comboPoints = 0;
 		EventBroadcaster.Instance.PostEvent (EventNames.FRENZY_TRIGGERED);
 	}
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        var poolableObject = collision.gameObject.GetComponent<APoolable>();
+	private void OnTriggerEnter2D(Collider2D collision)
+	{
+		var poolableObject = collision.gameObject.GetComponent<APoolable>();
 
-        if (poolableObject == null)
-            return;
+		if (poolableObject == null)
+			return;
 
-        EventBroadcaster.Instance.PostEvent(EventNames.ON_DEAD);
-    }
+		EventBroadcaster.Instance.PostEvent(EventNames.ON_DEAD);
+	}
 
 }

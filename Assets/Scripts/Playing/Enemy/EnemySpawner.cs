@@ -41,11 +41,16 @@ public class EnemySpawner : MonoBehaviour, IHitListener {
 		List <APoolable> objects =  objectPool.GetUsedObjects();
 
 		objects.ForEach (delegate(APoolable poolableObject) {
-			this.objectPool.ReleasePoolable(poolableObject);
-
+			Debug.Log("FRENZY"+objectPool.ToString());
+			StartCoroutine(FlyAnimation(poolableObject));
 			EventBroadcaster.Instance.PostEvent(EventNames.ON_HIT_CUSTOMER);
 		});
 
+	}
+	
+	IEnumerator pauser()
+	{
+		yield return new WaitForSeconds(3);
 	}
 
 	private void ResetEnemy()
