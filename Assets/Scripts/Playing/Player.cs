@@ -40,6 +40,12 @@ public class Player : MonoBehaviour {
 		if (poolableObject == null)
 			return;
 
+		// To fix player dying even the customer is hit
+		var enemy = (Enemy) poolableObject;
+
+		if (enemy.IsHit)
+			return;
+
 		EventBroadcaster.Instance.PostEvent(EventNames.ON_DEAD);
 	}
 
