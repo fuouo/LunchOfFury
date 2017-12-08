@@ -20,6 +20,7 @@ public class IntroScreen : View {
 	void Start () {
 		
 		playerTypes = PlayerType.LoadAll ();
+		Debug.Log ("PlayerTypes: " + playerTypes.Length);
 		EventBroadcaster.Instance.PostEvent (EventNames.INTRO_SOUND);
 	}
 	

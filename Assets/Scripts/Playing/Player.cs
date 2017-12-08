@@ -7,27 +7,27 @@ public class Player : MonoBehaviour {
 	[Header("Player Type")]
 	[SerializeField] PlayerType type;
 
-	[Header("COMBO")]
-	[SerializeField] float minimumComboForFrenzy = 40.0f;
-	[SerializeField] float frenzyDecayRate = 0.05f;
-	[SerializeField] float comboIncrementRate =1;
-	private float comboPoints;
-
 	[Header("FOODS SERVED")]
 	[SerializeField] GameObject currentFood;
 	[SerializeField] GameObject[] foods;
 
-	[Header("STATES")]
-	[SerializeField] private GameObject gameOverPanel;
+	[Header("Frenzy")]
+	[SerializeField]  GameObject FrenzyEffect;
+
+	//STATES
 	private bool isAlive;
 
 	//Animation Parameters
 	private const string PUNCH_TRIGGER_PARAM = "punch";
 	private const string IS_HIT_ANIM = "isHit";
 
+	//IMPORTANT DELAYS
+	public const float FRENZY_DELAY = 1.5f;
+
 	// Use this for initialization
 	void Start () {
 		EventBroadcaster.Instance.AddObserver (EventNames.ON_SWIPE, this.punch);
+		EventBroadcaster.Instance.AddObserver (EventNames.ON_FRENZY_ACTIVATED, this.playFrenzy);
 		EventBroadcaster.Instance.AddObserver (EventNames.ON_PLAYER_DEATH, this.playDead);
 		EventBroadcaster.Instance.AddObserver (EventNames.ON_GAME_RESET, this.ResetStats);
 	
@@ -74,11 +74,6 @@ public class Player : MonoBehaviour {
 
 	}
 
-	public void enemyPunched(){
-		comboPoints=comboPoints+comboIncrementRate;
-		//		comboGauge.value = comboPoints;
-	}
-
 	public void playDead(){	
 		if (isAlive)
 			isAlive = false;
@@ -89,14 +84,19 @@ public class Player : MonoBehaviour {
 		GetComponent<Animator> ().ResetTrigger (IS_HIT_ANIM);
 		GetComponent<Animator> ().SetTrigger (IS_HIT_ANIM);
 		GetComponent<Animator> ().ResetTrigger (IS_HIT_ANIM);
-
-
 	}
 
-
-	public void onClickPlayAgain(){
-		//LoadManager.Instance.LoadScene (SceneNames.GAME_SCENE);	
+	public void playFrenzy(Parameters parameter){
+		StartCoroutine (animFrenzy ());
 	}
+	IEnumerator animFrenzy(){
+		FrenzyEffect.SetActive (true);
+		FrenzyEffect.GetComponent<ParticleSystem> ().Play ();
+		yield return new WaitForSeconds (FRENZY_DELAY);
+		FrenzyEffect.SetActive (false);
+		FrenzyEffect.GetComponent<ParticleSystem> ().Pause ();
+	}
+
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{

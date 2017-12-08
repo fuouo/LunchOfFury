@@ -665,7 +665,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   requiredFrenzyCombo: 40
   frenzyDecayRate: 0.02
-  comboIncrementRate: 2
+  comboIncrementRate: 10
 --- !u!1 &321187584
 GameObject:
   m_ObjectHideFlags: 0
@@ -3214,6 +3214,11 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!1 &1700745578 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1866098183103670, guid: 5bbb0f0a830aeb14d868ee111351bebd,
+    type: 2}
+  m_PrefabInternal: {fileID: 1467682076}
 --- !u!1 &1736373254
 GameObject:
   m_ObjectHideFlags: 0
@@ -3621,15 +3626,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d406e09ed234af449c5c22e100158a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: {fileID: 11400000, guid: bafb6463bb6b0d6438e25cc1c02a4e72, type: 2}
-  minimumComboForFrenzy: 40
-  frenzyDecayRate: 0.02
-  comboIncrementRate: 1
+  type: {fileID: 11400000, guid: b9101560feb3f524696271dce4c8af70, type: 2}
   currentFood: {fileID: 98224165}
   foods:
   - {fileID: 98224165}
   - {fileID: 685015112}
-  gameOverPanel: {fileID: 0}
+  FrenzyEffect: {fileID: 1700745578}
 --- !u!212 &2046838628
 SpriteRenderer:
   m_ObjectHideFlags: 0

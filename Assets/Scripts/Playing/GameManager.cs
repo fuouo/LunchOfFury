@@ -98,6 +98,7 @@ public class GameManager : MonoBehaviour
 		EventBroadcaster.Instance.AddObserver (EventNames.ON_DEAD, this.OnDead);
 		EventBroadcaster.Instance.AddObserver (EventNames.ON_PLAY, this.OnPlay);
 		EventBroadcaster.Instance.AddObserver(EventNames.ON_UPDATE_SCORE, OnUpdateScore);
+		EventBroadcaster.Instance.AddObserver (EventNames.ON_FRENZY_ACTIVATED, this.OnFrenzy);
 	}
 
 	private void OnDestroy()
@@ -219,7 +220,12 @@ public class GameManager : MonoBehaviour
 		return this.enemyDatabase;
 	}
 
+	public void OnFrenzy(Parameters param){
+		isPlaying = false;
+		StartCoroutine(DelayPlay(Player.FRENZY_DELAY + 1.0f));
+	}
 
+	
 	// This is for Playing. From Intro/GameOver state to Play state
 	public void OnPlay(){
 
@@ -259,9 +265,7 @@ public class GameManager : MonoBehaviour
 
     // This is for when player detects correct hit. 
     public void OnUpdateScore(){
-
-		Debug.Log("OnUpdateScore");
-
+			
 		currentGold++;
 
 		// Update current score
@@ -322,6 +326,7 @@ public class GameManager : MonoBehaviour
 	{
 		return this.isPlaying;
 	}
+
 
 
 }
