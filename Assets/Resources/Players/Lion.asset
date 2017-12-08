@@ -8,12 +8,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: PlayerType
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerType
-  id: 2
-  typeName: 34
+  m_Script: {fileID: 11500000, guid: 1d187f5790e499e4eb91ff427a35617c, type: 3}
+  m_Name: Lion
+  m_EditorClassIdentifier: 
+  id: 1
+  typeName: Lion
   price: 5
   locked: 1
   animator: {fileID: 9100000, guid: af6674081ee09a246a913c76db6b7a9f, type: 2}
-  defaultSprite: {fileID: 21300000, guid: 6ba5a65861f86264bbcbf0898c38d6cd, type: 3}
+  defaultSprite: {fileID: 21300040, guid: 4d1311b5bfed6ba41ac46e24ec2fd8a5, type: 3}

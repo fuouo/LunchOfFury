@@ -72,6 +72,9 @@ public class GameManager : MonoBehaviour
 
 	private static GameManager sharedInstance = null;
 
+	private bool isInitialized = false;
+
+
 	public static GameManager Instance
 	{
 		get
@@ -95,9 +98,11 @@ public class GameManager : MonoBehaviour
 	}
 	private void Start()
 	{
+		isInitialized = false;
 		EventBroadcaster.Instance.AddObserver (EventNames.ON_DEAD, this.OnDead);
 		EventBroadcaster.Instance.AddObserver (EventNames.ON_PLAY, this.OnPlay);
 		EventBroadcaster.Instance.AddObserver(EventNames.ON_UPDATE_SCORE, OnUpdateScore);
+		EventBroadcaster.Instance.AddObserver (EventNames.ON_FRENZY_ACTIVATED, this.OnFrenzy);
 	}
 
 	private void OnDestroy()
@@ -114,6 +119,12 @@ public class GameManager : MonoBehaviour
 
 		if (!isPlaying)
 			return;
+
+		if (!isInitialized) {
+			RequestSpawn ();
+			isInitialized = true;
+		}
+			
 		
 		time = Time.timeSinceLevelLoad;
 
@@ -219,7 +230,18 @@ public class GameManager : MonoBehaviour
 		return this.enemyDatabase;
 	}
 
+	public void OnFrenzy(Parameters param){
+		isPlaying = false;
+		// Reset rate
+		this.speed = this.startSpeed;
+		this.spawnRate = this.startSpawnRate;
+		this.nextTime = 0;
+		this.time = Time.timeSinceLevelLoad;
+		this.nextTime = this.time;
+		StartCoroutine(DelayPlay(Player.FRENZY_DELAY + 1.0f));
+	}
 
+	
 	// This is for Playing. From Intro/GameOver state to Play state
 	public void OnPlay(){
 
@@ -259,9 +281,7 @@ public class GameManager : MonoBehaviour
 
     // This is for when player detects correct hit. 
     public void OnUpdateScore(){
-
-		Debug.Log("OnUpdateScore");
-
+			
 		currentGold++;
 
 		// Update current score
@@ -322,6 +342,7 @@ public class GameManager : MonoBehaviour
 	{
 		return this.isPlaying;
 	}
+
 
 
 }
