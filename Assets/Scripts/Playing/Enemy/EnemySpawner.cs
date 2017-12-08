@@ -25,9 +25,16 @@ public class EnemySpawner : MonoBehaviour, IHitListener {
 
 		EventBroadcaster.Instance.AddObserver (EventNames.FRENZY_TRIGGERED, this.Frenzy);
 		EventBroadcaster.Instance.AddObserver(EventNames.ON_SPAWN_REQUEST, Spawn);
+		EventBroadcaster.Instance.AddObserver(EventNames.ON_GAME_RESET, ResetEnemy);
 		this.objectPool.Initialize();
 		this.hitHandler.SetListener(this);
 
+	}
+
+	private void OnDestroy()
+	{
+		EventBroadcaster.Instance.RemoveActionAtObserver(EventNames.ON_SPAWN_REQUEST, Spawn);
+		EventBroadcaster.Instance.RemoveActionAtObserver(EventNames.ON_GAME_RESET, ResetEnemy);
 	}
 
 	private void Frenzy(){
@@ -41,9 +48,19 @@ public class EnemySpawner : MonoBehaviour, IHitListener {
 
 	}
 
-	private void OnDestroy()
+	private void ResetEnemy()
 	{
-		EventBroadcaster.Instance.RemoveActionAtObserver(EventNames.ON_SPAWN_REQUEST, Spawn);
+		Debug.Log("ResetEnemy");
+
+		var usedObjects = objectPool.GetUsedObjects().ToArray();
+
+		// Reset all objects
+		for (var i = 0; i < usedObjects.Length; i++)
+		{
+			objectPool.ReleasePoolable(usedObjects[i]);
+			Debug.Log("Released Enemey " + (i + 1) + "/" + usedObjects.Length);
+		}
+		Debug.Log("Done ResetEnemy");
 	}
 
 	private void Spawn(Parameters parameters)
@@ -54,7 +71,6 @@ public class EnemySpawner : MonoBehaviour, IHitListener {
 		var newEnemy = (Enemy) this.objectPool.RequestPoolableBatch(SPAWN_COUNT)[0];
 
 		var direction = (Direction) parameters.GetObjectExtra(PARAM_DIRECTION);
-		Debug.Log(direction);
 		var enemyClass = (EnemyClass) parameters.GetObjectExtra(PARAM_ENEMYCLASS);
 
 		// Update enemy direction

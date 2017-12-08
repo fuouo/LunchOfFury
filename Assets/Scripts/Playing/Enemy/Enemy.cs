@@ -92,11 +92,11 @@ public class Enemy : APoolable, IFaceDirection {
 
 	private void ResetPosition()
 	{
-        this.transform.DOKill();
+		Debug.Log("ResetPosition Enemy");
+		this.transform.DOKill();
 		this.transform.localPosition = GameManager.Instance.GetSpawnPointPosition(direction);
 		this.transform.rotation = new Quaternion(0f, 0f, 0f, 0f);
 		IsHit = false;
-		Debug.Log(this.transform.localPosition);
 	}
 
 	public override void Initialize()

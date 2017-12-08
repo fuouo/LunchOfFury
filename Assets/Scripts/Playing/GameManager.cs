@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
 	private float spawnRate = 25;
 
 	[SerializeField]
-	private float spawnIncreaseRate = 1.1f;
+	private float spawnIncreaseRate = 1.02f;
 
 	// Speed properties
 
@@ -57,13 +57,13 @@ public class GameManager : MonoBehaviour
 	private float startSpeed = 1f;
 
 	[SerializeField]
-	private float minSpeedRate = 0.1f;
+	private float minSpeedRate = 0.25f;
 
 	[SerializeField]
 	private float speed = 1f;
 
 	[SerializeField]
-	private float speedIncreaseRate = 1.005f;
+	private float speedIncreaseRate = 1.05f;
 
 
 	[SerializeField]
@@ -71,6 +71,8 @@ public class GameManager : MonoBehaviour
 
 	private static Random random;
 	/* end of enemy spawning */
+
+	private float time;
 
 	private static GameManager sharedInstance = null;
 
@@ -111,10 +113,12 @@ public class GameManager : MonoBehaviour
 	{
 		if (!isPlaying)
 			return;
+		
+		time = Time.timeSinceLevelLoad;
 
 		DebugControls ();
 
-		if (!(Time.time >= nextTime)) return;
+		if (!(time >= nextTime)) return;
 
 		//		if (Input.GetKeyDown("space"))
 
@@ -180,6 +184,7 @@ public class GameManager : MonoBehaviour
 
 	private void NextFrame()
 	{
+		Debug.Log("NextFrame()");
 		EventBroadcaster.Instance.PostEvent(EventNames.ON_NEXT_FRAME);
 	}
 
@@ -211,20 +216,17 @@ public class GameManager : MonoBehaviour
 
 	// This is for Playing. From Intro/GameOver state to Play state
 	public void OnPlay(){
-		ResetStats ();
+
+		ResetState();
 		StartCoroutine(DelayPlay(startPlayDelay));
 	}
 
 	IEnumerator DelayPlay(float seconds){
+
 		yield return new WaitForSeconds (seconds);
-
-		// Reset the enemy state
-
 
 		// Start the game
 		isPlaying = true;
-		this.spawnRate = this.startSpawnRate;
-		this.speed = this.startSpeed;
 	}
 	//======================//
 
@@ -261,11 +263,21 @@ public class GameManager : MonoBehaviour
 	}
 	//======================//
 
-	public void ResetStats(){
+	public void ResetState(){
 		if (earnedGold > bestGold) //updates best score
 			bestGold = currentGold;
 		earnedGold = earnedGold + currentGold;
 		currentGold = 0;
+
+		// Reset rate
+		this.speed = this.startSpeed;
+		this.spawnRate = this.startSpawnRate;
+		this.nextTime = 0;
+		this.time = Time.timeSinceLevelLoad;
+		this.nextTime = this.time;
+
+		// Reset enemy list
+		EventBroadcaster.Instance.PostEvent(EventNames.ON_GAME_RESET);
 
 		//TODO: Reset Player stats here pls (Reset Combo pls)
 	}
