@@ -7,10 +7,6 @@ using Random = System.Random;
 public class GameManager : MonoBehaviour
 {
 	public const string TAG = "[GameManager]";
-	public const string CURRENT_GOLD_KEY = "CURRENT_GOLD_KEY";
-	public const string MAX_COMBO_KEY = "MAX_COMBO_KEY";
-	public const string CURRENT_COMBO_KEY = "CURRENT_COMBO_KEY";
-	public const string PUNCH_DIRECTION = "PUNCH_DIRECTION";
 
 	[SerializeField] private float startPlayDelay;
 	[SerializeField] private int earnedGold; //this is the gold earned from previous games
@@ -258,13 +254,10 @@ public class GameManager : MonoBehaviour
 		Debug.Log("OnUpdateScore");
 
 		currentGold++;
-		var param = new Parameters ();
-		//TODO: Integrate Player's combo stats here
-		//param.PutExtra(PlayScreen.MAX_COMBO_KEY, <max combo of player> );
-		//param.PutExtra(PlayScreen.CURRENT_COMBO_KEY, <current combo of player> );
-		param.PutExtra(CURRENT_GOLD_KEY, currentGold);
 
-		EventBroadcaster.Instance.PostEvent (EventNames.ON_UPDATE_COMBO_UI, param); //TODO: Since combo is part of Player, pass the Player's Parameters next time
+		// Update current score
+		var param = new Parameters();
+		param.PutExtra(PlayScreen.PARAM_CURRENT_SCORE, currentGold);
 		EventBroadcaster.Instance.PostEvent (EventNames.ON_UPDATE_GOLD_UI, param);
 	}
 	//======================//
@@ -280,7 +273,7 @@ public class GameManager : MonoBehaviour
 		this.time = Time.timeSinceLevelLoad;
 		this.nextTime = this.time;
 
-		// Reset enemy list
+		// Reset frenzy and enemy list
 		EventBroadcaster.Instance.PostEvent(EventNames.ON_GAME_RESET);
 
 		//TODO: Reset Player stats here pls (Reset Combo pls)

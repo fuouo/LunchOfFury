@@ -7,7 +7,6 @@ public class Player : MonoBehaviour {
 	[Header("Player Type")]
 	[SerializeField] PlayerType type;
 
-
 	[Header("COMBO")]
 	[SerializeField] float minimumComboForFrenzy = 40.0f;
 	[SerializeField] float frenzyDecayRate = 0.05f;
@@ -28,45 +27,19 @@ public class Player : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		EventBroadcaster.Instance.AddObserver (EventNames.ENEMY_PUNCHED, this.enemyPunched);
 		EventBroadcaster.Instance.AddObserver (EventNames.ON_SWIPE, this.punch);
-		EventBroadcaster.Instance.AddObserver (EventNames.PLAYER_DEATH, this.gameOver);
-		comboPoints = 0;
-		alive = true;
 
 		GetComponent<SpriteRenderer> ().sprite = type.defaultSprite;
 		GetComponent<Animator> ().runtimeAnimatorController = type.animator;
 
 	}
 
-	void updateCombo(){
-
-		Debug.Log ("WENT IN START");
-
-		Parameters parameters = new Parameters();
-		parameters.PutExtra(GameManager.MAX_COMBO_KEY, minimumComboForFrenzy);
-		parameters.PutExtra (GameManager.CURRENT_COMBO_KEY, comboPoints);
-		EventBroadcaster.Instance.PostEvent (EventNames.ON_UPDATE_COMBO_UI,parameters);
-	}
-
 	// Update is called once per frame
 	void Update () {
-		//		scoreText.text = currentScore.ToString ();
-		if (comboPoints > 0) {
-			comboPoints -= frenzyDecayRate;
-			//			comboGauge.value = comboPoints;
-			updateCombo();
-		}
-
-		if (comboPoints >= minimumComboForFrenzy) {
-			EventBroadcaster.Instance.PostEvent (EventNames.FRENZY);
-			this.frenzy ();
-		}
 	}
 
 	void punch(Parameters parameters){
 		Direction direction = (Direction) parameters.GetObjectExtra (EnemyMechanicHandler.PARAM_DIRECTION);
-		updateCombo();
 
 		int randomFoodIndex = (int) Random.Range (0, foods.Length);
 
@@ -76,6 +49,7 @@ public class Player : MonoBehaviour {
 
 		StartCoroutine (playPunchAnimation (direction));
 	}	
+
 
 	IEnumerator playPunchAnimation(Direction direction){
 		GetComponent<Animator> ().SetInteger (PUNCH_TRIGGER_PARAM, (int)direction);
@@ -121,6 +95,12 @@ public class Player : MonoBehaviour {
 		var poolableObject = collision.gameObject.GetComponent<APoolable>();
 
 		if (poolableObject == null)
+			return;
+
+		// To fix player dying even the customer is hit
+		var enemy = (Enemy) poolableObject;
+
+		if (enemy.IsHit)
 			return;
 
 		EventBroadcaster.Instance.PostEvent(EventNames.ON_DEAD);

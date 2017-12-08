@@ -15,12 +15,16 @@ public class EventNames {
 	public const string ON_UPDATE_SCORE = "ON_UPDATE_SCORE"; //this is when player hits the customer. 
 	public const string ON_DEAD = "ON_DEAD"; //this is when player is ddead / has collided with customer
 	public const string ON_PLAY = "ON_PLAY"; //this is when intro screen enters game screen. or gameover screen enters game screen
+
 	public const string ON_GAME_RESET = "ON_GAME_RESET"; //this is when intro screen enters game screen. or gameover screen enters game screen
+
+	// Frenzy
+	public const string ON_INCREASE_FRENZY_COMBO = "ON_INCREASE_FRENZY_COMBO";
+	public const string ON_UPDATE_FRENZY_UI = "ON_UPDATE_FRENZY_UI";
 
 	//For FrontEnd 
 	public const string ON_GAME_OVER = "ON_GAME_OVER"; //this is when intro screen enters game screen. or gameover screen enters game screen
 	public const string ON_UPDATE_GOLD_UI = "ON_UPDATE_GOLD_UI"; //this is to tell UI to update the displayed gold
-	public const string ON_UPDATE_COMBO_UI = "ON_UPDATE_COMBO_UI"; //this is to tell UI to update combo gauge
 	public const string ON_UPDATE_MAX_COMBO_UI = "ON_UPDATE_MAX_COMBO_UI"; //this is to tell UI to update max combo gauge
 
 	//Call
@@ -31,9 +35,7 @@ public class EventNames {
 	public const string ON_SWIPE = "ON_SWIPE";
 
 	//Player Events
-	public const string ENEMY_PUNCHED = "ENEMY_PUNCHED";
-	public const string FRENZY_TRIGGERED = "FRENZY_TRIGGERED";
-	public const string PLAYER_DEATH = "PLAYER_DEATH";
+	public const string ON_FRENZY_ACTIVATED = "ON_FRENZY_ACTIVATED";
 
 	//BGM
 	public const string INTRO_SOUND = "INTRO_SOUND";

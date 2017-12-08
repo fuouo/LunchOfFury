@@ -20,18 +20,30 @@ public class EnemySpawner : MonoBehaviour
 	public const string PARAM_ENEMYCLASS = "PARAM_ENEMYCLASS";
 	public const string PARAM_ENEMY_TO_HIT = "PARAM_ENEMY_TO_HIT";
 
-	private System.Random random;
+	private static EnemySpawner sharedInstance = null;
+
+	public static EnemySpawner Instance
+	{
+		get
+		{
+			return sharedInstance;
+		}
+	}
+
+	void Awake()
+	{
+		sharedInstance = this;
+	}
+
 
 	// Use this for initialization
 	void Start()
 	{
-		random = new System.Random();
 		this.objectPool.Initialize();
 
-		EventBroadcaster.Instance.AddObserver (EventNames.FRENZY_TRIGGERED, this.Frenzy);
 		EventBroadcaster.Instance.AddObserver(EventNames.ON_GAME_RESET, ResetEnemy);
 		EventBroadcaster.Instance.AddObserver(EventNames.ON_SPAWN_REQUEST, Spawn);
-		EventBroadcaster.Instance.AddObserver(EventNames.ON_HIT_CUSTOMER, OnHit);
+		EventBroadcaster.Instance.AddObserver(EventNames.ON_HIT_CUSTOMER, RemoveEnemy);
 
 	}
 
@@ -39,23 +51,18 @@ public class EnemySpawner : MonoBehaviour
 	{
 		EventBroadcaster.Instance.RemoveActionAtObserver(EventNames.ON_SPAWN_REQUEST, Spawn);
 		EventBroadcaster.Instance.RemoveActionAtObserver(EventNames.ON_GAME_RESET, ResetEnemy);
-		EventBroadcaster.Instance.RemoveActionAtObserver(EventNames.ON_HIT_CUSTOMER, OnHit);
+		EventBroadcaster.Instance.RemoveActionAtObserver(EventNames.ON_HIT_CUSTOMER, RemoveEnemy);
 	}
 
-	private void Frenzy(){
-		var usedObjects =  objectPool.GetUsedObjects().ToArray();
+	public Enemy[] GetEnemyList()
+	{
+		var usedObjects = objectPool.GetUsedObjects().ToArray();
+		var result = new Enemy[usedObjects.Length];
 
 		for (var i = 0; i < usedObjects.Length; i++)
-		{
-			StartCoroutine(FlyAnimation(usedObjects[i]));
-			EventBroadcaster.Instance.PostEvent(EventNames.ON_HIT_CUSTOMER);
-		}
+			result[i] = (Enemy) usedObjects[i];
 
-	}
-	
-	IEnumerator pauser()
-	{
-		yield return new WaitForSeconds(3);
+		return result;
 	}
 
 	private void ResetEnemy()
@@ -105,7 +112,7 @@ public class EnemySpawner : MonoBehaviour
 
 	}
 
-	public void OnHit(Parameters parameters)
+	public void RemoveEnemy(Parameters parameters)
 	{
 		// The enemy that has been hit
 		var poolableObject = (APoolable) parameters.GetObjectExtra(PARAM_ENEMY_TO_HIT);

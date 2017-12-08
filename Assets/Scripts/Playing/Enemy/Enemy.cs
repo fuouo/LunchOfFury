@@ -12,7 +12,7 @@ public class Enemy : APoolable, IFaceDirection {
 
 	// Fly speed in seconds
 	[SerializeField]
-	private float flyAnimationSpeed = 30f;
+	private float flyAnimationSpeed = 2f;
 
 	private IBoundaryListener boundaryListener;
 	private Random random;
@@ -129,8 +129,8 @@ public class Enemy : APoolable, IFaceDirection {
 
 		Debug.Log("HA");
 		EventBroadcaster.Instance.PostEvent (EventNames.HA);
-		const float MIN = -15;
-		const float MAX = 15;
+		const float MIN = -10;
+		const float MAX = 10;
 
 		// Update sprite
 		this.GetComponent<SpriteRenderer>().sprite = enemyClass.HitSprite;
