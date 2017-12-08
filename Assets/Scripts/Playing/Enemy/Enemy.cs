@@ -134,8 +134,8 @@ public class Enemy : APoolable, IFaceDirection {
 		this.GetComponent<SpriteRenderer>().sprite = enemyClass.HitSprite;
 
 		var endPosition = GameManager.Instance.GetSpawnPointPosition(this.GetDirection());
-		endPosition.x *= 1.3f;
-		endPosition.y *= 1.3f;
+		endPosition.x *= 1.5f;
+		endPosition.y *= 1.5f;
 		endPosition.y += GetRandomNumber(MIN, MAX);
 		endPosition.x += GetRandomNumber(MIN, MAX);
 
