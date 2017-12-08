@@ -19,7 +19,7 @@ public class Player : MonoBehaviour {
 
 	[Header("STATES")]
 	[SerializeField] private GameObject gameOverPanel;
-	private bool alive;
+	private bool isAlive;
 
 	//Animation Parameters
 	private const string PUNCH_TRIGGER_PARAM = "punch";
@@ -29,14 +29,27 @@ public class Player : MonoBehaviour {
 	void Start () {
 		EventBroadcaster.Instance.AddObserver (EventNames.ON_SWIPE, this.punch);
 		EventBroadcaster.Instance.AddObserver (EventNames.ON_PLAYER_DEATH, this.playDead);
-
+		EventBroadcaster.Instance.AddObserver (EventNames.ON_GAME_RESET, this.ResetStats);
+	
 		GetComponent<SpriteRenderer> ().sprite = type.defaultSprite;
 		GetComponent<Animator> ().runtimeAnimatorController = type.animator;
+
+		ResetStats ();
 
 	}
 
 	// Update is called once per frame
 	void Update () {
+	}
+
+	void ResetStats(){
+		GetComponent<SpriteRenderer>().sortingLayerName = "Player";
+		GetComponent<SpriteRenderer> ().sortingOrder = 1;
+		GetComponent<Animator> ().SetInteger (PUNCH_TRIGGER_PARAM, (int)Direction.NONE);
+		GetComponent<Animator> ().ResetTrigger (IS_HIT_ANIM);
+		isAlive = true;
+
+
 	}
 
 	void punch(Parameters parameters){
@@ -61,23 +74,22 @@ public class Player : MonoBehaviour {
 
 	}
 
-	public bool isAlive(){
-		return this.alive;
-	}
-
 	public void enemyPunched(){
 		comboPoints=comboPoints+comboIncrementRate;
 		//		comboGauge.value = comboPoints;
 	}
 
-	public void playDead(){
-		if(!alive)
+	public void playDead(){	
+		if (isAlive)
+			isAlive = false;
+		else
 			return;
-		alive = false;
 		GetComponent<SpriteRenderer>().sortingLayerName = "Food";
 		GetComponent<SpriteRenderer> ().sortingOrder = 999;
 		GetComponent<Animator> ().ResetTrigger (IS_HIT_ANIM);
 		GetComponent<Animator> ().SetTrigger (IS_HIT_ANIM);
+		GetComponent<Animator> ().ResetTrigger (IS_HIT_ANIM);
+
 
 	}
 
