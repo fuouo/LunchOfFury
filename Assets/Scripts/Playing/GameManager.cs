@@ -86,6 +86,13 @@ public class GameManager : MonoBehaviour
 		random = new Random();
 	}
 
+	public  int getEarnedGold(){
+		return this.earnedGold;
+	}
+
+	public void setEarnedGold(int EarnedGold){
+		this.earnedGold = EarnedGold;
+	}
 	private void Start()
 	{
 		EventBroadcaster.Instance.AddObserver (EventNames.ON_DEAD, this.OnDead);
@@ -103,12 +110,13 @@ public class GameManager : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
+		DebugControls ();
+
 		if (!isPlaying)
 			return;
 		
 		time = Time.timeSinceLevelLoad;
 
-		DebugControls ();
 
 		if (!(time >= nextTime)) return;
 
@@ -171,7 +179,13 @@ public class GameManager : MonoBehaviour
 	private static Direction GetRandomDirection()
 	{
 		var values = Enum.GetValues(typeof(Direction));
-		return (Direction) values.GetValue(random.Next(values.Length));
+		Direction dir;
+
+		do {
+			dir = (Direction) values.GetValue (random.Next (values.Length));
+		} while(dir == Direction.NONE);
+			
+		return (Direction)dir;
 	}
 
 	private void NextFrame()
@@ -223,7 +237,6 @@ public class GameManager : MonoBehaviour
 	//======================//
 
 	// This is for entering Intro/Gameover
-	//TODO: @Dyan. Please reprocess this method :) thanks
 	public void OnDead()
 	{
 		EventBroadcaster.Instance.PostEvent (EventNames.DEATH);
@@ -235,8 +248,9 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator OnDeadTransition()
     {
-        yield return new WaitForSeconds(1f);
-        EventBroadcaster.Instance.PostEvent(EventNames.ON_GAME_OVER);
+		EventBroadcaster.Instance.PostEvent (EventNames.ON_PLAYER_DEATH);
+		yield return null;
+		EventBroadcaster.Instance.PostEvent(EventNames.ON_GAME_OVER);
     }
     //======================//
 

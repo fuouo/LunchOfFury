@@ -56,3 +56,6 @@ TagManager:
   - name: Smoke
     uniqueID: 4137637275
     locked: 0
+  - name: Food
+    uniqueID: 3538883547
+    locked: 0

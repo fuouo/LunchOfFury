@@ -7,7 +7,7 @@ public class EntityType : ScriptableObject {
 	//data
 	public string id;
 	public string typeName;
-	public string price;
+	public int price;
 	public bool locked;
 
 	//art / assets

@@ -7,10 +7,28 @@ public class Player : MonoBehaviour {
 	[Header("Player Type")]
 	[SerializeField] PlayerType type;
 
+	[Header("COMBO")]
+	[SerializeField] float minimumComboForFrenzy = 40.0f;
+	[SerializeField] float frenzyDecayRate = 0.05f;
+	[SerializeField] float comboIncrementRate =1;
+	private float comboPoints;
+
+	[Header("FOODS SERVED")]
+	[SerializeField] GameObject currentFood;
+	[SerializeField] GameObject[] foods;
+
+	[Header("STATES")]
+	[SerializeField] private GameObject gameOverPanel;
+	private bool alive;
+
+	//Animation Parameters
+	private const string PUNCH_TRIGGER_PARAM = "punch";
+	private const string IS_HIT_ANIM = "isHit";
 
 	// Use this for initialization
 	void Start () {
 		EventBroadcaster.Instance.AddObserver (EventNames.ON_SWIPE, this.punch);
+		EventBroadcaster.Instance.AddObserver (EventNames.ON_PLAYER_DEATH, this.playDead);
 
 		GetComponent<SpriteRenderer> ().sprite = type.defaultSprite;
 		GetComponent<Animator> ().runtimeAnimatorController = type.animator;
@@ -22,16 +40,46 @@ public class Player : MonoBehaviour {
 	}
 
 	void punch(Parameters parameters){
-		//		currentScore++;
-		//EventBroadcaster.Instance.PostEvent (EventNames.SERVED);
-//		SwipeDirection direction = (SwipeDirection) parameters.GetObjectExtra (GameManager.PUNCH_DIRECTION);
-//
-//		//		comboGauge.value = comboPoints;
-//		updateCombo();
-//
-//		Debug.Log (direction);
+		Direction direction = (Direction) parameters.GetObjectExtra (EnemyMechanicHandler.PARAM_DIRECTION);
+
+		int randomFoodIndex = (int) Random.Range (0, foods.Length);
+
+		currentFood.SetActive (false);
+		currentFood = foods [randomFoodIndex];
+		currentFood.SetActive (true);
+
+		StartCoroutine (playPunchAnimation (direction));
 	}	
-	
+
+
+	IEnumerator playPunchAnimation(Direction direction){
+		GetComponent<Animator> ().SetInteger (PUNCH_TRIGGER_PARAM, (int)direction);
+		Debug.Log (direction + " = " + (int)direction);
+		yield return null;
+		GetComponent<Animator> ().SetInteger (PUNCH_TRIGGER_PARAM, (int)Direction.NONE);
+
+
+	}
+
+	public bool isAlive(){
+		return this.alive;
+	}
+
+	public void enemyPunched(){
+		comboPoints=comboPoints+comboIncrementRate;
+		//		comboGauge.value = comboPoints;
+	}
+
+	public void playDead(){
+		GetComponent<SpriteRenderer>().sortingLayerName = "Food";
+		GetComponent<SpriteRenderer> ().sortingOrder = 999;
+		GetComponent<Animator> ().SetBool (IS_HIT_ANIM, true);
+	}
+
+
+	public void onClickPlayAgain(){
+		//LoadManager.Instance.LoadScene (SceneNames.GAME_SCENE);	
+	}
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
