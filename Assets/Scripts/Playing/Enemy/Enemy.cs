@@ -126,8 +126,11 @@ public class Enemy : APoolable, IFaceDirection {
 
 	public void PlayFlyAnimation()
 	{
-		const float MIN = -10;
-		const float MAX = 10;
+
+		Debug.Log("HA");
+		EventBroadcaster.Instance.PostEvent (EventNames.HA);
+		const float MIN = -15;
+		const float MAX = 15;
 
 		// Update sprite
 		this.GetComponent<SpriteRenderer>().sprite = enemyClass.HitSprite;
